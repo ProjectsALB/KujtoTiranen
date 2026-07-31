@@ -1,0 +1,14 @@
+{
+  "name": "Kujto Tiranën",
+  "short_name": "KujtoTirane",
+  "description": "Kapsulë kohe dixhitale për historinë e Tiranës",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F2C1A",
+  "theme_color": "#0F2C1A",
+  "lang": "sq",
+  "icons": [
+    { "src": "images/logo1.webp", "sizes": "192x192", "type": "image/webp", "purpose": "any" },
+    { "src": "images/logo1.webp", "sizes": "512x512", "type": "image/webp", "purpose": "any" }
+  ]
+}

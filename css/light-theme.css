@@ -1,0 +1,339 @@
+
+/* FORCE LIGHT / WHITE THEME — loads last */
+html, body {
+  background: #FAFAF8 !important;
+  background-image: none !important;
+  color: #1A1A1A !important;
+}
+body::before,
+body::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.header {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid rgba(15, 44, 26, 0.1) !important;
+  box-shadow: 0 2px 16px rgba(15, 44, 26, 0.06) !important;
+  border-radius: 0 !important;
+  z-index: 100000 !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 0.5rem !important;
+}
+
+.header .logo {
+  color: #0F2C1A !important;
+  background: none !important;
+  -webkit-text-fill-color: #0F2C1A !important;
+  font-weight: 700 !important;
+}
+.header .logo i {
+  color: #B8860B !important;
+  -webkit-text-fill-color: #B8860B !important;
+  filter: none !important;
+  animation: none !important;
+}
+.header .navbar a {
+  color: #444 !important;
+}
+.header .navbar a:hover {
+  color: #0F2C1A !important;
+  background: #f0ede6 !important;
+  box-shadow: none !important;
+}
+.header .icons div,
+.header .icons a {
+  color: #0F2C1A !important;
+}
+
+/* ===== EN / SQ — always visible ===== */
+#kt-lang-switch,
+.kt-lang-switch {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  padding: 3px;
+  background: #f3f3f3 !important;
+  border: 1px solid #ddd !important;
+  border-radius: 999px !important;
+  z-index: 100001 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+}
+.kt-lang-btn {
+  display: inline-block !important;
+  visibility: visible !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 6px 14px !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  color: #555 !important;
+  pointer-events: auto !important;
+  font-family: inherit !important;
+}
+.kt-lang-btn.active {
+  background: #0F2C1A !important;
+  color: #fff !important;
+}
+
+/* Hide old Language */
+[data-dropdown-toggle="language-dropdown-menu"],
+#language-dropdown-menu {
+  display: none !important;
+}
+
+/* Login */
+.kt-login-btn,
+#kt-auth-btn {
+  display: inline-flex !important;
+  visibility: visible !important;
+  background: #0F2C1A !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  z-index: 100001 !important;
+  box-shadow: 0 4px 12px rgba(15,44,26,0.15) !important;
+}
+#kt-auth-btn.logged {
+  background: #fff !important;
+  color: #0F2C1A !important;
+  border: 1.5px solid #0F2C1A !important;
+}
+
+/* Content light */
+h1, h2, h3, h4, .heading, .heading1, #klevi {
+  color: #0F2C1A !important;
+  -webkit-text-fill-color: #0F2C1A !important;
+  background: none !important;
+  text-shadow: none !important;
+}
+.gallery-item {
+  background: #fff !important;
+  border: 1px solid #eee !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+}
+.image-title {
+  background: #fff !important;
+  color: #0F2C1A !important;
+}
+.sidebar {
+  background: #fff !important;
+  color: #333 !important;
+}
+.sidebar-title, .sidebar h2 { color: #0F2C1A !important; }
+.sidebar p { color: #555 !important; }
+.kt-filters {
+  background: #fff !important;
+  color: #555 !important;
+  border: 1px solid #eee !important;
+}
+.kt-filters select {
+  background: #fff !important;
+  color: #333 !important;
+  border: 1px solid #ccc !important;
+}
+.kt-tour-card {
+  background: #fff !important;
+  border: 1px solid #eee !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06) !important;
+}
+.kt-tour-card h3 { color: #0F2C1A !important; }
+.kt-tour-card p { color: #666 !important; }
+.contact-box { background: #fff !important; }
+.field {
+  background: #fff !important;
+  color: #333 !important;
+  border: 1px solid #ddd !important;
+}
+.content-area .bg-light,
+.content-area section.bg-light {
+  background: #fff !important;
+  color: #333 !important;
+  border: 1px solid #eee !important;
+}
+.mapi .content h3 {
+  color: #0F2C1A !important;
+  -webkit-text-fill-color: #0F2C1A !important;
+  background: none !important;
+}
+.mapi .content p { color: #555 !important; }
+.btn, .hbtn, .send-btn, .time-capsule-btn {
+  background: #0F2C1A !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(15,44,26,0.2) !important;
+}
+.btn:hover, .hbtn:hover, .send-btn:hover {
+  background: #1A3D28 !important;
+  color: #fff !important;
+}
+.footer {
+  background: #0F2C1A !important;
+  color: #e8e8e8 !important;
+}
+
+/* Auth modal light */
+#kt-auth-modal { background: rgba(0,0,0,0.4) !important; }
+.kt-auth-box {
+  background: #fff !important;
+  color: #222 !important;
+  border: 1px solid #eee !important;
+}
+.kt-auth-box h2 { color: #0F2C1A !important; }
+.kt-auth-box input {
+  background: #fff !important;
+  color: #222 !important;
+  border: 1px solid #ddd !important;
+}
+.kt-auth-tabs button.active {
+  background: #0F2C1A !important;
+  color: #fff !important;
+}
+.kt-auth-submit {
+  background: #0F2C1A !important;
+  color: #fff !important;
+}
+#kt-auth-menu {
+  background: #fff !important;
+  border: 1px solid #eee !important;
+}
+#kt-auth-menu button, #kt-auth-menu a { color: #222 !important; }
+.kt-fav-inner { background: #fff !important; color: #222 !important; }
+.kt-tour-hud-inner { background: #fff !important; color: #222 !important; }
+
+/* Zoom hero can stay image-based */
+.zoom-out-container {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12) !important;
+}
+
+
+/* CLOSE BUTTON — always on top, impossible to miss */
+#kt-tl-close,
+button.polaroid-close,
+button.kt-tl-close-btn {
+  position: fixed !important;
+  top: 16px !important;
+  right: 16px !important;
+  left: auto !important;
+  bottom: auto !important;
+  z-index: 999999 !important;
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 3px solid #fff !important;
+  border-radius: 50% !important;
+  background: #c0392b !important;
+  color: #ffffff !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 50px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+#kt-tl-close:hover,
+button.polaroid-close:hover {
+  background: #e74c3c !important;
+  transform: scale(1.1) !important;
+}
+/* Only show when gallery open */
+#polaroidGallery[style*="display: none"] #kt-tl-close,
+#polaroidGallery[style*="display:none"] #kt-tl-close {
+  display: none !important;
+}
+#polaroidGallery[style*="display: flex"] #kt-tl-close,
+#polaroidGallery[style*="display:flex"] #kt-tl-close,
+#polaroidGallery.kt-tl-open #kt-tl-close {
+  display: flex !important;
+}
+
+
+/* ===== Universal close X buttons ===== */
+.kt-close-x {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  z-index: 50 !important;
+  width: 40px !important;
+  height: 40px !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background: #c0392b !important;
+  color: #fff !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  line-height: 40px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3) !important;
+  padding: 0 !important;
+}
+.kt-close-x:hover {
+  background: #e74c3c !important;
+  transform: scale(1.08);
+}
+
+/* Timeline card needs relative for absolute X */
+.kt-tl-main {
+  position: relative !important;
+}
+
+/* Fixed screen-corner close for timeline overlay */
+#kt-tl-close,
+.polaroid-close {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 999999 !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: #c0392b !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+  font-size: 26px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45) !important;
+}
+
+/* Upload form container */
+#formContainer {
+  position: relative !important;
+}
+#formOverlay {
+  z-index: 30050 !important;
+}
+#kt-form-close {
+  top: 12px !important;
+  right: 12px !important;
+}

@@ -1,0 +1,82 @@
+openapi: 3.0.3
+info:
+  title: Kujto Tiranën API
+  version: 1.4.0
+  description: Historical photo map API for Tirana
+servers:
+  - url: http://localhost:5000/api/v1
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: OK
+  /auth/login:
+    post:
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        "200": { description: JWT + user }
+        "401": { description: Invalid credentials }
+  /auth/register:
+    post:
+      summary: Register
+      responses:
+        "201": { description: Created }
+  /photos/{locationKey}:
+    get:
+      summary: Approved photos for a location
+      parameters:
+        - in: path
+          name: locationKey
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Photo list }
+  /photos:
+    post:
+      summary: Upload photo (multipart)
+      responses:
+        "201": { description: Pending photo created }
+  /photos/admin/pending:
+    get:
+      summary: Pending queue (admin)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Pending photos }
+  /photos/{id}/moderate:
+    patch:
+      summary: Approve or reject
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Updated }
+  /contact:
+    post:
+      summary: Contact form
+      responses:
+        "201": { description: Stored }
+  /comments/{locationKey}:
+    get:
+      summary: Approved comments
+      responses:
+        "200": { description: Comments }
+    post:
+      summary: Add comment
+      responses:
+        "201": { description: Created }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

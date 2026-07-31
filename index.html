@@ -1,0 +1,3031 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
+    <meta http-equiv='content-language' content='en-US'>
+
+    <!-- Meta Tags -->
+    <meta name="title" content="Kujto Tiranën">
+    <meta name="description" content="Kujto Tiranën is a digital platform dedicated to preserving and showcasing the historical and cultural heritage of Tirana.">
+    <meta name="keywords" content="Tirana, Albania, history, culture, heritage, time capsule, kujto tiranen">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kujto Tiranën">
+    <meta property="og:description" content="A digital platform dedicated to preserving and showcasing the historical and cultural heritage of Tirana.">
+    <meta property="og:image" content="images/hi.webp">
+    <meta property="og:locale" content="sq_AL">
+    <meta name="author" content="Kujto Tiranën">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Kujto Tiranën">
+    <meta property="twitter:description" content="A digital platform dedicated to preserving and showcasing the historical and cultural heritage of Tirana.">
+    <meta property="twitter:image" content="images/hi.webp">
+
+    <title>Kujto Tiranën</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/webp" href="images/logo1.webp">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S79Y2FRX1H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-S79Y2FRX1H');
+    </script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- third-party libraries -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" />
+
+    <!-- custom stylesheets -->
+    <link rel="stylesheet" href="css/allstyle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- cute-3d disabled -->
+    <link rel="stylesheet" href="css/light-theme.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/perf.css">
+    <link rel="stylesheet" href="css/a11y-polish.css">
+    <!-- professional-3d dark theme disabled: light background -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0F2C1A">
+</head>
+<body>
+<a class="skip-link" href="#map">Skip to map</a>
+    <div id="top"></div>
+<header class="header">
+
+    <a href="#" class="logo"><i class="fas fa-landmark"></i> Kujto Tiranën</a>
+
+    <nav class="navbar">
+        <div id="nav-close" class="fas fa-times"></div>
+        <a href="#top" data-translate="home">Home</a>
+           <a href="#explore" data-translate="map">Map</a>
+        <a href="#hart" data-translate="why_tirana">Why Tirana?</a>
+     
+        <a href="#aboutus" data-translate="about">About Us</a>
+    </nav>
+
+    <div class="icons">
+      <div id="menu-btn" class="fas fa-bars"></div>
+      <div id="search-btn" class="fas fa-search"></div>
+  </div>
+  <div id="kt-lang-switch" class="kt-lang-switch">
+    <button type="button" class="kt-lang-btn active" data-lang="en" id="btn-lang-en">EN</button>
+    <button type="button" class="kt-lang-btn" data-lang="al" id="btn-lang-sq">SQ</button>
+  </div>
+  <button type="button" id="kt-auth-btn" class="kt-login-btn">
+    <i class="fas fa-user"></i> <span id="kt-auth-btn-label">Hyr</span>
+  </button>
+  <div id="kt-auth-menu"></div>
+</header>
+<div class="search-form">
+
+  <div id="close-search" class="fas fa-times"></div>
+
+  <form action="">
+      <input type="search" name="" placeholder="search here..." id="search-box">
+      <label for="search-box" class="fas fa-search"></label>
+  </form>
+</div>
+<script>
+const translations = {
+  'en': {
+    // Navigation
+    'home': 'Home',
+    'why_tirana': 'Why Tirana?',
+    'map': 'Map',
+    'about': 'About Us',
+    'language': 'Language',
+    
+    // Home section
+    'welcome': 'Welcome to Kujto Tiranën',
+    'subtitle': 'Preserving the history and culture of Tirana',
+    
+    // Map/Info section
+    'map_heading': 'Get to know Tirana better &#128462;',
+    'map_para1': 'Tirana is more than just the capital of Albania—it is the heart of the country\'s history, transformation, and collective memory. A city that has witnessed decades of change, resilience, and cultural evolution, Tirana stands as a symbol of progress and identity.',
+    'map_para2': 'Through Kujto Tiranën, we chose Tirana as the home for our time capsule because it encapsulates the spirit of an entire nation. From its layered history to its rapid modernization, every street, building, and story holds a piece of Albania\'s past, present, and future. By preserving memories here, we honor the experiences of generations, ensuring that the essence of Tirana is never forgotten.',
+    'map_para3': 'This city is where personal and collective narratives intertwine—where history meets the future. That\'s why Tirana.',
+    'read_more': 'read more',
+    
+    // Preserving History Section
+    'preserving_title': 'Preserving Tirana\'s History, One Memory at a Time',
+    'preserving_text1': 'Kujto Tiranën is a digital time capsule designed to preserve and celebrate the evolving history of Tirana. Through an interactive map, users can explore how different locations have changed over the years, read and share stories, and contribute their own experiences.',
+    'preserving_text2': 'Understanding Tirana\'s past helps shape its future. By preserving historical narratives, we strengthen our cultural identity, foster a deeper appreciation for the city\'s transformation, and ensure that future generations can connect with its history.',
+    
+    // Mission & Vision Section
+    'mission_vision_title': 'Our Mission & Vision',
+    'mission_title': 'Our Mission',
+    'mission_text': 'To create a digital time capsule where users can explore and contribute to Tirana\'s evolving history.',
+    'vision_title': 'Our Vision',
+    'vision_text': 'A community-driven platform where memories, places, and events are preserved for future generations.',
+    
+    // Team Section
+    'team_title': 'Meet Our Team',
+    'team_subtitle': 'Passionate undergraduate IT team, eager to use our skills and knowledge to make a positive impact.',
+    
+    // Contact Section
+    'contact_title': 'Contact us',
+    'contact_subtitle': 'We are open for any suggestion or to solve a problem.',
+    'get_in_touch': 'Get in touch',
+    'kv': 'Unlock the Past: Top Places in Tirana to Experience Time Capsules',
+
+    'klevivokshi': 'Explore Tirana Historical and Cultural Gems',
+    
+    // Contact Form
+    'contact_form': {
+      'name': 'Your Name',
+      'email': 'Your Email',
+      'phone': 'Phone',
+      'message': 'Message',
+      'send': 'Send',
+      'success': 'Message sent successfully!'
+    },
+    
+    // Roles
+    'roles': {
+      'frontend': 'Front-end Developer',
+      'backend': 'Back-end Developer',
+      'researcher': 'Research Analyst',
+      'mentor': 'Website Mentor for Project'
+    },
+    
+    // Quotes
+    'quotes': {
+      'edlin': '"As a front-end developer, I ensure the responsiveness, speed, and accessibility of websites, all while focusing on providing users with a seamless browsing experience."',
+      'kasilda': '"As a front-end developer, I focus on translating design concepts into interactive and responsive user interfaces that deliver an exceptional web experience."',
+      'kora': '"As a back-end developer, I focus on designing and maintaining robust server-side systems that handle data processing and integrate seamlessly with front-end interfaces."',
+      'kristi': '"As a back-end developer, I build and maintain databases, write server-side scripts, and design APIs that power the functionality of interactive web applications."',
+      'marsi': '"As a researcher, I am skilled in gathering and analyzing data to inform the design and development of digital products"',
+      'nati': '"As a researcher, I am skilled in gathering and analyzing data to inform the design and development of digital products"',
+      'mentor': '"As a website mentor for projects, I guide individuals or teams through the entire web development process, from planning and design to deployment, ensuring high-quality results and adherence to best practices."'
+    },
+    'distance_info': 'Distance from Skanderbeg Square:',
+        'time_capsule_view': 'Time Capsule View',
+        'km': 'km',
+        'dajti_title': "Mount Dajti",
+        'dajti_info': "Dajti Mountain has always been a natural symbol of Tirana, and is not a human construction, but a protected natural asset. In the 1950s, roads were built and then in 2005 the Dajti Ekspres cable car was built, making the mountain more accessible to visitors. Initially, the Dajti area was used for recreational activities and nature exploration. Over the years, Dajti has developed with hotels, restaurants and tourist activities. Today it is mainly used for mountain tourism, sports and recreation. Click 'Time Capsule View' to discover its story through time!",
+        'parku_title': "Grand Park of the Lake",
+        'parku_info': "was built in 1956-1958 by Albanian architects, with the aim of creating a green recreational space for the city. Its initial function was to provide a natural environment for rest, walks and sports activities for citizens. During the construction, an artificial lake was created and thousands of trees were planted, giving the park the identity it has today. Over the years, the park has been enriched with cafes, sports fields and cultural activities. Currently, it remains one of the most important areas for recreation and various events in Tirana. The restoration of some parts of the park and investments to improve the infrastructure began in 2015.",
+        'piramida_title': "Pyramid of Tirana",
+        'piramida_info': "The Tirana Pyramid was designed by architect Pranvera Hoxha and her team, and was built in 1988. It originally served as a museum in honor of the leader Enver Hoxha. The building was designed as a modernist structure and was one of the most expensive in the country at the time. After the political changes of the 1990s, the Pyramid has been used in various ways as a cultural center, exhibition space, and youth activity venue. Its restoration and transformation into a center for innovation and technology began in 2018 and is expected to be completed in 2023. Click 'Time Capsule View' to explore its evolution through time!",
+        'zoo_title': "Tirana Zoo",
+        'zoo_info': "The Tirana Zoo was built in 1966 by the municipal authorities as an educational and recreational space for children and families. From the beginning, its function was to house various species of animals and educate the public about nature. The construction of the zoo was part of a wider project to develop the city's recreational areas. In the 2000s, the zoo was criticized for poor conditions for the animals and a restoration project was launched, which was completed in 2022, turning it into a modern and more animal- and visitor-friendly space.Click 'Time Capsule View' to explore its history and evolution!",
+        'kalaja_title': "Tirana Castle",
+        'kalaja_info': "A historic castle in the heart of Tirana, Kalaja e Tiranës offers a glimpse into the city's past. Click 'Time Capsule View' to explore its evolution through time!",
+        'teatri_title': "National Theater",
+        'teatri_info': "A cultural landmark in Tirana, Teatri Kombëtar is home to Albania's rich theatrical history. Click 'Time Capsule View' to explore its journey through time!",
+        'xhamia_title': "Ethem Bey Mosque",
+        'xhamia_info': "This mosque is the only one of the eight 18th-19th century mosques built in Tirana that we still see today. Its foundations were laid by Molla Bey, but he died after completing the dome and the Shrine was completed by his son, Haxhi Ethem Bey,",
+        'stadiumi_title': "Air Albania Stadium",
+        'stadiumi_info': "A modern sports arena in Tirana, Stadiumi Air Albania is a hub for national and international events. Click 'Time Capsule View' to discover its history and development!",
+        'ambasada_title': "Former Yugoslav Embassy",
+        'ambasada_info': "A historic building in Tirana, the former Yugoslav Embassy stands as a symbol of Albania's diplomatic past. Click 'Time Capsule View' to uncover its story through the years!",
+        'farka_title': "Farka Lake",
+        'farka_info': "A serene lake near Tirana, Farka Lake offers a peaceful retreat surrounded by nature. Click 'Time Capsule View' to discover its history through the years!",
+        'petrela_title': "Petrela Castle",
+        'petrela_info': "A historic fortress with stunning views, Petrela Castle showcases Albania's rich heritage. Click 'Time Capsule View' to uncover its story through the centuries!",
+        'pazari_title': "Pazari i Ri",
+        'pazari_info': "This bazaar is located in that area of ​​Tirana, which together with the Mujo neighborhood represents one of the oldest areas of the city. Even today, the New Bazaar continues to remain one of the largest markets in the city. Today, the New Bazaar is a multifunctional space.",
+        'sheshi_title': "Skanderbeg Square",
+        'sheshi_info': "Skanderbeg Square is the main square of Tirana and one of the most famous historical landmarks of the city. It is named in honor of the national hero, Gjergj Kastrioti Skanderbeg, and was built in 1968 after urban changes that included the demolition of several old buildings. The square is a symbol of national unity and has great importance for public activities and state events. Today, Skanderbeg Square is a lively center, with monuments and cultural activities that attract visitors and citizens.",
+        'muzeu_title': "National History Museum",
+        'muzeu_info': "The National History Museum in Tirana is the largest museum in Albania, showcasing the country's rich history and cultural heritage through various exhibits and artifacts.",
+        'kisha_title': "Orthodox Autocephalous Church of Albania",
+        'kisha_info': "The Orthodox Autocephalous Church of Albania is the national church of Albania, representing the Orthodox Christian community and playing a significant role in the country's religious and cultural life.",
+        'ura_title': "Tanners Bridge",
+        'ura_info': "Ura e Tabakëve is a historic bridge in Tirana, known for its unique architecture and significance in the city's history. Click 'Time Capsule View' to explore its story through time!",
+        'materniteti_title': "Maternity Hospital",
+        'materniteti_info': "The Maternity Hospital in Tirana is a significant healthcare facility specializing in maternal and child health, providing essential services to the community.",
+        'ushtarak_title': "Military Hospital",
+        'ushtarak_info': "The Military Hospital in Tirana is a specialized healthcare facility serving military personnel and their families, providing comprehensive medical care and support.",
+        'kulla_title': "Clock Tower",
+        'kulla_info': "The Clock Tower of Tirana is an iconic landmark, symbolizing the city's history and culture. Click 'Time Capsule View' to explore its evolution through time!",
+        'lana_title': "Lana River",
+        'lana_info': "The Lana River is a significant waterway in Tirana, known for its scenic beauty and ecological importance. Click 'Time Capsule View' to explore its history and transformation!",
+        'banka_title': "Bank of Albania",
+        'banka_info': "The Bank of Albania is the central bank of the country, responsible for monetary policy and financial stability. Click 'Time Capsule View' to explore its history and evolution!",
+        'playground_title': "Children's Playground",
+        'playground_info': "A vibrant space for children in Tirana, the Children's Playground offers recreational activities and a safe environment for families. Click 'Time Capsule View' to explore its history and development!",
+        'radio_title': "Former Radio Tirana",
+        'radio_info': "Former Radio Tirana is the national radio broadcaster, providing news, culture, and entertainment to the Albanian public. Click 'Time Capsule View' to explore its history and evolution!",
+        'bashkia_title': "Tirana Municipality",
+        'bashkia_info': "The Tirana Municipality is the local government authority responsible for the administration and development of the city. Click 'Time Capsule View' to explore its history and evolution!",
+        'hoteli_title': "Hotel Tirana",
+        'hoteli_info': "Hotel Tirana is a prominent hotel in the city, offering accommodation and services to visitors. Click 'Time Capsule View' to explore its history and development!",
+        'bektashi_title': "Bektashi World Center",
+        'bektashi_info': "The Bektashi World Center in Tirana is the headquarters of the Bektashi Order, a Sufi Islamic sect known for its unique beliefs and practices. Click 'Time Capsule View' to explore its history and significance!",
+        'varri_title': "Kapllan Pashas Tomb ",
+        'varri_info': "Kapllan Pasha's Tomb is a historic site in Tirana, known for its architectural significance and cultural heritage. Click 'Time Capsule View' to explore its history and transformation!",
+        'shkenca_title': "Natural Sciences Museum of Albania",
+        'shkenca_info': "The Natural Sciences Museum of Albania in Tirana showcases the country's rich biodiversity and geological heritage. Click 'Time Capsule View' to explore its history and exhibits!",
+        "biri_title": "New Boulevard",
+        "biri_info": "The New Boulevard in Tirana preserves the history of Albanian tradition. Click 'View Time Capsule' to discover its roots and transformation over the years!",
+        "zoguip_title": "Zogu I Boulevard",
+        "zoguip_info": "Zogu I Boulevard in Tirana represents an important part of urban heritage. Click 'View Time Capsule' to explore its history!",
+        "zogizi_title": "Zogu i Zi Boulevard",
+        "zogizi_info": "Zogu i Zi Boulevard in Tirana reflects the city's architectural and social developments. Click 'View Time Capsule' to learn more!",
+        "ubt_title": "Agricultural University of Tirana",
+        "ubt_info": "The Agricultural University of Tirana has helped generations of students specialize in agriculture. Click 'View Time Capsule' to explore its journey!",
+        "kino_title": "Ish-Kinostudioja e Tiranës",
+        "kino_info": "Ish-Kinostudioja e TiranësFilm Studio, built in 1952, was the center of film production and cinematographic art in Albania during the communist regime. It has been a key point for the development of the film and television industry in the country. After the political changes, the Film Studio lost its function and today is a space used for cultural and creative activities. It is a symbol of the cultural heritage of Albanian film and has been a place where some of Albania's most famous films have been shot. Click 'View Time Capsule' to travel back in time!",
+        "pali_title": "Saint Paul's Cathedral",
+        "pali_info": "Saint Paul's Cathedral in Tirana holds a special place in the heart of the city. Click 'View Time Capsule' to discover its story!",
+        "erzen_title": "Erzen River",
+        "erzen_info": "The Erzen River has been an important natural resource for life and development around Tirana. Click 'View Time Capsule' to explore its history!",
+        "brig_title": "Palace of Brigades",
+        "brig_info": "The Palace of Brigades in Tirana carries traces of social movements and organizations. Click 'View Time Capsule' to learn more!",
+        "kongres_title": "Palace of Congresses",
+        "kongres_info": "The Palace of Congresses in Tirana is a symbol of cultural and historical events. Click 'View Time Capsule' to see its journey!",
+        "farie_title": "Farie Hoti Sports Palace",
+        "farie_info": "The Farie Hoti Sports Palace brings stories from the field of sports and its changes over the years in Tirana. Click 'View Time Capsule' to explore more!",
+        "partizani_title": "Partizani Sports Palace",
+        "partizani_info": "The Partizani Sports Palace holds a rich legacy in Albanian sports. Click 'View Time Capsule' to see its timeline!",
+        "ministrat_title": "Ministries' Area",
+        "ministrat_info": "The Ministries' Area in Tirana is a historic center of state administration. Click 'View Time Capsule' to uncover its transformations!",
+        "parlament_title": "Parliament of Albania",
+        "parlament_info": "The Parliament of Albania in Tirana is the center of the country's legislative life. Click 'View Time Capsule' to learn about its history!",
+        "politeknik_title": "Polytechnic University of Tirana",
+        "politeknik_info": "The Polytechnic University of Tirana has shaped many of the country's engineers and professionals. Click 'View Time Capsule' to follow its evolution!",
+        "student_title": "Student City",
+        "student_info": "Student City in Tirana represents academic life and youthful spirit across generations. Click 'View Time Capsule' to discover its story!",
+        "nentori_title": "28th November Square",
+        "nentori_info": "'28th November' Square holds important historical memories for Albanians. Click 'View Time Capsule' to explore its journey!",
+        "barrikada_title": "Barricades Street",
+        "barrikada_info": "Barricades Street evokes memories of resistance and resilience in Albanian history. Click 'View Time Capsule' to learn more!",
+        "dibra_title": "Dibra Street",
+        "dibra_info": "Dibra Street in Tirana connects the past and the present through its rich stories. Click 'View Time Capsule' to travel back in time!",
+        "durres_title": "Durrës Street",
+        "durres_info": "Durrës Street has been one of the main arteries of modern Tirana. Click 'View Time Capsule' to explore its evolution!",
+        "kavaja_title": "Kavaja Street",
+        "kavaja_info": "Kavaja Street in Tirana carries the city's commercial and social history. Click 'View Time Capsule' to learn more!",
+        "luigj_title": "Luigj Gurakuqi Street",
+        "luigj_info": "Luigj Gurakuqi Street has influenced the history of many generations. Click 'View Time Capsule' to uncover its roots!",
+        "qemal_title": "Qemal Stafa Street",
+        "qemal_info": "Qemal Stafa Street is a symbol that connects the past with Albanian history. Click 'View Time Capsule' to follow its journey!",
+        "hoxha_title": "Tasim Hoxha Street",
+        "hoxha_info": "Tasim Hoxha Street in Tirana represents different aspects of the city's urban history. Click 'View Time Capsule' to discover it!",
+        "kukull_title": "Puppet Theater",
+        "kukull_info": "The Puppet Theater in Tirana has brought smiles and emotions to generations of children. Click 'View Time Capsule' to explore its magic!",
+        "vila_title": "Presidential Villa of Tirana",
+        "vila_info": "The Presidential Villa of Tirana preserves memories of architecture and urban life. Click 'View Time Capsule' to discover their story!"
+      },
+
+  'al': {
+    // Navigation
+    'home': 'Kryefaqja',
+    'why_tirana': 'Pse Tirana?',
+    'map': 'Harta',
+    'about': 'Rreth Nesh',
+    'language': 'Gjuha',
+    
+    // Home section
+    'welcome': 'Mirësevini në Kujto Tiranën',
+    'subtitle': 'Ruajtja e historisë dhe kulturës së Tiranës',
+    
+    // Map/Info section
+    'map_heading': 'Njihuni më mirë me Tiranën &#128462;',
+    'map_para1': 'Tirana nuk është thjesht kryeqyteti i Shqipërisë—ajo është zemra e historisë, transformimit dhe kujtesës kolektive të vendit. Një qytet që ka dëshmuar dekada ndryshimesh, rezistence dhe evolucion kulturor, Tirana qëndron si simbol i përparimit dhe identitetit.',
+    'map_para2': 'Përmes Kujto Tiranën, ne zgjodhëm Tiranën si shtëpinë e kapsulës sonë kohore sepse ajo përfshin frymën e një kombi të tërë. Nga historia e saj e shtresuar deri te modernizimi i shpejtë, çdo rrugë, ndërtesë dhe histori mban një pjesë të së kaluarës, së tashmes dhe së ardhmes së Shqipërisë. Duke ruajtur kujtime këtu, ne nderojmë përvojat e brezave, duke siguruar që thelbi i Tiranës të mos harrohet kurrë.',
+    'map_para3': 'Ky qytet është vendi ku ndërthuren narrativat personale dhe kolektive—ku historia takohet me të ardhmen. Kjo është arsyeja pse Tirana.',
+    'read_more': 'lexo më shumë',
+    
+    // Preserving History Section
+    'preserving_title': 'Ruajtja e Historisë së Tiranës, Një Kujtim në Herë',
+    'preserving_text1': 'Kujto Tiranën është një kapsulë kohore dixhitale e krijuar për të ruajtur dhe festuar historinë në zhvillim të Tiranës. Përmes një harte interaktive, përdoruesit mund të eksplorojnë se si kanë ndryshuar vende të ndryshme gjatë viteve, të lexojnë dhe ndajnë histori, dhe të kontribuojnë përvojat e tyre.',
+    'preserving_text2': 'Të kuptuarit e së kaluarës së Tiranës ndihmon në formimin e të ardhmes së saj. Duke ruajtur narrativat historike, ne forcojmë identitetin tonë kulturor, nxisim një vlerësim më të thellë për transformimin e qytetit dhe sigurojmë që brezat e ardhshëm të mund të lidhen me historinë e tij.',
+    
+    // Mission & Vision Section
+    'mission_vision_title': 'Misioni dhe Vizioni ynë',
+    'mission_title': 'Misioni ynë',
+    'mission_text': 'Të krijojmë një kapsulë kohore dixhitale ku përdoruesit mund të eksplorojnë dhe të kontribuojnë në historinë në zhvillim të Tiranës.',
+    'vision_title': 'Vizioni ynë',
+    'vision_text': 'Një platformë e drejtuar nga komuniteti ku kujtimet, vendet dhe ngjarjet ruhen për brezat e ardhshëm.',
+    
+    // Team Section
+    'team_title': 'Takoni Ekipin Tonë',
+    'team_subtitle': 'Ekip i pasionuar i IT-së në nivel universitar, i etur për të përdorur aftësitë dhe njohuritë tona për të bërë një ndikim pozitiv.',
+    
+    // Contact Section
+    'contact_title': 'Na kontaktoni',
+    'contact_subtitle': 'Jemi të hapur për çdo sugjerim ose për të zgjidhur një problem.',
+    'get_in_touch': 'Lidhuni me ne',
+    'kv': 'Kujto të kaluarën: Vendet më të mira në Tiranë për të përjetuar kapsula kohore',
+    'klevivokshi': 'Eksploroni perlat historike dhe kulturore të Tiranës',
+    // Contact Form
+    'contact_form': {
+      'name': 'Emri juaj',
+      'email': 'Emaili juaj',
+      'phone': 'Telefoni',
+      'message': 'Mesazhi',
+      'send': 'Dërgo',
+      'success': 'Mesazhi u dërgua me sukses!'
+    },
+    
+    // Roles
+    'roles': {
+      'frontend': 'Zhvillues Front-end',
+      'backend': 'Zhvillues Back-end',
+      'researcher': 'Analist Kërkimesh',
+      'mentor': 'Mentor i Projektit për Faqen e Internetit'
+    },
+    
+    // Quotes
+    'quotes': {
+      'edlin': '"Si zhvillues front-end, siguroj përgjigjshmërinë, shpejtësinë dhe qasjen e faqeve të internetit, duke u fokusuar në ofrimin e një përvoje të qetë për përdoruesit."',
+      'kasilda': '"Si zhvillues front-end, fokusohem në përkthimin e koncepteve të projektimit në ndërfaqe përdoruesi interaktive dhe të përshtatshme që ofrojnë një përvojë të jashtëzakonshme në internet."',
+      'kora': '"Si zhvillues back-end, fokusohem në projektimin dhe mirëmbajtjen e sistemeve të forta në anën e serverit që përpunojnë të dhënat dhe integrohen pa probleme me ndërfaqet front-end."',
+      'kristi': '"Si zhvillues back-end, ndërtoj dhe mirëmbaj baza të dhënash, shkruaj skripta në anën e serverit dhe projektoj API që fuqizojnë funksionalitetin e aplikacioneve interaktive në internet."',
+      'marsi': '"Si kërkues, jam i aftë në mbledhjen dhe analizimin e të dhënave për të informuar projektimin dhe zhvillimin e produkteve dixhitale"',
+      'nati': '"Si kërkues, jam i aftë në mbledhjen dhe analizimin e të dhënave për të informuar projektimin dhe zhvillimin e produkteve dixhitale"',
+      'mentor': '"Si mentor i projekteve të faqeve të internetit, udhëheq individët ose ekipet përmes të gjithë procesit të zhvillimit të internetit, nga planifikimi dhe projektimi deri te vendosja, duke siguruar rezultate me cilësi të lartë dhe respektimin e praktikave më të mira."'
+    },
+    'distance_info': 'Distanca nga Sheshi Skënderbej:',
+        'time_capsule_view': 'Shiko Kapsulën Kohore',
+        'km': 'km',
+        'dajti_title': "Mali i Dajtit",
+        'dajti_info': "Mali i Dajtit ka qenë gjithmonë një simbol natyror i Tiranës, dhe nuk është një ndërtim njerëzor, por një pasuri natyrore e mbrojtur. Në vitet 1950 u ndërtuan rrugë dhe më pas në vitin 2005 u ndërtua teleferiku 'Dajti Ekspres', duke e bërë malin më të aksesueshëm për vizitorët. Fillimisht, zona e Dajtit përdorej për aktivitete rekreative dhe për eksplorim natyror. Me kalimin e viteve, Dajti është zhvilluar me hotele, restorante dhe aktivitete turistike. Sot përdoret kryesisht për turizëm malor, sporte dhe rekreacion.",
+        'parku_title': "Parku i Madh i Liqenit",
+        'parku_info': "Parku i Madh i Tiranës u ndërtua në vitet 1956-1958 nga arkitektë shqiptarë, me qëllimin për të krijuar një hapësirë të gjelbër rekreative për qytetin. Funksioni i tij fillestar ishte ofrimi i një ambienti natyror për pushim, shëtitje dhe aktivitete sportive për qytetarët. Gjatë ndërtimit u krijua liqeni artificial dhe u mbollën mijëra pemë, duke i dhënë parkut identitetin që ka sot. Me kalimin e viteve, parku është pasuruar me kafene, fusha sportive dhe aktivitete kulturore. Aktualisht, ai mbetet një nga zonat më të rëndësishme për rekreacion dhe evente të ndryshme në Tiranë. Restaurimi i disa pjesëve të parkut dhe investimet për përmirësimin e infrastrukturës nisën në vitin 2015.",
+        'piramida_title': "Piramida e Tiranës",
+        'piramida_info': "Piramida e Tiranës u projektua nga arkitektja Pranvera Hoxha dhe ekipi i saj, dhe u ndërtua në vitin 1988. Fillimisht ajo shërbente si muze në nderim të udhëheqësit Enver Hoxha. Ndërtesa u projektua si një strukturë moderniste dhe ishte një nga më të shtrenjtat në vend në atë kohë. Pas ndryshimeve politike të viteve 1990, Piramida ka kaluar në përdorime të ndryshme si qendër kulturore, hapësirë ekspozitash dhe ambient për aktivitete rinore. Restaurimi dhe transformimi i saj në një qendër inovacioni dhe teknologjie nisi në vitin 2018 dhe përfundoi në vitin 2023.",
+        'zoo_title': "Kopshti Zoologjik i Tiranës",
+        'zoo_info': "Kopshti Zoologjik i Tiranës u ndërtua në vitin 1966 nga autoritetet komunale, si një hapësirë edukative dhe rekreative për fëmijët dhe familjet. Që nga fillimi, funksioni i tij ishte të strehonte specie të ndryshme të kafshëve dhe të edukonte publikun mbi natyrën. Ndërtimi i kopshtit ishte pjesë e një projekti më të gjerë për zhvillimin e zonave rekreative të qytetit. Në vitet 2000, kopshti u kritikua për kushtet jo të mira për kafshët dhe nisi një projekt restaurimi, i cili u përfundua në vitin 2022, duke e kthyer atë në një hapësirë moderne dhe më miqësore për kafshët dhe vizitorët.",
+        'kalaja_title': "Kalaja e Tiranës",
+        'kalaja_info': "Një kalë historike në zemër të Tiranës, Kalaja e Tiranës ofron një vështrim në të kaluarën e qytetit. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar evolucionin e saj përgjatë kohës!",
+        'teatri_title': "Teatri Kombëtar",
+        'teatri_info': "Një shenjë kulturore në Tiranë, Teatri Kombëtar është shtëpi e historisë së pasur teatrale të Shqipërisë. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar udhëtimin e tij përgjatë kohës!",
+        'xhamia_title': "Xhamia e Ethem Beut",
+        'xhamia_info': "Kjo xhami është e vetmja ndër tetë xhamitë e shekullit XVIII-XIX të ndërtuara në Tiranë që e shohim ende sot.  Themelet e saj i vuri Molla Beu, por ai vdiq pasi kishte përfunduar kubenë dhe Faltoren e plotësoi i biri i tij, Haxhi Ethem Beu,Klikoni 'Shiko Kapsulën Kohore' për të zbuluar historinë e saj përgjatë viteve!",
+        'stadiumi_title': "Stadiumi Air Albania",
+        'stadiumi_info': "Një arenë moderne sportive në Tiranë, Stadiumi Air Albania është një qendër për ngjarje kombëtare dhe ndërkombëtare. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar historinë dhe zhvillimin e tij!",
+        'ambasada_title': "Ish-Ambasada Jugosllave",
+        'ambasada_info': "Një ndërtesë historike në Tiranë, ish-Ambasada Jugosllave qëndron si simbol i së kaluarës diplomatike të Shqipërisë. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar historinë e saj përgjatë viteve!",
+        'farka_title': "Liqeni i Farkës",
+        'farka_info': "Një liqen i qetë pranë Tiranës, Liqeni i Farkës ofron një strehë të qetë të rrethuar nga natyra. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar historinë e tij përgjatë viteve!",
+        'petrela_title': "Kalaja e Petrelës",
+        'petrela_info': "Një kala historike me pamje mahnitëse, Kalaja e Petrelës shfaq trashëgiminë e pasur të Shqipërisë. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar historinë e saj përgjatë shekujve!",
+        'pazari_title': "Pazari i Ri",
+        'pazari_info': "Ky pazar ndodhet në atë zonë të Tiranës, që së bashku me lagjen e Mujos përfaqëson një nga zonat më të vjetra të qytetit.Edhe sot Pazari i Ri vazhdon të mbetet një nga tregjet më të mëdhenj ne qytet. Sot, Pazari i Ri është një hapësirë multifunksionale.",
+        'sheshi_title': "Sheshi Skënderbej",
+        'sheshi_info': "Sheshi Skënderbej është sheshi kryesor i Tiranës dhe një nga pikat më të njohura historike të qytetit. Ai është emëruar në nderim të heroit kombëtar, Gjergj Kastrioti Skënderbeu, dhe është ndërtuar në vitin 1968 pas ndryshimeve urbanistike që përfshinin shpërndarjen e disa ndërtesave të vjetra. Sheshi është një simbol i unitetit kombëtar dhe ka një rëndësi të madhe për aktivitete publike dhe ngjarje shtetërore. Sot, Sheshi Skënderbej është një qendër e gjallë, me monumente dhe aktivitete kulturore që tërheqin vizitorët dhe qytetarët.",
+        'muzeu_title': "Muzeu Kombëtar i Historisë",
+        'muzeu_info': "Muzeu Kombëtar i Historisë në Tiranë është muzeu më i madh në Shqipëri, që shfaq historinë e pasur të vendit dhe trashëgiminë kulturore përmes ekspozitave dhe artefakteve të ndryshme.",
+        'kisha_title': "Kisha Autoqefale Ortodokse e Shqipërisë",
+        'kisha_info': "Kisha Autoqefale Ortodokse e Shqipërisë është kisha kombëtare e Shqipërisë, që përfaqëson komunitetin ortodoks dhe luan një rol të rëndësishëm në jetën fetare dhe kulturore të vendit.",
+        'ura_title': "Ura e Tabakëve",
+        'ura_info': "Ura e Tabakëve është një urë historike në Tiranë, e njohur për arkitekturën e saj unike dhe rëndësinë në historinë e qytetit. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë e saj përgjatë kohës!",
+        'materniteti_title': "Spitali i Maternitetit",
+        'materniteti_info': "Spitali i Maternitetit në Tiranë është një institucion shëndetësor i rëndësishëm që specializohet në shëndetin e nënës dhe fëmijës, duke ofruar shërbime të domosdoshme për komunitetin.",
+        'ushtarak_title': "Spitali Ushtarak",
+        'ushtarak_info': "Spitali Ushtarak në Tiranë është një institucion shëndetësor i specializuar që shërben për personelin ushtarak dhe familjet e tyre, duke ofruar kujdes dhe mbështetje mjekësore të plotë.",
+        'kulla_title': "Kulla e Sahatit",
+        'kulla_info': "Kulla e Sahatit të Tiranës është një simbol ikonik, që përfaqëson historinë dhe kulturën e qytetit. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar evolucionin e saj përgjatë kohës!",
+        'lana_title': "Lana",
+        'lana_info': "Lana është një lumë i rëndësishëm në Tiranë, i njohur për bukurinë e tij skenike dhe rëndësinë ekologjike. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe transformimin e tij!",
+        'banka_title': "Banka e Shqipërisë",
+        'banka_info': "Banka e Shqipërisë është banka qendrore e vendit, përgjegjëse për politikën monetare dhe stabilitetin financiar. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe evolucionin e saj!",
+        'playground_title': "Lojërat për Fëmijë",
+        'playground_info': "Një hapësirë e gjallë për fëmijët në Tiranë, Lojërat për Fëmijë ofrojnë aktivitete rekreative dhe një mjedis të sigurt për familjet. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe zhvillimin e saj!",
+        'radio_title': "Ish-Radio Tirana",
+        'radio_info': "Ish-Radio Tirana është transmetuesi kombëtar i radios, duke ofruar lajme, kulturë dhe argëtim për publikun shqiptar. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe evolucionin e saj!",
+        'bashkia_title': "Bashkia e Tiranës",
+        'bashkia_info': "Bashkia e Tiranës është autoriteti qeveritar lokal përgjegjës për administrimin dhe zhvillimin e qytetit. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe evolucionin e saj!",
+        'hoteli_title': "Hoteli Tirana",
+        'hoteli_info': "Hoteli Tirana është një hotel i njohur në qytet, duke ofruar akomodim dhe shërbime për vizitorët. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe zhvillimin e tij!",
+        'bektashi_title': "Qendra Botërore Bektashiane",
+        'bektashi_info': "Qendra Botërore Bektashiane në Tiranë është selia e Urdhrit Bektashi, një sekt islamik sufi i njohur për besimet dhe praktikat e tij unike. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe rëndësinë e saj!",
+        'varri_title': "Varri i Kapllan Pashës",
+        'varri_info': "Varri i Kapllan Pashës është një vend historik në Tiranë, i njohur për rëndësinë e tij arkitektonike dhe trashëgiminë kulturore. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe transformimin e tij!",
+        'shkenca_title': "Muzeu i Shkencave Natyrore të Shqipërisë",
+        'shkenca_info': "Muzeu i Shkencave Natyrore të Shqipërisë në Tiranë shfaq pasurinë e biodiversitetit dhe trashëgiminë gjeologjike të vendit. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë dhe ekspozitat e tij!",
+        "biri_title": "Bulevardi i Ri",
+        'biri_info': "Bulevardi i Ri në Tiranë ruan historinë e traditës shqiptare. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar rrënjët e saj dhe transformimin ndër vite!",
+        "zoguip_title": "Bulevardi Zogu i Parë",
+        'zoguip_info': "Bulevardi Zogu i Parë në Tiranë përfaqëson një pjesë të rëndësishme të trashëgimisë urbane. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë e tij!",
+        "zogizi_title": "Bulevardi Zogu i Zi",
+        'zogizi_info': "Bulevardi Zogut i Zi në Tiranë pasqyron zhvillimet arkitekturore dhe shoqërore të qytetit. Klikoni 'Shiko Kapsulën Kohore' për të mësuar më shumë!",
+        "ubt_title": "Universiteti Bujqësor i Tiranës",
+        'ubt_info': "Universiteti Bujqësor i Tiranës ka ndihmuar breza studentësh të formohen në fushën e bujqësisë. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar rrugëtimin e tij!",
+        "kino_title": "Ish-Kinostudioja e Tiranës",
+        'kino_info': "Ish-Kinostudioja e Tiranës, e ndërtuar në vitin 1952, ishte qendra e prodhimit të filmave dhe artit kinematografik në Shqipëri gjatë regjimit komunist. Ajo ka qenë një pikë kyçe për zhvillimin e industrisë së filmit dhe televizionit në vend. Pas ndryshimeve politike, Kinostudioja humbi funksionin e saj dhe sot është një hapësirë që përdoret për aktivitete kulturore dhe kreative. Ajo është një simbol i trashëgimisë kulturore të filmit shqiptar dhe ka qenë një vend ku janë xhiruar disa prej filmave më të njohur të Shqipërisë. Klikoni 'Shiko Kapsulën Kohore' për të udhëtuar pas në kohë!",
+        "pali_title": "Kisha e Shën Palit",
+        'pali_info': "Kisha e Shën Palit në Tiranë ka historinë e saj të veçantë në zemër të qytetit. Klikoni 'Shiko Kapsulën Kohore' për ta zbuluar!",
+        "erzen_title": "Lumi Erzen",
+        'erzen_info': "Lumi Erzen ka qenë një burim natyror i rëndësishëm për jetën dhe zhvillimin përreth Tiranës. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar historinë e tij!",
+        "brig_title": "Pallati i Brigadave",
+        'brig_info': "Pallati i Brigadave në Tiranë mban gjurmët e historisë së lëvizjeve dhe organizimeve shoqërore. Klikoni 'Shiko Kapsulën Kohore' për të mësuar më shumë!",
+        "kongres_title": "Pallati i Kongreseve",
+        'kongres_info': "Pallati i Kongreseve në Tiranë është një simbol i ngjarjeve kulturore dhe historike. Klikoni 'Shiko Kapsulën Kohore' për të parë rrugëtimin e tij!",
+        "farie_title": "Pallati i Sportit të Farie Hotit",
+        'farie_info': "Pallati i Sportit të Farie Hotit sjell histori të fushës së sportit dhe ndryshimeve gjatë viteve në Tiranë. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar më shumë!",
+        "partizani_title": "Pallati Sportiv Partizani",
+        'partizani_info': "Pallati Partizani ka një trashëgimi të pasur në sportin shqiptar. Klikoni 'Shiko Kapsulën Kohore' për të parë rrugëtimin e tij në kohë!",
+        "ministrat_title": "Zona e Ministrive",
+        'ministrat_info': "Zona e Ministrive në Tiranë është një qendër historike e administratës shtetërore. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar transformimet e saj!",
+        "parlament_title": "Kuvendi i Shqipërisë",
+        'parlament_info': "Kuvendi i Shqipërisë në Tiranë është qendra e jetës ligjvënëse të vendit. Klikoni 'Shiko Kapsulën Kohore' për të njohur historinë e tij!",
+        "politeknik_title": "Universiteti Politeknik i Tiranës",
+        'politeknik_info': "Universiteti Politeknik i Tiranës ka formuar shumë prej inxhinierëve dhe profesionistëve të vendit. Klikoni 'Shiko Kapsulën Kohore' për të ndjekur evolucionin e tij!",
+        "student_title": "Qyteti Studenti",
+        'student_info': "Qyteti Studenti në Tiranë përfaqëson jetën akademike dhe shpirtin rinor ndër breza. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar historinë e tij!",
+        "nentori_title": "Sheshi 28 Nëntori",
+        'nentori_info': "Sheshi '28 Nëntori' ruan kujtime të rëndësishme historike për shqiptarët. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar rrugëtimin e tij!",
+        "barrikada_title": "Rruga e Barrikadave",
+        'barrikada_info': "Rruga e Barrikadave evokon kujtime të rezistencës dhe qëndresës në historinë shqiptare. Klikoni 'Shiko Kapsulën Kohore' për të mësuar më shumë!",
+        "dibra_title": "Rruga e Dibrës",
+        'dibra_info': "Rruga e Dibrës në Tiranë lidh të shkuarën dhe të tashmen përmes historive të saj të pasura. Klikoni 'Shiko Kapsulën Kohore' për të udhëtuar në kohë!",
+        "durres_title": "Rruga e Durrësit",
+        'durres_info': "Rruga e Durrësit ka qenë një nga arteriet kryesore të Tiranës moderne. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar evolucionin e tij!",
+        "kavaja_title": "Rruga e Kavajës",
+        'kavaja_info': "Rruga e Kavajës në Tiranë mbart histori tregtare dhe sociale të qytetit. Klikoni 'Shiko Kapsulën Kohore' për të mësuar më shumë!",
+        "luigj_title": "Rruga Luigj Gurakuqi",
+        'luigj_info': "Rruga 'Luigj Gurakuqi' ka ndikuar në historinë e shumë brezave. Klikoni 'Shiko Kapsulën Kohore' për të njohur rrënjët e tij!",
+        "qemal_title": "Rruga Qemal Stafa",
+        'qemal_info': "Rruga 'Qemal Stafa' është një simbol që lidh të shkuarën me historinë shqiptare. Klikoni 'Shiko Kapsulën Kohore' për të ndjekur rrugëtimin e tij!",
+        "hoxha_title": "Rruga Tasim Hoxha",
+        'hoxha_info': "Rruga Tasim Hoxha në Tiranë përfaqëson pjesë të ndryshme të historisë urbane të qytetit. Klikoni 'Shiko Kapsulën Kohore' për ta zbuluar!",
+        "kukull_title": "Teatri i Kukullave",
+        'kukull_info': "Teatri i Kukullave në Tiranë ka dhuruar buzëqeshje dhe emocione për breza të tërë fëmijësh. Klikoni 'Shiko Kapsulën Kohore' për të eksploruar magjinë e tij!",
+        "vila_title": "Vila Presidenciale e Tiranës",
+        'vila_info': "Vila Presidenciale e Tiranës ruajnë kujtime të arkitekturës dhe jetës qytetare. Klikoni 'Shiko Kapsulën Kohore' për të zbuluar historinë e tyre!"
+     }
+};
+
+// Helper functions
+function updateElementText(selector, text) {
+  const element = document.querySelector(selector);
+  if (element) element.textContent = text;
+}
+
+function updateElementHTML(selector, html) {
+  const element = document.querySelector(selector);
+  if (element) element.innerHTML = html;
+}
+
+function updatePlaceholder(selector, text) {
+  const element = document.querySelector(selector);
+  if (element) element.placeholder = text;
+}
+
+function updateElementValue(selector, value) {
+  const element = document.querySelector(selector);
+  if (element) element.value = value;
+}
+
+
+
+
+
+function updateTexts() {
+  const langData = translations[currentLanguage];
+
+    // Navbar
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      if (langData[key]) el.textContent = langData[key];
+    });
+    // Hero
+    const heroH = document.querySelector('.opening-sequence h1');
+    const heroP = document.querySelector('.opening-sequence p');
+    if (heroH && langData['welcome']) heroH.textContent = langData['welcome'];
+    if (heroP && langData['subtitle']) heroP.textContent = langData['subtitle'];
+
+  
+  try {
+    // Navigation items
+    updateElementText('.navbar a[href="index.html"]', langData['home']);
+    updateElementText('.navbar a[href="#hart"]', langData['why_tirana']);
+    updateElementText('.navbar a[href="#explore"]', langData['map']);
+    updateElementText('.navbar a[href="#aboutus"]', langData['about']);
+    
+    // Home section
+    updateElementText('.opening-sequence h1', langData['welcome']);
+    updateElementText('.opening-sequence p', langData['subtitle']);
+    
+    // Map/Info section
+    updateElementHTML('[data-translate="map_heading"]', langData['map_heading']);
+    updateElementText('[data-translate="map_para1"]', langData['map_para1']);
+    updateElementText('[data-translate="map_para2"]', langData['map_para2']);
+    updateElementText('[data-translate="map_para3"]', langData['map_para3']);
+    updateElementText('[data-translate="read_more"]', langData['read_more']);
+    
+    // Preserving History Section
+    updateElementText('#preserving-title', langData['preserving_title']);
+    updateElementText('#preserving-text1', langData['preserving_text1']);
+    updateElementText('#preserving-text2', langData['preserving_text2']);
+    
+    // Mission & Vision Section
+    updateElementText('#mission-vision-title', langData['mission_vision_title']);
+    updateElementText('#mission-title', langData['mission_title']);
+    updateElementText('#mission-text', langData['mission_text']);
+    updateElementText('#vision-title', langData['vision_title']);
+    updateElementText('#vision-text', langData['vision_text']);
+    
+    // Team Section
+    updateElementText('#team-title', langData['team_title']);
+    updateElementText('#team-subtitle', langData['team_subtitle']);
+    
+    // Team Quotes
+    document.querySelectorAll('[data-quote]').forEach(el => {
+      const quoteKey = el.getAttribute('data-quote');
+      el.textContent = langData['quotes'][quoteKey];
+    });
+    
+    // Contact Section
+    updateElementText('#contact-title', langData['contact_title']);
+    updateElementText('.contact-para', langData['contact_subtitle']);
+    updateElementText('#get-in-touch', langData['get_in_touch']);
+    
+    // Contact Form
+    updatePlaceholder('#contact-name', langData['contact_form']['name']);
+    updatePlaceholder('#contact-email', langData['contact_form']['email']);
+    updatePlaceholder('#contact-phone', langData['contact_form']['phone']);
+    updatePlaceholder('#contact-message', langData['contact_form']['message']);
+    updateElementValue('#send-btn', langData['contact_form']['send']);
+    updateElementText('#k', langData['kv']);
+    updateElementText('#klevi', langData['klevivokshi']);
+
+    
+    // Team Roles
+    document.querySelectorAll('[data-role]').forEach(el => {
+      const roleType = el.getAttribute('data-role');
+      el.textContent = langData['roles'][roleType];
+    });
+    
+    // Language button
+    updateElementText('[data-dropdown-toggle="language-dropdown-menu"]', langData['language']);
+    
+  } catch (error) {
+    console.error('Error updating translations:', error);
+  }
+}
+
+// Current language (default to English)
+let currentLanguage = 'en';
+
+// Function to change language
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    console.log('Language changed to:', currentLanguage);
+    updateTexts();
+    localStorage.setItem('languagePreference', lang);
+}
+window.changeLanguage = changeLanguage;
+
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Check for saved language preference
+  const savedLang = localStorage.getItem('languagePreference');
+  if (savedLang) {
+    changeLanguage(savedLang);
+  }
+  
+  // Language switch EN / SQ
+  document.querySelectorAll('[data-lang]').forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const lang = this.getAttribute('data-lang');
+        changeLanguage(lang);
+        const menu = document.getElementById('language-dropdown-menu');
+        if (menu) {
+          menu.classList.add('hidden');
+          menu.classList.remove('block');
+          menu.style.display = 'none';
+        }
+    });
+  });
+  // Also wire by text for safety
+  document.querySelectorAll('#language-dropdown-menu a').forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const txt = (this.textContent || '').toLowerCase();
+        const lang = txt.includes('english') || txt.includes('en') ? 'en' : 'al';
+        if (this.getAttribute('data-lang')) return; // already handled
+        changeLanguage(lang);
+        const menu = document.getElementById('language-dropdown-menu');
+        if (menu) { menu.classList.add('hidden'); menu.style.display = 'none'; }
+    });
+  });
+});
+
+</script>
+
+<section class="home" id="home">
+  <div class="zoom-out-container">
+    <div class="image-container"></div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Tirana_Clock_Tower%2C_Old_Building.jpg" alt="Zoom Out Image" class="zoom-out-image" id="dynamic-image" fetchpriority="high">
+      <div class="image-overlay"></div>
+    </div>
+    <div class="opening-sequence">
+      <h1>Welcome to Kujto Tiranën</h1>
+      <p>Preserving the history and culture of Tirana</p>
+    </div>
+  </div>
+</section>
+<script>
+// Array of image URLs
+const imageUrls = [
+  "https://i.pinimg.com/736x/95/6c/a5/956ca597c1acfded838b020a65888c41.jpg",
+  "https://www.delcampe.net/static/img_large/auction/001/599/487/852_001.jpg",
+  "https://www.albaniantrip.com/wp-content/uploads/2017/05/tirana3.jpg",
+  "https://www.exutopia.com/wp-content/uploads/2024/04/Albania-Tirana-Tour-1-Tirana-Pyramyd-5.jpg",
+  "https://telegrafi.com/wp-content/uploads/2020/06/Tirana-04-e1632396880575-780x439.jpeg",
+  "https://i.redd.it/iraqy162tib11.jpg",
+  "https://citizens.al/wp-content/uploads/2025/02/Pazari-i-vjeter-1024x576.jpg",
+  "https://images.saatchiart.com/saatchi/1276329/art/6266739/5336511-HSC00001-32.jpg",
+  "https://www.delcampe.net/static/img_large/auction/002/086/649/061_001.jpg",
+  "https://images.pond5.com/old-tirana-center-aerial-drone-footage-061799673_iconl.jpeg",
+  "https://emerging-europe.com/wp-content/uploads/2019/11/bigstock-tirana-albania-june-a-310027549.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/0/0d/Skanderbeg_square_tirana_2016.jpg",
+  "https://i0.wp.com/theorangebackpack.nl/wp-content/uploads/2023/12/Tirana-Albanie-1-scaled.jpg?fit=2560%2C1707&ssl=1",
+  "https://i0.wp.com/nomadehjerter.no/wp-content/uploads/2023/06/Tirana-111757.jpg?resize=640%2C311&ssl=1",
+  "https://theholisticbackpacker.com/wp-content/uploads/2022/08/MG_1858.jpg"
+];
+
+// Reference to the image element
+const dynamicImage = document.getElementById("dynamic-image");
+
+// Function to set a random image on page load
+function setRandomImage() {
+  const randomIndex = Math.floor(Math.random() * imageUrls.length);
+  dynamicImage.src = imageUrls[randomIndex];
+}
+
+// Function to change the image every 5 seconds
+function changeImage() {
+  let currentImageIndex = imageUrls.indexOf(dynamicImage.src);
+  currentImageIndex = (currentImageIndex + 1) % imageUrls.length; // Cycle through images
+  dynamicImage.src = imageUrls[currentImageIndex];
+}
+
+// Set a random image on page load
+setRandomImage();
+
+// Change the image every 5 seconds (matching the text animation cycle)
+setInterval(changeImage, 5000);
+</script>
+
+<div class="cont" id="explore">
+  <!-- New sidebar -->
+  <div class="sidebar" id="sidebar">
+
+    <div class="sidebar-content" id="sidebar-content">
+      <!-- Content will be populated by JavaScript -->
+    </div>
+  </div>
+  
+
+
+
+  <div class="harta" >
+      <h1 style="font-family: 'Doto', sans-serif; text-align: center; margin-bottom: 20px;" id="klevi">Explore Tirana's Historical and Cultural Gems</h1>
+    
+    <!-- Timeline Container -->
+    <div class="timeline-container" id="timelineContainer">
+      <button class="timeline-close" onclick="hideTimeline()">&times;</button>
+      <div id="timelineContent"></div>
+    </div>
+    
+    <div id="map"></div>
+  </div>
+  <!-- Polaroid Gallery -->
+<!-- Polaroid Gallery -->
+<div class="foto" id="polaroidGallery" style="display: none;">
+<button type="button" id="kt-tl-close" class="polaroid-close kt-tl-close-btn" onclick="hidePolaroidGallery()" title="Mbyll timeline" aria-label="Close">✕</button>
+
+<div id="polaroidContent" class="kt-timeline-viewer">
+  <button type="button" id="kt-tl-prev" class="kt-tl-nav" aria-label="Previous">‹</button>
+  <div class="kt-tl-main">
+    <button type="button" id="kt-tl-close-inner" class="kt-close-x" onclick="hidePolaroidGallery()" title="Mbyll">✕</button>
+    <div class="kt-tl-year" id="kt-tl-year"></div>
+    <div class="kt-tl-img-wrap">
+      <img id="kt-tl-img" src="images/logo1.webp" alt="Timeline" />
+    </div>
+    <div class="kt-tl-caption" id="kt-tl-caption"></div>
+    <div class="kt-tl-counter" id="kt-tl-counter"></div>
+    <div class="kt-tl-zoom-bar">
+      <button type="button" id="kt-tl-zoom-out" title="Zoom out">−</button>
+      <button type="button" id="kt-tl-zoom-in" title="Zoom in">+</button>
+      <button type="button" id="kt-tl-reset" title="Reset & resume">Reset</button>
+    </div>
+    <p class="kt-tl-hint" id="kt-tl-hint"></p>
+  </div>
+  <button type="button" id="kt-tl-next" class="kt-tl-nav" aria-label="Next">›</button>
+</div>
+<button type="button" class="sort-btn" style="display:none" onclick="sortPhotosByYear()">Sort</button>
+<button type="button" class="upload-btn" onclick="document.getElementById('uploadInput').click()" id="uploadImageButton">Upload Image</button>
+<input type="file" id="uploadInput" style="display: none;" accept="image/*">
+<div id="formOverlay" style="display: none;">
+  <div id="formContainer">
+      <button type="button" id="kt-form-close" class="kt-close-x" onclick="document.getElementById('formOverlay').style.display='none'" title="Mbyll">✕</button>
+      <form id="imageUploadForm">
+          <p id="kt-upload-hint" style="margin:0 0 12px;font-size:1.35rem;color:#555;line-height:1.4">
+            Fotoja dërgohet për miratim. Do të shfaqet vetëm pasi admini ta aprovojë. / Photo is sent for approval. It appears only after admin approves it.
+          </p>
+          <label for="year" id="lbl-year">Viti / Year:</label>
+          <input type="text" id="year" name="year" required placeholder="p.sh. 1990" inputmode="numeric">
+          <br>
+          <label for="caption" id="lbl-caption">Përshkrimi / Caption:</label>
+          <input type="text" id="caption" name="caption" required placeholder="Shkruaj qartë në shqip ose anglisht">
+          <br>
+          <label for="firstName" id="lbl-firstName">Emri / First name:</label>
+          <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+          <br>
+          <label for="lastName" id="lbl-lastName">Mbiemri / Last name:</label>
+          <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+          <br>
+          <label for="email" id="lbl-email">Email:</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+          <br>
+          <button type="submit" id="kt-upload-submit">Dërgo / Submit</button>
+      </form>
+  </div>
+</div>
+
+
+
+
+</div>
+</div>
+<section class="mapi" id="hart">
+  <div class="image">
+    <img src="images/5.webp" class="center" alt="">
+  </div>
+  <div class="content" id="info">
+    <h3 data-translate="map_heading" style="margin-top: 10px;">Get to know Tirana better &#128462;</h3>
+    <p data-translate="map_para1">Tirana is more than just the capital of Albania—it is the heart of the country's history, transformation, and collective memory. A city that has witnessed decades of change, resilience, and cultural evolution, Tirana stands as a symbol of progress and identity.</p>
+    <p data-translate="map_para2">Through Kujto Tiranën, we chose Tirana as the home for our time capsule because it encapsulates the spirit of an entire nation. From its layered history to its rapid modernization, every street, building, and story holds a piece of Albania's past, present, and future. By preserving memories here, we honor the experiences of generations, ensuring that the essence of Tirana is never forgotten.</p>
+    <p data-translate="map_para3">This city is where personal and collective narratives intertwine—where history meets the future. That's why Tirana.</p>
+    <a href="https://tirana.al/" target="_blank"  class="btn" data-translate="read_more">read more</a>
+  </div>
+</section>
+<div class="banner-area"></div>
+
+<div class="content-area" id="aboutus">
+    <!-- First Section -->
+    <section class="container py-5">
+        <div class="row g-4">
+            <div class="col-12 col-md-6">
+                <h2 class="fs-1 fw-semibold text-dark mb-4" id="preserving-title">Preserving Tirana's History, One Memory at a Time</h2>
+                <p class="text-muted mb-4" id="preserving-text1">Kujto Tiranën is a digital time capsule designed to preserve and celebrate the evolving history of Tirana. Through an interactive map, users can explore how different locations have changed over the years, read and share stories, and contribute their own experiences.</p>
+                <p class="text-muted mb-4" id="preserving-text2">Understanding Tirana's past helps shape its future. By preserving historical narratives, we strengthen our cultural identity, foster a deeper appreciation for the city's transformation, and ensure that future generations can connect with its history.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <img src="images/hi.webp">
+            </div>
+        </div>
+    </section>
+  
+    <!-- Mission & Vision Section -->
+    <section class="container py-5 bg-light rounded-3" style="max-width: 1112px;">
+        <h3 class="h1 fw-semibold text-dark mb-4" id="mission-vision-title" style="margin-top: 10px;">Our Mission & Vision</h3>
+        <div class="row g-4">
+            <div class="col-12 col-md-6">
+                <h4 class="h2 fw-semibold text-dark mb-2" id="mission-title">Our Mission</h4>
+                <p class="text-muted" id="mission-text">To create a digital time capsule where users can explore and contribute to Tirana's evolving history.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h4 class="h2 fw-semibold text-dark mb-2" id="vision-title">Our Vision</h4>
+                <p class="text-muted" id="vision-text">A community-driven platform where memories, places, and events are preserved for future generations.</p>
+            </div>
+        </div>
+    </section><div class="title" style="background-color: #eee; margin-top: 50px;">
+    <h1 id="contact-title">Contact us</h1>
+</div>
+<div class="para">
+    <p class="contact-para text-center text-muted">We are open for any suggestion or to solve a problem.</p>
+</div>
+<div class="contact-container">
+    <div class="contact-box">
+        <div class="left"></div>
+        <div class="right">
+            <h2 id="get-in-touch">Get in touch</h2>
+            <form id="contactForm" action="#" method="post">
+                <input type="text" class="field" placeholder="Your Name" id="contact-name" name="name" required>
+                <input type="email" class="field" placeholder="Your Email" id="contact-email" name="email" required>
+                <input type="tel" class="field" placeholder="Phone" id="contact-phone" name="phone">
+                <textarea placeholder="Message" class="field" id="contact-message" name="message" required></textarea>
+                <input type="submit" class="send-btn" id="send-btn" value="Send">
+            </form>
+            <div id="successMessage" style="display:none; color: green; font-size: 16px;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const form = event.target;
+    const btn = document.getElementById("send-btn");
+    const msgEl = document.getElementById("successMessage");
+    btn.disabled = true;
+    btn.value = "...";
+    try {
+        const name = (document.getElementById("contact-name") || form.querySelector("[name=name]")).value.trim();
+        const email = (document.getElementById("contact-email") || form.querySelector("[name=email]")).value.trim();
+        const phoneEl = document.getElementById("contact-phone") || form.querySelector("[name=phone]");
+        const message = (document.getElementById("contact-message") || form.querySelector("[name=message]")).value.trim();
+        if (!email || !email.includes('@')) { throw new Error('Please enter a valid email address'); }
+        const payload = { name, email, phone: phoneEl ? phoneEl.value : "", message };
+        const res = await window.KT_API.submitContactForm(payload);
+        msgEl.style.color = "green";
+        msgEl.textContent = res.message || (translations[currentLanguage]['contact_form']['success'] || "Sent!");
+        msgEl.style.display = "block";
+        form.reset();
+        setTimeout(function() { msgEl.style.display = "none"; }, 4000);
+    } catch (err) {
+        msgEl.style.color = "crimson";
+        msgEl.textContent = err.message || "Error sending message";
+        msgEl.style.display = "block";
+    } finally {
+        btn.disabled = false;
+        btn.value = translations[currentLanguage]?.contact_form?.send || "Send";
+    }
+});
+</script>
+
+<!-- ------scroller to top -->
+<a href="#top" class="to-top">
+    <i class="fas fa-chevron-up"></i>
+</a>
+
+<!-- custom js file link  -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/photos.js"></script>
+<script src="js/moderation-client.js"></script>
+<script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+<script src="js/auth-ui.js"></script>
+<script src="js/features.js"></script>
+<script src="js/allscript.js"></script>
+<script src="js/searchBar.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Language data
+
+
+    // Current language (default to English)
+    let markers = []; // Store all markers
+    let currentHighlightedMarker = null;
+    let currentHighlightedPolyline = null;
+    var skenderbejLat = 41.3275;
+    var skenderbejLng = 19.8189;
+    let currentLocation = null;
+
+    // Initialize map
+    var map = L.map('map').setView((window.KT_CONFIG && KT_CONFIG.defaultMapCenter) || [41.3355599, 19.8430004], (window.KT_CONFIG && KT_CONFIG.defaultMapZoom) || 12);
+    window.map = map;
+    setTimeout(function(){ try{ map.invalidateSize(true); }catch(e){} }, 200);
+    window.addEventListener('resize', function(){ try{ map.invalidateSize(true); }catch(e){} });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+    }).addTo(map);
+
+    
+    var legend = L.control({position: 'topright'});
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'legend');
+    div.innerHTML += "<b>Destinations</b><br>";
+    div.innerHTML += '<div class="legend-item"><img src="images/parku.webp" alt="Parku">Parku/Park</div>';
+    div.innerHTML += '<div class="legend-item"><img src="images/pyramid.webp">Piramida/Pyramid</div>';
+    div.innerHTML += '<div class="legend-item"><img src="images/zoo.webp">Kopesht Zoologjik/Zoo</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn-icons-png.freepik.com/512/3583/3583692.png"> Kala/Castle</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://thaka.bing.com/th/id/OIP.pyzKMgUq0Jezb8Cz7IMYwwAAAA?rs=1&pid=ImgDetMain">Teater/Theatre</div>';
+    div.innerHTML += '<div class="legend-item"><img src="images/Screenshot_20250403_221929_Google.webp">Stadium/Stadium</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://static.vecteezy.com/system/resources/previews/021/615/187/non_2x/embassy-3d-render-icon-illustration-png.png">Ambasade/Embassy</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/shop-icon.png"> Pazar/shopping</div>';
+    div.innerHTML += '<div class="legend-item"><img src="images/1000_F_236364476_lyKVCePy3YnIDPAF7Zwmo0rqcCsXxKMY-removebg-preview.webp">Sheshi/Square</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://static.vecteezy.com/system/resources/previews/012/623/106/non_2x/administrative-building-university-office-city-hall-in-white-icon-on-transparent-background-3d-rendering-png.png">Muze/Museum</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cfrouting.zoeysite.com/cdn-cgi/image/format=auto,fit=scale-down,quality=70/https://s3.amazonaws.com/zcom-media/sites/a0i8a00000cpxS6AAI/media/catalog/product/c/x/cx54et_-_edited.png">Kisha/Church</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://www.clipartmax.com/png/full/56-560905_river-clipart-rpg-bridge-symbol-on-a-map.png">Ura/Bridge</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn-icons-png.flaticon.com/512/3021/3021811.png">Materniteti/Maternity</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://png.pngtree.com/png-clipart/20250309/original/pngtree-classic-big-ben-clock-tower-with-rich-golden-accents-png-image_20613607.png">Kulle/Tower</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://pngimg.com/uploads/bank/bank_PNG24.png">Banke/Bank</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn4.iconfinder.com/data/icons/advertising-soft/512/news_center-512.png">Ish Radio/Forner Radio</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn-icons-png.freepik.com/512/1666/1666066.png">Bashkia/Municipality</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://static-00.iconduck.com/assets.00/cinema-icon-2048x1621-trrbvvpr.png">Kinostudio/Film studio</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://thaka.bing.com/th/id/OIP.Lwhlf860Z6AMcTmm7a0jmwHaH0?rs=1&pid=ImgDetMain">Hotel/Hotel</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn2.iconfinder.com/data/icons/digital-economy-9/512/GovernmentAgencies-parliament-government-ministry-justice-512.png">Ministri/Ministry</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn-icons-png.flaticon.com/512/8307/8307095.png">Parlament/Parlament</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Education%2C_Studying%2C_University%2C_Alumni_-_icon.png">Universitet/University</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn4.iconfinder.com/data/icons/campus-life-color-filled/300/Campus_Life_color_6-512.png">Qyteti Studenti/Student City</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://www.freepnglogos.com/uploads/road-png/road-icon-web-icons-png-33.png">Rruge/Street</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn-icons-png.flaticon.com/512/207/207006.png">Teatri i kukullave/Puppet theater</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn-icons-png.freepik.com/512/4840/4840912.png">Vila/Villas</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://www.pngarts.com/files/9/Royal-Palace-PNG-Photo.png">Pallati i Kongreseve/Palace of Congresses</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn-icons-png.flaticon.com/512/4765/4765663.png">Lum/River</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://static.vecteezy.com/system/resources/thumbnails/010/870/958/small_2x/mosque-icon-design-silhouette-png.png">Teqe/Masjid</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://thaka.bing.com/th/id/OIP.aWjySJf8_6gM1NUXL3-jygHaHa?rs=1&pid=ImgDetMain">Kend Lojrash/Playground</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://th.bing.com/th/id/R.53550af7e8a1cef4234633e71e929ac5?rik=dpIEpDugKHfRnw&pid=ImgRaw&r=0">Liqen/Lake</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://th.bing.com/th/id/R.2a5c52b1a0c0ed30ef3907ddf945f1ee?rik=OgLRkeyjv7tYBw&pid=ImgRaw&r=0">Spital/Hospital</div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://pngimg.com/d/mosque_PNG10.png">Xhamia/Mosque </div>';
+    div.innerHTML += '<div class="legend-item"><img src="https://cdn2.vectorstock.com/i/1000x1000/13/11/map-pointer-with-mountain-symbol-flat-isometric-vector-15101311.jpg">Mal/Mountain</div>';
+    return div;
+};
+
+legend.addTo(map);
+
+    // Locations data
+    var locations = [
+      {
+        lat:41.31148895,
+        lng: 19.829454721973445,
+        icon:'images/parku.webp',
+        image: 'fotot/parku_tirane/2025.webp',
+        key: 'parku',
+        timelineImages: [
+          { src: 'fotot/parku_tirane/1996.webp', title: 'Park 1996'},
+          { src: "fotot/parku_tirane/1999.webp", title: 'Park 1999'},
+          { src: 'fotot/parku_tirane/2000.webp', title: 'Park 2000'},
+          { src: 'fotot/parku_tirane/2001.webp', title: 'Park 2001'},
+          { src: 'fotot/parku_tirane/2016.webp', title: 'Park 2016'},
+          { src: 'fotot/parku_tirane/2017.webp', title: 'Park 2017'},
+          { src: 'fotot/parku_tirane/2018.webp', title: 'Park 2018'},
+          { src: 'fotot/parku_tirane/2022.webp', title: 'Park 2022'},
+          { src: 'fotot/parku_tirane/2023.webp', title: 'Park 2023'},
+          { src: 'fotot/parku_tirane/2025.webp', title: 'Park 2025'}
+        ]
+      },
+      {
+        lat: 41.32308937795653,
+        lng: 19.82150000000000,
+        image: 'fotot/piramida/2025_3.webp',
+        key: 'piramida',
+        timelineImages: [
+          { src: 'fotot/piramida/1988.webp', title: 'Piramida 1988'},
+          { src: 'fotot/piramida/1989.webp', title: 'Piramida 1989'},
+          { src: 'fotot/piramida/1990.webp', title: 'Piramida 1990'},
+          { src: 'fotot/piramida/1996.webp', title: 'Piramida 1996'},
+          { src: 'fotot/piramida/1999.webp', title: 'Piramida 1999'},
+          { src: 'fotot/piramida/2000.webp', title: 'Piramida 2000'},
+          { src: 'fotot/piramida/2002.webp', title: 'Piramida 2002'},
+          { src: 'fotot/piramida/2017.webp', title: 'Piramida 2017'},
+          { src: 'fotot/piramida/2017(2).webp', title: 'Piramida 2017'},
+          { src: 'fotot/piramida/2017(3).webp', title: 'Piramida 2017'},
+          { src: 'fotot/piramida/2018.webp', title: 'Piramida 2018'},
+          { src: 'fotot/piramida/2018(2).webp', title: 'Piramida 2018'},
+          { src: 'fotot/piramida/2019.webp', title: 'Piramida 2019'},
+          { src: 'fotot/piramida/2019_2.webp', title: 'Piramida 2019'},
+          { src: 'fotot/piramida/2019_3.webp', title: 'Piramida 2019'},
+          { src: 'fotot/piramida/2020.webp', title: 'Piramida 2020'},
+          { src: 'fotot/piramida/2020_2.webp', title: 'Piramida 2020'},
+          { src: 'fotot/piramida/2021.webp', title: 'Piramida 2021'},
+          { src: 'fotot/piramida/2021_2.webp', title: 'Piramida 2021'},
+          { src: 'fotot/piramida/2022.webp', title: 'Piramida 2022'},
+          { src: 'fotot/piramida/2023.webp', title: 'Piramida 2023'},
+          { src: 'fotot/piramida/2025.webp', title: 'Piramida 2025'},
+          { src: 'fotot/piramida/2025_2.webp', title: 'Piramida 2025'},
+          { src: 'fotot/piramida/2025_3.webp', title: 'Piramida 2025'}
+          ]
+      },
+      {
+        lat: 41.366668, 
+        lng: 19.923885,
+        image: 'fotot/mali_dajtit/2025.webp',
+        key: 'dajti',
+        timelineImages: [
+          { src: 'fotot/mali_dajtit/2008.webp', title: 'Dajti 2008'},
+          { src: 'fotot/mali_dajtit/2010.webp', title: 'Dajti 2010'},
+          { src: 'fotot/mali_dajtit/2015.webp', title: 'Dajti 2015'},
+          { src: 'fotot/mali_dajtit/2018.webp', title: 'Dajti 2018'},
+          { src: 'fotot/mali_dajtit/2021.webp', title: 'Dajti 2021'},
+          { src: 'fotot/mali_dajtit/2023.webp', title: 'Dajti 2023'},
+          { src: 'fotot/mali_dajtit/2025.webp', title: 'Dajti 2025' }
+        ]
+      }, {
+        lat: 41.307399,
+        lng: 19.809400,
+        image: 'fotot/zoo/2025_1.webp',
+        key: 'zoo',
+        timelineImages: [
+          { src: 'fotot/zoo/2009.webp', title: 'Zoo 2019'},
+          { src: 'fotot/zoo/2011.webp', title: 'Zoo 2011'},
+          { src: 'fotot/zoo/2015.webp', title: 'Zoo 2015'},
+          { src: 'fotot/zoo/2017.webp', title: 'Zoo 2017'},
+          { src: 'fotot/zoo/2018.webp', title: 'Zoo 2018'},
+          { src: 'fotot/zoo/2021.webp', title: 'Zoo 2021'},
+          { src: 'fotot/zoo/2022.webp', title: 'Zoo 2022'},
+          { src: 'fotot/zoo/2022_2.webp', title: 'Zoo 2022'},
+          { src: 'fotot/zoo/2022_3.webp', title: 'Zoo 2022'},
+          { src: 'fotot/zoo/2023.webp', title: 'Zoo 2023'},
+          { src: 'fotot/zoo/2023_2.webp', title: 'Zoo 2023'},
+          { src: 'fotot/zoo/2023_3.webp', title: 'Zoo 2023'},
+          { src: 'fotot/zoo/2024.webp', title: 'Zoo 2024'},
+          { src: 'fotot/zoo/2025.webp', title: 'Zoo 2025'},
+          { src: 'fotot/zoo/2025_1.webp', title: 'Zoo 2025'}
+        ]
+      },
+      {
+        lat: 41.3265284,
+        lng: 19.822484,
+        image: 'fotot/kalaja_e_tiranes/2025_2.webp',
+        key: 'kalaja',
+        timelineImages: [
+          { src: 'fotot/kalaja_e_tiranes/1798.webp', title: 'Kalaja 1798'},
+          { src: 'fotot/kalaja_e_tiranes/2000.webp', title: 'Kalaja 2000'},
+          { src: 'fotot/kalaja_e_tiranes/2005.webp', title: 'Kalaja 2005'},
+          { src: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400/fbc55174189533.5c259c57c7962.jpg', title: 'Kalaja 2005' },
+          { src: 'fotot/kalaja_e_tiranes/2014.webp', title: 'Kalaja 2014'},
+          { src: 'fotot/kalaja_e_tiranes/2021.webp', title: 'Kalaja 2021'},
+          { src: 'fotot/kalaja_e_tiranes/2022.webp', title: 'Kalaja 2022'},
+          { src: 'fotot/kalaja_e_tiranes/2023.webp', title: 'Kalaja 2023'},
+          { src: 'fotot/kalaja_e_tiranes/2024.webp', title: 'Kalaja 2024'},
+          { src: 'fotot/kalaja_e_tiranes/2024_2.webp', title: 'Kalaja 2024'},
+          { src: 'fotot/kalaja_e_tiranes/2025.webp', title: 'Kalaja 2025'},
+          { src: 'fotot/kalaja_e_tiranes/2025_2.webp', title: 'Kalaja 2025'}
+        ]
+      },
+      {
+        lat: 41.3265173,
+        lng: 19.8204815,
+        image: 'fotot/teatri_i_ri_tirane/2025.webp',
+        key: 'teatri',
+        timelineImages: [
+          { src: 'https://tirananews.al/wp-content/uploads/2020/05/67580889_2275835055797785_7239271590494470144_n.jpg', title: 'Teatri 1940' },
+          { src: 'https://citizens.al/wp-content/uploads/2024/04/Kolonada-696x479-1.jpg', title: 'Teatri 1980' },
+          { src: 'https://kohajone.com/wp-content/uploads/2020/05/teatri-2-1.jpg', title: 'Teatri 1999' },
+          { src: 'fotot/teatri_i_ri_tirane/2007.webp', title: 'Teatri 2007'},
+          { src: 'fotot/teatri_i_ri_tirane/2008.webp', title: 'Teatri 2008'},
+          { src: 'fotot/teatri_i_ri_tirane/2014.webp', title: 'Teatri 2014'},
+          { src: 'fotot/teatri_i_ri_tirane/2016.webp', title: 'Teatri 2016'},
+          { src: 'fotot/teatri_i_ri_tirane/2018.webp', title: 'Teatri 2018'},
+          { src: 'https://citizens.al/wp-content/uploads/2024/03/Teatri-Kombetar-i-shembur.jpg', title: 'Teatri 2020' },
+          { src: 'https://gazetasi.al/wp-content/uploads/2019/07/teatriii.jpg', title: 'Teatri 2025' }
+        ]
+      }, {
+        lat: 41.3278,
+        lng: 19.8193,
+        image: 'fotot/xhamia/2025.webp',
+        key: 'xhamia',
+        timelineImages: [
+          { src: 'fotot/xhamia/1452.webp', title: 'Xhamia 1452'},
+          { src: 'fotot/xhamia/1614_1.webp', title: 'Xhamia 1614'},
+          { src: 'fotot/xhamia/1614_2.webp', title: 'Xhamia 1614'},
+          { src: 'fotot/xhamia/1615.webp', title: 'Xhamia 1615'},
+          { src: 'fotot/xhamia/1616.webp', title: 'Xhamia 1616'},
+          { src: 'fotot/xhamia/1618.webp', title: 'Xhamia 1618'},
+          { src: 'fotot/xhamia/1619.webp', title: 'Xhamia 1619'},
+          { src: 'fotot/xhamia/1620_1.webp', title: 'Xhamia 1620'},
+          { src: 'fotot/xhamia/1620_2.webp', title: 'Xhamia 1620'},
+          { src: 'fotot/xhamia/1620_3.webp', title: 'Xhamia 1620'},
+          { src: 'fotot/xhamia/1621.webp', title: 'Xhamia 1621'},
+          { src: 'fotot/xhamia/1910.webp', title: 'Xhamia 1910'},
+          { src: 'fotot/xhamia/1922.webp', title: 'Xhamia 1922'},
+          { src: 'fotot/xhamia/1923.webp', title: 'Xhamia 1923'},
+          { src: 'fotot/xhamia/1924.webp', title: 'Xhamia 1924'},
+          { src: 'fotot/xhamia/1927.webp', title: 'Xhamia 1927'},
+          { src: 'fotot/xhamia/1928.webp', title: 'Xhamia 1928'},
+          { src: 'fotot/xhamia/1935.webp', title: 'Xhamia 1935'},
+          { src: 'fotot/xhamia/1936.webp', title: 'Xhamia 1936'},
+          { src: 'fotot/xhamia/1943.webp', title: 'Xhamia 1943'},
+          { src: 'fotot/xhamia/1945.webp', title: 'Xhamia 1945'},
+          { src: 'fotot/xhamia/1946.webp', title: 'Xhamia 1946'},
+          { src: 'fotot/xhamia/1947.webp', title: 'Xhamia 1947'},
+          { src: 'fotot/xhamia/1949.webp', title: 'Xhamia 1949'},
+          { src: 'fotot/xhamia/1960.webp', title: 'Xhamia 1960'},
+          { src: 'fotot/xhamia/1962.webp', title: 'Xhamia 1962'},
+          { src: 'fotot/xhamia/1980.webp', title: 'Xhamia 1980'},
+          { src: 'fotot/xhamia/1988.webp', title: 'Xhamia 1988'},
+          { src: 'fotot/xhamia/1995.webp', title: 'Xhamia 1995'},
+          { src: 'https://cdn2.picryl.com/photo/1936/07/01/ethem-bey-mosque-tirana-1937-c822c3-1024.png', title: 'Xhamia 2005' },
+          { src: 'https://tika.gov.tr/wp-content/uploads/2023/05/1.1024-1686.jpg', title: 'Xhamia 2015' },
+          { src: 'https://heybrian.com/lib/images/travels/albania/tirana_et-hem_bej_mosque.jpg', title: 'Xhamia 2025' }
+        ]
+      }, {
+        lat: 41.31838885,
+        lng: 19.82457567714954,
+        image: 'fotot/stadiumi/2025_2.webp',
+        key: 'stadiumi',
+        timelineImages: [
+          { src: 'fotot/stadiumi/1939.webp', title: 'Stadium 1939'},
+          { src: 'fotot/stadiumi/1940.webp', title: 'Stadium 1940'},
+          { src: 'fotot/stadiumi/1941.webp', title: 'Stadium 1941'},
+          { src: 'fotot/stadiumi/1941_2.webp', title: 'Stadium 1941'},
+          { src: 'fotot/stadiumi/1942.webp', title: 'Stadium 1942'},
+          { src: 'fotot/stadiumi/1950.webp', title: 'Stadium 1950'},
+          { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3wfadiwWQn9IGGOjefzzxQYjFQraA5E8GFA&s', title: 'Stadium 2022' },
+          { src: 'https://pine.al/uploads/images/2023/10/26/653a88c9ed3a4-View-of-the-tribunes-of-Air-Albania-Stadium-Source-Author.png', title: 'Stadium 2025' },
+          { src: 'fotot/stadiumi/2025_1.webp', title: 'Stadium 2025'},
+          { src: 'fotot/stadiumi/2025_2.webp', title: 'Stadium 2025'}
+        ]
+      }, {
+        lat:41.33199909343212,
+        lng:  19.80982339870238,
+        image: 'fotot/ambasada/2025.webp',
+        icon:'images/Screenshot_20250403_224021_Google.webp',
+        key: 'ambasada',
+        timelineImages: [
+          { src: 'https://i.redd.it/fzi7t0d3fpoc1.png', title: 'Place 1988' },
+          { src: 'https://tvklan.al/wp-content/uploads/2021/02/ambasada-jugosllave.jpg', title: 'Place 2001' },
+          { src: 'https://static.wixstatic.com/media/e73a14_ec48181f52d24894bec415fcfd250d82~mv2.jpg/v1/fill/w_980,h_735,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/e73a14_ec48181f52d24894bec415fcfd250d82~mv2.jpg', title: 'Place 2015' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Image_facade_of_the_Former_Yugoslav_Embassy_in_Tirana_2.jpg/2560px-Image_facade_of_the_Former_Yugoslav_Embassy_in_Tirana_2.jpg', title: 'Place 2021' },
+          { src: 'https://i.redd.it/jxbdphai4ole1.jpeg', title: 'Place 2025' }
+        ]
+      },{
+        lat:41.31552065551053,
+        lng:19.860735897409228,
+        image: 'fotot/farka/2025.webp',
+        key: 'farka',
+        timelineImages: [
+          { src: 'fotot/farka/2016.webp', title: 'Farka 2016'},
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipNq5qjCM--dtSQOl1DxRFXMv6ifjkBip7a2SRSL=w400-h300-k-no', title: 'Farka 2016' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu28Exl6AazaWe59AYz_C-AFLx0w2KyDK2R5bA490ilRFIb417MaIdR5Gzc-PpmehXdNI-6Yw6V-g9-i-eqPh1dr_RkwB4y_eXWqN0X3o5JojsJxoBaLjrPGcv_edv1wXbOrXcnE1w=w400-h238-k-no', title: 'Farka 2019' },
+          { src: 'fotot/farka/2019.webp', title: 'Farka 2019'},
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipNYPQrf9UdSnEFTtn7Q98HvHbioEwkLCHyxBP1W=w400-h180-k-no', title: 'Farka 2022' },
+          { src: 'fotot/farka/2022.webp', title: 'Farka 2022'},
+          { src: 'fotot/farka/2023.webp', title: 'Farka 2023'},
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipOAVXuznm_gHSCa-OrjBIqkQ6quhlIKvf3YX83g=w400-h300-k-no', title: 'Farka 2023' },
+          { src: 'fotot/farka/2025.webp', title: 'Farka 2025'},
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipOq9-Sqw1FrZWMdB6l9iR1WlQzYIr_hi1DnLW17=w400-h300-k-no', title: 'Farka 2025' }
+        ]
+      },
+      {
+        lat:41.254830,
+        lng:19.854516,
+        image: 'fotot/kalaja_e_petreles/2020.webp',
+        key: 'petrela',
+        timelineImages: [
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Partial_reconstruction_of_Petrel%C3%AB_Castle.png', title: 'Petrela 501-600' },
+          { src: 'https://konica.al/wp-content/uploads/2019/10/2507579679_ce4ee52b63_b-300x218.jpg', title: 'Petrela 601-700' },
+          { src: 'fotot/kalaja_e_petreles/1920.webp', title: 'Petrela 1920'},
+          { src: 'fotot/kalaja_e_petreles/1923.webp', title: 'Petrela 1923'},
+          { src: 'fotot/kalaja_e_petreles/1984.webp', title: 'Petrela 1984'},
+          { src: 'fotot/kalaja_e_petreles/2000.webp', title: 'Petrela 2000'},
+          { src: 'https://www.visit-tirana.com/wp-content/uploads/2024/01/164_Petrela_castle_7_-1.jpg', title: 'Petrela 2016' },
+          { src: 'https://img1.advisor.travel/fs1600x1200px-Petrele_Castle_8.jpg', title: 'Petrela 2020 ' },
+          { src: 'https://pine.al/uploads/images/2022/08/10/62f38c1f883ff-IMG_8982.jpg', title: 'Petrela 2025' }
+        ]
+      },
+      {
+        lat: 41.330041319413624,
+        lng:19.82449121954264,
+        image: 'fotot/pazari_i_vjeter/2025.webp',
+        key: 'pazari',
+        timelineImages: [
+          { src: 'fotot/pazari_i_vjeter/1915.webp', title: 'Pazari 1915' },
+          { src: 'fotot/pazari_i_vjeter/1923.webp', title: 'Pazari 1923' },
+          { src: 'fotot/pazari_i_vjeter/1925.webp', title: 'Pazari 1925' },
+          { src: 'fotot/pazari_i_vjeter/1939.webp', title: 'Pazari 1939' },
+          { src: 'fotot/pazari_i_vjeter/1940.webp', title: 'Pazari 1940' },
+          { src: 'fotot/pazari_i_vjeter/1942.webp', title: 'Pazari 1942' },
+          { src: 'fotot/pazari_i_vjeter/1948.webp', title: 'Pazari 1948' },
+          { src: 'fotot/pazari_i_vjeter/1952.webp', title: 'Pazari 1952' },
+          { src: 'https://scontent.ftia18-1.fna.fbcdn.net/v/t39.30808-6/484964536_4080246585595753_5032981052709467514_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=aa7b47&_nc_eui2=AeFiRPGrtwgjcsnVtk2I7oomtuvE88mzFdq268TzybMV2gOr5pTIio5q_4KnldxW0uG-d40obV5vhuGDqFCTD6Bj&_nc_ohc=Ess7g4X7LrkQ7kNvwHTeUMx&_nc_oc=AdkK8X9U8dssUA1E_WoqwIz6Q7koL9OJqhgiVFrwmnxxwtvgRIk_UMWnur6QfZB_2Ko&_nc_zt=23&_nc_ht=scontent.ftia18-1.fna&_nc_gid=ZKW1qTAl1Nda7eAxYjqwQw&oh=00_AfEvlLtrJtY0yvsOBASsRsrAM2aX9xiw9L7K8uJdXbEd0A&oe=67FDE94B', title: 'Pazari 2005' },
+          { src: 'fotot/pazari_i_vjeter/2017.webp', title: 'Pazari 2017' },
+          { src: 'fotot/pazari_i_vjeter/2018.webp', title: 'Pazari 2018' },
+          { src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/87/1c/37/warm-spaces-of-new-baazar.jpg?w=900&h=500&s=1', title: 'Pazari 2021' },
+          { src: 'fotot/pazari_i_vjeter/2024.webp', title: 'Pazari 2024' },
+          { src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/c1/2a/3f/the-bazaar-represented.jpg?w=900&h=-1&s=1', title: 'Pazari 2025' }
+        ]
+      },  {
+        lat:  41.328548350000005,
+        lng:19.81766421845115,
+        image: 'fotot/sheshi/2019.webp',
+        key: 'sheshi',
+        timelineImages: [
+          { src: 'fotot/sheshi/1910.webp', title: 'Sheshi 1910'},
+          { src: 'fotot/sheshi/1918.webp', title: 'Sheshi 1918'},
+          { src: 'fotot/sheshi/1920.webp', title: 'Sheshi 1920'},
+          { src: 'fotot/sheshi/1925.webp', title: 'Sheshi 1925'},
+          { src: 'fotot/sheshi/1927_1.webp', title: 'Sheshi 1922'},
+          { src: 'fotot/sheshi/1927_1.webp', title: 'Sheshi 1927'},
+          { src: 'fotot/sheshi/1927_2.webp', title: 'Sheshi 1927'},
+          { src: 'fotot/sheshi/1928.webp', title: 'Sheshi 1928'},
+          { src: 'fotot/sheshi/1930_2.webp', title: 'Sheshi 1930'},
+          { src: 'fotot/sheshi/1930_3.webp', title: 'Sheshi 1930'},
+          { src: 'fotot/sheshi/1931.webp', title: 'Sheshi 1931'},
+          { src: 'fotot/sheshi/1933.webp', title: 'Sheshi 1933'},
+          { src: 'fotot/sheshi/1935_1.webp', title: 'Sheshi 1935'},
+          { src: 'fotot/sheshi/1935_2.webp', title: 'Sheshi 1935'},
+          { src: 'fotot/sheshi/1936.webp', title: 'Sheshi 1936'},
+          { src: 'fotot/sheshi/1937_1.webp', title: 'Sheshi 1937'},
+          { src: 'fotot/sheshi/1937_2.webp', title: 'Sheshi 1937'},
+          { src: 'fotot/sheshi/1938.webp', title: 'Sheshi 1938'},
+          { src: 'fotot/sheshi/1940.webp', title: 'Sheshi 1940'},
+          { src: 'fotot/sheshi/1941.webp', title: 'Sheshi 1941'},
+          { src: 'fotot/sheshi/1942.webp', title: 'Sheshi 1942'},
+          { src: 'fotot/sheshi/1943.webp', title: 'Sheshi 1943'},
+          { src: 'fotot/sheshi/1944.webp', title: 'Sheshi 1944'},
+          { src: 'fotot/sheshi/1946.webp', title: 'Sheshi 1946'},
+          { src: 'fotot/sheshi/1962.webp', title: 'Sheshi 1962'},
+          { src: 'fotot/sheshi/1965.webp', title: 'Sheshi 1965'},
+          { src: 'fotot/sheshi/1966.webp', title: 'Sheshi 1966'},
+          { src: 'fotot/sheshi/1967.webp', title: 'Sheshi 1967'},
+          { src: 'fotot/sheshi/1968.webp', title: 'Sheshi 1968'},
+          { src: 'fotot/sheshi/1980.webp', title: 'Sheshi 1980'},
+          { src: 'fotot/sheshi/1981.webp', title: 'Sheshi 1981'},
+          { src: 'fotot/sheshi/1984.webp', title: 'Sheshi 1984'},
+          { src: 'fotot/sheshi/1989.webp', title: 'Sheshi 1989'},
+          { src: 'fotot/sheshi/1990_1.webp', title: 'Sheshi 1990'},
+          { src: 'fotot/sheshi/1990_2.webp', title: 'Sheshi 1990'},
+          { src: 'fotot/sheshi/1991_2.webp', title: 'Sheshi 1991'},
+          { src: 'fotot/sheshi/1992.webp', title: 'Sheshi 1992'},
+          { src: 'fotot/sheshi/1993.webp', title: 'Sheshi 1993'},
+          { src: 'fotot/sheshi/1994.webp', title: 'Sheshi 1994'},
+          { src: 'fotot/sheshi/2000.webp', title: 'Sheshi 2000'},
+          { src: 'fotot/sheshi/2001.webp', title: 'Sheshi 2001'},
+          { src: 'fotot/sheshi/2011.webp', title: 'Sheshi 2011'},
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/SkanderbegSquare_construction_Dec2016_%28WPWTR16%29.JPG/1280px-SkanderbegSquare_construction_Dec2016_%28WPWTR16%29.JPG', title: 'Sheshi 2016' },
+          { src: 'fotot/sheshi/2017.webp', title: 'Sheshi 2017'},
+          { src: 'fotot/sheshi/2018.webp', title: 'Sheshi 2018'},
+          { src: 'fotot/sheshi/2019.webp', title: 'Sheshi 2019'},
+          { src: 'https://theholisticbackpacker.com/wp-content/uploads/2022/08/MG_1858.jpg', title: 'Sheshi 2025' }
+        ]
+      },{
+      lat: 41.329420,
+        lng:  19.816600,
+        image: 'fotot/muzeu_historik_kombetar/2017.webp',
+        key: 'muzeu',
+        timelineImages: [
+          { src: 'fotot/muzeu_historik_kombetar/1966.webp', title: 'Museum 1958'},
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Bundesarchiv_Bild_101I-049-1605-30A%2C_Tirana%2C_Raupenschlepper_Ost_mit_Anh%C3%A4nger.jpg', title: 'Museum 1943' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Sheshi_Sk%C3%ABnderbej_%28Szkander_b%C3%A9g_t%C3%A9r%29._Fortepan_28339.jpg/1280px-Sheshi_Sk%C3%ABnderbej_%28Szkander_b%C3%A9g_t%C3%A9r%29._Fortepan_28339.jpg', title: 'Museum 1963' },
+          { src: 'fotot/muzeu_historik_kombetar/1966.webp', title: 'Museum 1966'},
+          { src: 'fotot/muzeu_historik_kombetar/1981.webp', title: 'Museum 1969'},
+          { src: 'fotot/muzeu_historik_kombetar/1981.webp', title: 'Museum 1981'},
+          { src: 'fotot/muzeu_historik_kombetar/1999.webp', title: 'Museum 1999'},
+          { src: 'fotot/muzeu_historik_kombetar/1999.webp', title: 'Museum 2000'},
+          { src: 'fotot/muzeu_historik_kombetar/2002.webp', title: 'Museum 2002'},
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Skanderbeg_Square_from_Clock_Tower_of_Tirana.JPG/1200px-Skanderbeg_Square_from_Clock_Tower_of_Tirana.JPG?20121212164042', title: 'Museum 2008' },
+          { src: 'fotot/muzeu_historik_kombetar/2011.webp', title: 'Museum 2011'},
+          { src: 'https://farm7.static.flickr.com/6196/6069001955_408ee98151_b.jpg', title: 'Museum 2011' },
+          { src: 'fotot/muzeu_historik_kombetar/2017.webp', title: 'Museum 2017'},
+          { src: 'https://eia476h758b.exactdn.com/wp-content/uploads/2023/07/Tirana-Musuem-scaled.jpeg?strip=all&lossy=1&ssl=1', title: 'Museum 2025' }
+        ]
+      },{
+      lat: 41.3264511,
+        lng: 19.806777933782747,
+        image: 'fotot/kisha_katolike/1950.webp',
+        key: 'kisha',
+        timelineImages: [
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Bundesarchiv_Bild_101I-049-1605-30A%2C_Tirana%2C_Raupenschlepper_Ost_mit_Anh%C3%A4nger.jpg', title: 'Kisha 1943' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Sheshi_Sk%C3%ABnderbej_%28Szkander_b%C3%A9g_t%C3%A9r%29._Fortepan_28339.jpg/1280px-Sheshi_Sk%C3%ABnderbej_%28Szkander_b%C3%A9g_t%C3%A9r%29._Fortepan_28339.jpg', title: 'Kisha 1963' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu080O3-uGiex1hOYmkvJvr3ee3wngP-tMG4XTpoWpJ5H0MmzKvEBdQ5cg21aNYq0w-MCi7CEZ53JPB8IfeMt8VmvS9ydQQnuOGZOGIey4SWm-eIRVHxTJ1O4buHVjQbBZn9KDfV=w400-h400-k-no', title: 'Kisha 2017' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu10F1wpFa8iyfwXT42LXECxMJMORXoSHh9J6OG5jKX99qtqgwJy0zlXjwpmEFwh620Lqy69aeK00CnbpYv2pDIhOrjyTFLktddsVE29crc2Iq3FlHlR9uda2RCqEU7Zlyk2NA4Yv9miHUPf=w400-h300-k-no', title: 'Kisha 2019' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipMBfb_f4Ix-bnIbUhoW3tIlreEr1jGxxv_AIAfY=w400-h300-k-no', title: 'Kisha 2020' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipPIEYsyi0WSUTi_7JMAyj3n1EmPid_gAoM68pf8=w400-h266-k-no', title: 'Kisha 2021'},
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipO155AaRnmeStUJKG01OVuOmyy6EUhZF-f-pHpC=w400-h300-k-no', title: 'Kisha 2023' },
+          { src: 'https://www.balkanweb.com/wp-content/uploads/2018/12/untitled-216.jpg', title: 'Kisha 2025' }
+        ]
+      },{
+      lat: 41.3264761,
+        lng: 19.8261633,
+        image: 'fotot/ura_e_tanerve/2019.webp',
+        key: 'ura',
+        timelineImages: [
+          { src: 'https://memorie.al/wp-content/uploads/2023/06/32.1.jpg', title: 'Ura 1910' },
+          { src: 'fotot/ura_e_tanerve/1917.webp', title: 'Ura 1917'},
+          { src: 'fotot/ura_e_tanerve/1933.webp', title: 'Ura 1933'},
+          { src: 'fotot/ura_e_tanerve/1936.webp', title: 'Ura 1936'},
+          { src: 'fotot/ura_e_tanerve/1987.webp', title: 'Ura 1987'},
+          { src: 'fotot/ura_e_tanerve/1989.webp', title: 'Ura 1989'},
+          { src: 'https://www.visit-tirana.com/wp-content/uploads/2023/11/45_Tanners_Bridge_visit_tirana-1.jpg', title: 'Ura 2011' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipP7DMJJYa8K5Okcj--8Y1WZY7L2vfytolg8hMU_=w400-h400-k-no', title: 'Ura 2013' },
+          { src: 'fotot/ura_e_tanerve/2019.webp', title: 'Ura 2019'},
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipN6O1B0D3DlP6izsYN3V6l83lr-209524u22_Ls=w400-h266-k-no', title: 'Ura 2021' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipM0zx8m1nazCPUuL1k6N7Fb2z593FbQEhhNiat7=w400-h300-k-no', title: 'Ura 2025' }
+        ]
+      },{
+      lat: 41.334691899999996,
+        lng: 19.817389766603085,
+        image: 'fotot/mbreteresha_geraldine/1999.webp',
+        key: 'materniteti',
+        timelineImages: [
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/1-Pamje-nga-puna-ne-ndertim-te-Maternitetit-te-Tiranes-dhe-ambientet-e-mbrendshme-ne-vitin-1943.jpg', title: 'Maternitet 1940' },
+          { src: 'fotot/mbreteresha_geraldine/1941.webp', title: 'Maternitet 1941'},
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/3-Pamje-nga-puna-ne-ndertim-te-Maternitetit-te-Tiranes-dhe-ambientet-e-mbrendshme-ne-vitin-1943.jpg', title: 'Maternitet 1959' },
+          { src: 'fotot/mbreteresha_geraldine/1960.webp', title: 'Maternitet 1960'},
+          { src: 'fotot/mbreteresha_geraldine/1999.webp', title: 'Maternitet 1999'},
+          { src: 'https://metropolpost.al/wp-content/uploads/2021/03/Materniteti-1.jpg', title: 'Maternitet 2013' },
+          { src: 'https://metropolpost.al/wp-content/uploads/2021/03/M2-2.jpg', title: 'Maternitet 2021' },
+          { src: 'https://sot.com.al/wp-content/uploads/2020/07/5f1aeb56d3bea.jpg', title: 'Maternitet 2025' }
+        ]
+      },{
+      lat: 41.343174950000005,
+        lng: 19.795343856262754,
+        image: 'fotot/spitali_ushtarak/2018.webp',
+        key: 'ushtarak',
+        timelineImages: [
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/1-.jpg', title: 'Hospital 1941' },
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/Spitali-Civil-1942.jpg', title: 'Hospital 1979' },
+          { src: 'https://i6tk28sbcv.gjirafa.net/businessdirectoryphotos/large/f08b90aa732275817aa6f34d8f82c2f2_20161125_105312.jpg', title: 'Hospital 2011' },
+          { src: "fotot/spitali_ushtarak/2018.webp", title: 'Hospital 2018'},
+          { src: 'https://shqiptarja.com/uploads/539x308/1557036224_SpitaliUshtarak.jpg', title: 'Hospital 2019' },
+          { src: 'https://i6tk28sbcv.gjirafa.net/businessdirectoryphotos/large/fb28daead0ea399a8ab08b067032e578_20170111_095805.jpg', title: 'Hospital today' }
+        ]
+      },{
+      lat: 41.327703299999996,
+        lng: 19.81968255,
+        image: 'fotot/sahati/2025.webp',
+        key: 'kulla',
+        timelineImages: [
+          { src: 'fotot/sahati/1620.webp', title: 'Kulla 1620'},
+          { src: 'fotot/sahati/1922.webp', title: 'Kulla 1922'},
+          { src: 'fotot/sahati/1925.webp', title: 'Kulla 1925'},
+          { src: 'fotot/sahati/1930.webp', title: 'Kulla 1930'},
+          { src: 'fotot/sahati/1935.webp', title: 'Kulla 1935'},
+          { src: 'fotot/sahati/1936.webp', title: 'Kulla 1936'},
+          { src: 'fotot/sahati/1940.webp', title: 'Kulla 1940'},
+          { src: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSMV-3vzC5Z0n1JyHoY9FjCfdTMQbD_WNXmY22e40RjtQ9HmyFhimD5FY6n5LW-4RYeafVTat3PsH9yD_-h9BLAOwUxwR55lZ3GR5Vba4l7S3wwEbA-mFokwFgBsy0EN8trgiiHVTtIJJ_/s1600/11698572_10153438256858684_4334747846596778669_n.jpg', title: 'Kulla 1941' },
+          { src: 'fotot/sahati/1944.webp', title: 'Kulla 1944'},
+          { src: 'fotot/sahati/1945.webp', title: 'Kulla 1945'},
+          { src: 'fotot/sahati/1962.webp', title: 'Kulla 1962'},
+          { src: 'fotot/sahati/1968.webp', title: 'Kulla 1968'},
+          { src: 'https://medias.artmajeur.com/hd/14676137_20210703-185531-1.jpg?v=1738758069', title: 'Kulla 1979' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipP-8Wj_fQnWi1Yimgpqx2kMmesTcsrciXEYZkUR=w400-h711-k-no', title: 'Kulla 2011' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu1uIViFON9zpBJ33_4IIczgD-QEeccmvk67NJDKzvfZkjpj4FEST0V7ofN-XHowmuQoe2ClvmPIZpZwsVWFN5ybAxk6DBIEOAYrk-AqelOiM48l3v9Im9aYQjOQbiz6dh_ks-9n=w400-h266-k-no', title: 'Kulla 2019' },
+          { src: 'fotot/sahati/2025.webp', title: 'Kulla 2025'}
+        ]
+      },{
+      lat: 41.3350233,
+        lng: 19.7833578,
+        image: 'fotot/lumi_lana/2004.webp',
+        key: 'lana',
+        timelineImages: [
+          { src: 'fotot/lumi_lana/1930.webp', title: 'Lana 1930'},
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/2.jpg', title: 'Lana 1942' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipOnl_CyGAmhMrbFcdyVKTLvsdUGVVr9d2z9yKow=w400-h203-k-no', title: 'Lana 1979' },
+          { src: 'fotot/lumi_lana/2004.webp', title: 'Lana 2004'},
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipNE0ZQDPolMewefFQMk9N-VSyXI9P-BtINo-auK=w400-h225-k-no', title: 'Lana 2016' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipPf9F5xqIAaXnAChoIh66sGhoa3DiNyyh8lCHBG=w400-h533-k-no', title: 'Lana 2020' },
+          { src: 'https://thumbs.dreamstime.com/b/view-lana-river-city-center-tirana-albania-september-108794420.jpg', title: 'Lana 2025' }
+        ]
+      },{
+      lat: 41.3277328,
+        lng: 19.816811863506977,
+        image: 'fotot/banka/1950.webp',
+        key: 'banka',
+        timelineImages: [
+          { src: 'fotot/banka/1919.webp', title: 'Banka 1919'},
+          { src: 'fotot/banka/1942.webp', title: 'Banka 1942'},
+          { src: 'https://tirana.al/uploads/images/points-of-interes/1029/20180726103129_image8.jpg', title: 'Banka 1942' },
+          { src: 'fotot/banka/1943.webp', title: 'Banka 1943'},
+          { src: 'fotot/banka/1946.webp', title: 'Banka 1946'},
+          { src: 'fotot/banka/1950.webp', title: 'Banka 1950'},
+          { src: 'https://www.bankofalbania.org/rc/img/banka_shqiptare_ne_kukes_8710.jpg', title: 'Banka 1979' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/d/da/National_Bank_of_Albania_in_Tirana%2C_Albania%2C_20070720_img_1467.jpg', title: 'Banka 2016' },
+          { src: 'https://telegraf.al/wp-content/uploads/2019/05/banka-e-shqiperise.jpg', title: 'Banka 2020' },
+          { src: 'https://sot.com.al/wp-content/uploads/2024/12/Banka-e-Shqiperise.jpg', title: 'Banka 2025' }
+        ]
+      },{
+      lat: 41.3269701,
+        lng: 19.8191638,
+        image: 'fotot/parku_tirane/2025.webp',
+        key: 'playground',
+        timelineImages: [
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/3.Pamje-nga-parku-i-loj%C3%ABrave-n%C3%AB-Tiran%C3%AB-ne-vitin-1941-6.jpg', title: 'Games 1942' },
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/Pamje-nga-parku-i-loj%C3%ABrave-n%C3%AB-Tiran%C3%AB-ne-vitin-1941-4.jpg', title: 'Games 1979' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu1y9xyoGz9SNUcWbpNyGXGDc42wfcuG1RMs6Cj7OEXtOjYjHJoe8hy65vAyNib3XGZky0nf5KnUiJT2-Iv0H_UZOb8-H7EySeOIFDNgbcQnZaXEDAj86puvmcINbfMCuGluDy-M=w400-h290-k-no', title: 'Games 2016' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu3QnEqpOYn3Zmkoey_97O90UqL9hNK-FNcXcS5Kjlmuyu-ZTLy8eNF0qPuyPVT3yaPf6enEwp-6-U9VWbSvHpgWRQ3eIs8ioELNaYdcw12uTZZg8MPrQMpTAmc9aysD7UQI7iEy=w400-h300-k-no', title: 'Games 2020' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu1u_kkhseG-6L4Pz5OFi6_rywt1EWt0E7wh72cB7nricldIRQB2MoWW6wRCDWo1o_SUS16OtZi4C35_Nkja72UfdvPAOuWageEcnC5PIUa6D39FwaZNZT9VwaM179d1Gbn2_fEc=w400-h202-k-no', title: 'Games 2025' }
+        ]
+      },{
+      lat: 41.3200165,
+        lng: 19.8154561,
+        image: 'fotot/pallati_i_kultures/2000.webp',
+        key: 'radio',
+        timelineImages: [
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/1-1.jpg', title: 'Radio 1940' },
+          { src: 'https://swling.com/blog/wp-content/uploads/2024/12/12_LiberationDay.jpeg', title: 'Radio 1979' },
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/Selia-e-Radio-Tiranes-brenda-dhe-jashte-ne-vitin-1940-1.jpg', title: 'Radio 1999' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipNyrD-PmvmIGu-tH15Bc27eYE-SgE0YYABgvMOH=w400-h533-k-no', title: 'Radio 2020' },
+          { src: 'https://top-channel.tv/wp-content/uploads/2023/07/rdt.png', title: 'Radio 2025' }
+        ]
+      },{
+      lat: 41.32746015,
+        lng: 19.81939365943541,
+        image: 'fotot/bashkia_tirane/2015.webp',
+        key: 'bashkia',
+        timelineImages: [
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/Pamje-nga-puna-per-ndertimin-e-ministrive-ne-Tirane-ne-vitin-1940.jpg', title: 'Bashkia 1940' },
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/398cf9b2-0f6e-4b8f-a0d3-835d274bd36d-1.jpg', title: 'Bashkia 1979' },
+          { src: 'https://memorie.al/wp-content/uploads/2023/03/398cf9b2-0f6e-4b8f-a0d3-835d274bd36d.jpg', title: 'Bashkia 1999' },
+          { src: 'https://shtetiweb.org/wp-content/uploads/2015/06/Bashkia.jpg', title: 'Bashkia 2020' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Bashkia_e_Tiran%C3%ABs.jpg', title: 'Bashkia 2025' }
+        ]
+      },{
+      lat: 41.32984475,
+        lng: 19.8186388790134,
+        image: 'fotot/hotel_tirana/2006.webp',
+        key: 'hoteli',
+        timelineImages: [
+          { src: 'fotot/hotel_tirana/1915.webp', title: 'Hotel 1915'},
+          { src: 'https://api.architectuul.org/media/5420062f-a228-4418-a9a5-40fa6d7b5e1b/416x.jpg', title: 'Hotel 1940' },
+          { src: 'https://api.architectuul.org/media/542004c7-4ee8-4bc9-9fae-41106d7b5e1b/416x.jpg', title: 'Hotel 1979' },
+          { src: 'fotot/hotel_tirana/1980.webp', title: 'Hotel 1980'},
+          { src: 'fotot/hotel_tirana/1990.webp', title: 'Hotel 1990'},
+          { src: 'fotot/hotel_tirana/1999.webp', title: 'Hotel 1999'},
+          { src: 'https://media.skydb.net/?id=553306699&d=400-crop', title: 'Hotel 1999' },
+          { src: 'fotot/hotel_tirana/2006.webp', title: 'Hotel 2006' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/InterContinental_Hotel_Tirana_2024.jpg/1200px-InterContinental_Hotel_Tirana_2024.jpg', title: 'Hotel 2025' }
+        ]
+      },{
+      lat: 41.331233350000005,
+        lng: 19.849887871208544,
+        image: 'fotot/xhamia/2025.webp',
+        key: 'bektashi',
+        timelineImages: [
+          { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRL_O3pxgAguBwXOBkK00t36qO-pVHyr9i3g&s', title: 'Bektashi 1940' },
+          { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyr_sKz1r1qJ5dnNC_Sbezqc2KdE1NPU4--g&s', title: 'Bektashi 2005' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Qendra_Bot%C3%ABrore_Bektashiane.jpg', title: 'Bektashi 2017' },
+          { src: 'https://www.visit-tirana.com/wp-content/uploads/2024/01/World-Bektashi-Center-in-Tirana-Albania-1.jpg', title: 'Bektashi 2020' },
+          { src: 'https://www.visit-tirana.com/wp-content/uploads/2024/01/50_visit_Bektashi_World_Center_tirana-768x576-1.jpg', title: 'Bektashi 2025' }
+        ]
+      },{
+      lat: 41.327842,
+        lng: 19.8216451,
+        image: 'fotot/varri_i_kapllanit/2009.webp',
+        key: 'varri',
+        timelineImages: [
+          { src: 'fotot/varri_i_kapllanit/1917.webp', title: 'Tyrbe 1917'},
+          { src: 'fotot/varri_i_kapllanit/1918.webp', title: 'Tyrbe 1918'},
+          { src: 'fotot/varri_i_kapllanit/1920.webp', title: 'Tyrbe 1920'},
+          { src: 'https://i.servimg.com/u/f81/13/51/35/08/19a10.jpg', title: 'Tyrbe  1940' },
+          { src: 'fotot/varri_i_kapllanit/1944.webp', title: 'Tyrbe 1944'},
+          { src: 'fotot/varri_i_kapllanit/1980.webp', title: 'Tyrbe 1980'},
+          { src: 'https://i0.wp.com/peizazhe.com/wp-content/uploads/2016/09/Kartoline-Kapllan_Pasha_Tomb_Tirana.jpg?fit=1200%2C885&ssl=1&w=640', title: 'Tyrbe  1980' },
+          { src: 'fotot/varri_i_kapllanit/1990.webp', title: 'Tyrbe 1990'},
+          { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThpqAOQXE-WfGDr4VlOffQEVJxeV0stsInUQ&s', title: 'Tyrbe  1999' },
+          { src: 'fotot/varri_i_kapllanit/2009.webp', title: 'Tyrbe 2009'},
+          { src: 'fotot/varri_i_kapllanit/2018.webp', title: 'Tyrbe 2018'},
+          { src: 'https://www.turpravda.com/newimg/2/800x600/00/01/61/45/1614557.webp', title: 'Tyrbe  2020' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Tirana_Kapllan_Pasha_Tomb.jpg/1200px-Tirana_Kapllan_Pasha_Tomb.jpg', title: 'Tyrbe  2025' }
+        ]
+      },{
+      lat: 41.3255219,
+        lng: 19.83454825356577,
+        image: 'fotot/politekniku/2025.webp',
+        key: 'shkenca',
+        timelineImages: [
+          { src: 'https://image.wmsm.co/67bb2a643d882/museum-of-natural-sciences-tirana-3.webp?quality=80&width=1280', title: 'Museum  2010' },
+          { src: 'https://lh3.googleusercontent.com/p/AF1QipN8ShOqEPGHVR3HYjeu1G8HOUw7rzcTHjNHUi6w=w400-h300-k-no', title: 'Museum  2015' },
+          { src: 'https://www.visit-tirana.com/wp-content/uploads/2024/02/Muzeu-i-Shkencave-15-768x576.jpeg', title: 'Museum  2020' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu2_LVtj56Iky9KKh40WSTy_nTGUYw7WAi4Vp8MsjL6zS0w__5b0Sbl-HyVGHUh2fzGwYbzpr_InveBUskw5-pS6AzDEzWz80pMR9AOcX5o57U6HfplivlA_C_qRI5y9U1twN-Y=w400-h225-k-no', title: 'Museum  2023' },
+          { src: 'https://tirana-albania.com/wp-content/uploads/2024/07/IMG_4799-768x432.jpg', title: 'Museum  today' }
+        ]
+      },{
+        lat: 41.3414269,
+        lng: 19.8148188,
+        image: 'fotot/bulevardi_i_ri/1989.webp',
+        key: 'biri',
+        timelineImages: [
+          { src: 'fotot/bulevardi_i_ri/1934.webp', title: 'Bulevard 1943' },
+          { src: 'fotot/bulevardi_i_ri/1950.webp', title: 'Bulevard 1950' },
+          { src: 'fotot/bulevardi_i_ri/1954.webp', title: 'Bulevard 1954' },
+          { src: 'fotot/bulevardi_i_ri/1958.webp', title: 'Bulevard 1958' },
+          { src: 'fotot/bulevardi_i_ri/1967.webp', title: 'Bulevard 1967' },
+          { src: 'fotot/bulevardi_i_ri/1989.webp', title: 'Bulevard 1989' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu0J-J4rkM2OMZfmiFYhuE_E1wzi5VsNAlwC_ct7DOUQ8Qe0leW9fNz4BjKUDcM0OCMd5VbNULfq29aJ1g-A-PwhNC5Khj8P7c7fcL5fPa-lFqQcbp79-i2kOreXKQpzkcWfCCOw=w400-h266-k-no', title: 'Bulevard 2018' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu2Y6-CVFjobQ5HAOCCl0kAbjcsSMOtKyOqbj-huUh9HCrbln-VfCVFYg-JKQvOFqBKPRDbn3v_mtxTNQrDVdM2NOa0PMfpVO80VCN2WkM2g1aLycxwVi7A2QOm28jyoULwdGkQ=w400-h266-k-no', title: 'Bulevard 2018'},
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu0_Ep8y8_jUmeE_8KNQK74aTgXUlLigF0MnfGY4PGmCWFIH3wTZ0Hj9xSJ8A35-jAY_fx1M4ZXGMx00w1pfylvnTHegmsLHUMHpQpp89Ath4PTXOrcz92MOo1_UASUtWix6aPU5Cw=w400-h300-k-no', title: 'Bulevard 2020'},
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu2Xu2Q7rNcei93Qut1U5ShOI60CSfQAL7Y3sjOlNYkPh7EapFThhTQcmAHWPYcHeyGzKqyr3AC5HVWJ5NBUQX-ZEYoB_9pntGIx1j6P72seHDPJGkBzQg7EZtZRQYDylMwLpT_gTQ=w400-h266-k-no', title: 'Bulevard 2022'},
+          { src: 'fotot/bulevardi_i_ri/1934.webp', title: 'Bulevard 1943' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu20cDEq-5wMDbl7DrAnZxgwe7_CNOmPRg5QU_FBwK5vviOH4nug-xsZXevJXJwm4G9ZXV0uIMkBPG6q06xt9CXwa32rrkhLLCzr0Pl4DpxJuMXeh1IuvaO0TCFL53GM3s7C-0nH=w400-h225-k-no', title: 'Bulevard 2025' }
+        ]
+      },
+      {
+        lat: 41.3325278,
+        lng: 19.8173398,
+        image: 'fotot/bulevardi_zogu_i_pare/1999.webp',
+        key: 'zoguip',
+        timelineImages: [
+          { src: 'fotot/bulevardi_zogu_i_pare/1927.webp', title: 'Zogu I 1927' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1930.webp', title: 'Zogu I 1930' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1931.webp', title: 'Zogu I 1931' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1932.webp', title: 'Zogu I 1932' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1936.webp', title: 'Zogu I 1936' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1940.webp', title: 'Zogu I 1940' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1945.webp', title: 'Zogu I 1945' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1960.webp', title: 'Zogu I 1960' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1989.webp', title: 'Zogu I 1989' },
+          { src: 'fotot/bulevardi_zogu_i_pare/1999.webp', title: 'Zogu I 1999' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu2824ef4dcld2W0ztEWTDA4rqaL8FNHJk3MiKPQG441NyKGrrhp07Lmd98zG5TZRFJatbpGyT1G8utevPR55q343RptOLrdBmdCNkvk5ycZCXFjyEvTade4gljZmJka7tLe3tgN=w400-h266-k-no', title: 'Zogu I 2018' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu2Gy-2gr5Le62bSDKegpaU2gpXOYrHV97j2rAwCayFb0VPeXcbvcw-1kgOMVAUBqorSnNJ-tsvtjdTfbs-92X2J8lKM1mj4HC4m2qD2GV4dpJvBIKsV1Km6-Z76ff05RGyLObkE3Q=w400-h601-k-no', title: 'Zogu I 2021' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu3Nr4aZ96nPGfxTFCyNowb2KNkka_R99nrXt4MFrjEFQo-8hJnqQcLK4mIsvldXAkdrXB5UbvqJYEipphkkdMkCHOvEejd4Gl_nL23Wa1sX_E2TD_CeyNk7Hc-BaFD-LzA_wU-HEA=w400-h711-k-no', title: 'Zogu I 2022' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu1oJ0NLNuq0MKEcaeIJ440hAJcqUAaWprJmSc0BwqdHPnH8U8Ac3ihVIh6RXv8ozuSuYUO8E8t8diL-4_F9ZjKCY8fl0H54h-8CY2CtgW2BsGoyhpSAp0rsOlI52qAqCRjWPjZs=w400-h225-k-no', title: 'Zogu I 2025' }
+        ]
+      },
+      {
+        lat: 41.3333597,
+        lng: 19.8042872,
+        image: 'fotot/bulevardi_zogu_i_zi/1985.webp',
+        key: 'zogizi',
+        timelineImages: [
+          { src: 'fotot/bulevardi_zogu_i_zi/1985.webp', title: 'Zog Zi 1985' },
+          { src: 'https://www.shekulli.com.al/admin/wp-content/uploads/2017/08/Zogu-i-Zi.png', title: 'Zog Zi 2005' },
+          { src: 'https://i.ytimg.com/vi/GKcQOk98Lss/maxresdefault.jpg', title: 'Zog Zi 2009' },
+          { src: 'https://www.t1dwanderer.com//wp-content/uploads/2015/02/zogu-i-zi-roundabout-in-tirana.jpg', title: 'Zog Zi 2017' },
+          { src: 'https://media.merrjep.al/Image/d21a1d8bd08340dfb6622fbf3832de2b/20230915/false/False/1280/1024/jepet-me-qera-ambjent-tek-zogu-i-zi-tirane.jpeg?noLogo=true', title: 'Zog Zi 2020' },
+          { src: 'https://p1crires.cri.cn/photoworkspace/cri/contentimg/2023/10/18/2023101810160722011.jpg', title: 'Zog Zi 2024' },
+          { src: 'https://p1crires.cri.cn/photoworkspace/cri/contentimg/2023/03/15/2023031509593168673.jpg', title: 'Zog Zi 2025' }
+        ]
+      },
+      {
+        lat: 41.3608742,
+        lng: 19.7717819,
+        image: 'fotot/instituti_bujqesor_kamez/2025.webp',
+        key: 'ubt',
+        timelineImages: [
+          { src: 'fotot/instituti_bujqesor_kamez/1951.webp', title: 'UBT 1951' },
+          { src: 'fotot/instituti_bujqesor_kamez/1986.webp', title: 'UBT 1986' },
+          { src: 'fotot/instituti_bujqesor_kamez/1997.webp', title: 'UBT 1997' },
+          { src: 'fotot/instituti_bujqesor_kamez/2017.webp', title: 'UBT 2017' },
+          { src: 'fotot/instituti_bujqesor_kamez/2020.webp', title: 'UBT 2020' },
+          { src: 'fotot/instituti_bujqesor_kamez/2021.webp', title: 'UBT 2021' },
+          { src: 'https://albtiko.com/wp-content/uploads/2022/08/Kamez_Albania_07_-_Agricultural_University_of_Tirana.jpg', title: 'UBT 2023'},
+          { src: 'fotot/instituti_bujqesor_kamez/2025.webp', title: 'UBT 2025' }
+        ]
+      },
+      {
+        lat: 41.3459521,
+        lng: 19.8481646,
+        image: 'fotot/kinostudio_shqiptare/2025.webp',
+        key: 'kino',
+        timelineImages: [
+          { src: 'fotot/kinostudio_shqiptare/1950.webp', title: 'Kinostudio 1950' },
+          { src: 'fotot/kinostudio_shqiptare/1970.webp', title: 'Kinostudio 1970' },
+          { src: 'fotot/kinostudio_shqiptare/1982.webp', title: 'Kinostudio 1982' },
+          { src: 'fotot/kinostudio_shqiptare/1985.webp', title: 'Kinostudio 1985' },
+          { src: 'fotot/kinostudio_shqiptare/1991.webp', title: 'Kinostudio 1991' },
+          { src: 'fotot/kinostudio_shqiptare/2016.webp', title: 'Kinostudio 2016' },
+          { src: 'https://tirana.al/uploads/images/points-of-interes/20190705130013_20190110153656_kinostudio.jpg', title: '2019' },
+          { src: 'https://admin.albanianpost.com/wp-content/uploads/2021/01/kinostudio.jpg', title: '2025' }
+        ]
+      },
+      {
+        lat: 41.3247984,
+        lng: 19.8218272,
+        image: 'fotot/kisha_e_shen_palit/2025.webp',
+        key: 'pali',
+        timelineImages: [
+          { src: 'fotot/kisha_e_shen_palit/1890.webp', title: 'Kisha 1890' },
+          { src: 'fotot/kisha_e_shen_palit/2017.webp', title: 'Kisha 2017' },
+          { src: 'https://tirana.al/uploads/images/points-of-interes/20190118111107_2345453568_9aa8f8808c_b-katedralja-e-shen-palit.jpg', title: 'Kisha 2019' },
+          { src: 'fotot/kisha_e_shen_palit/2021.webp', title: 'Kisha 2021' },
+          { src: 'fotot/kisha_e_shen_palit/2022.webp', title: 'Kisha 2022' },
+          { src: 'fotot/kisha_e_shen_palit/2024.webp', title: 'Kisha 2024' },
+          { src: 'fotot/kisha_e_shen_palit/2025.webp', title: 'Kisha 2025' },
+        ]
+      },
+      {
+        lat: 41.24363492430506,
+        lng: 19.934537467606237,
+        image: 'fotot/lumi_erzen/1985.webp',
+        key: 'erzen',
+        timelineImages: [
+          { src: 'fotot/lumi_erzen/1982..webp', title: 'Erzen 1982' },
+          { src: 'fotot/lumi_erzen/1985.webp', title: 'Erzen 1985' },
+          { src: 'https://www.mcntv.al/sites/default/files/2023-07-09/lumiii.JPG', title: 'Erzen 2011' },
+          { src: 'https://shendeti.com.al/wp-content/uploads/2017/10/Erzen3.jpg', title: 'Erzen 2019' },
+          { src: 'https://s2.wklcdn.com/image_338/10147406/181943086/113023007.700x525.jpg', title: 'Erzen 2022' },
+          { src: 'https://www.visit-tirana.com/wp-content/uploads/2024/01/277_Erzeni_Canyon_in_Tirana_tour_in_Tirana-1.jpg', title: 'Erzen 2023' },
+          { src: 'https://cdn.getyourguide.com/img/tour/f81da410e99d7db96427f9e8a86d40cbe047514d8bf445d8b29f5562e1752930.jpg/98.jpg', title: 'Erzen 2025' }
+        ]
+      },
+      {
+        lat: 41.3098217,
+        lng: 19.8331447,
+        image: 'fotot/pallati_i_brigadave/1995.webp',
+        key: 'brig',
+        timelineImages: [
+          { src: 'fotot/pallati_i_brigadave/1928.webp', title: 'Brigada 1928' },
+          { src: 'fotot/pallati_i_brigadave/1929.webp', title: 'Brigada 1929' },
+          { src: 'fotot/pallati_i_brigadave/1945.webp', title: 'Brigada 1945' },
+          { src: 'fotot/pallati_i_brigadave/1946.webp', title: 'Brigada 1946' },
+          { src: 'fotot/pallati_i_brigadave/1995.webp', title: 'Brigada 1995' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Pallati_i_Brigadave_South_side.jpg', title: 'Brigada 2005' },
+          { src: 'https://media.gazetatema.net/gazetatema.net/wp-content/uploads/2021/12/-0-500-pallati-i-brigadave1.jpg', title: 'Brigada 2015' },
+          { src: 'https://media.gazetatema.net/gazetatema.net/wp-content/uploads/2021/12/-0-500-pallati-i-brigadave1.jpg', title: 'Brigada 2015' },
+          { src: 'https://media.gazetatema.net/gazetatema.net/wp-content/uploads/2021/12/-0-500-pallati-i-brigadave7.jpg', title: 'Brigada 2017' },
+          { src: 'https://media.gazetatema.net/gazetatema.net/wp-content/uploads/2021/12/-1200-630-pallati-i-brigadave10.jpg', title: 'Brigada 2020' },
+          { src: 'https://media.gazetatema.net/gazetatema.net/wp-content/uploads/2021/12/-0-500-pallati-i-brigadave2.jpg', title: 'Brigada 2022' },
+          { src: 'https://acp.al/images/news/hapet%20per%20publikun.jpg', title: 'Brigada 2023' },
+          { src: 'https://prosound.al/wp-content/uploads/2019/07/Dasme-Ardit-Ismailaj-1-e1705313069347.jpg', title: 'Brigada 2025' }
+        ]
+      },
+      {
+        lat: 41.3192651,
+        lng: 19.8220888,
+        image: 'fotot/pallati_i_kongreseve/1998.webp',
+        key: 'kongres',
+        timelineImages: [
+          { src: 'https://pastvu.com/_p/d/g/o/3/go3gakz2fs70qh92to.jpg', title: 'Kongres 1995' },
+          { src: 'fotot/pallati_i_kongreseve/1998.webp', title: 'Kongres 1998' },
+          { src: 'https://lh3.googleusercontent.com/gpms-cs-s/AIMqDu18yeOnwm9H8YUsE9Ij98xsh8Y2MiJTn8sGjhDGK_MWiL9m8VHI5Qsr2F2MfJ5EslBgVr2OOGRyuGmzetPYh6-DJnmdmApeF5Xkub5d8nV63ex1Mzd_IMWa1IrMAMLu5rZq8LAa=w400-h265-k-no', title: 'Kongres 2010' },
+          { src: 'https://www.artstreetecture.com/uploads/img/913.jpeg', title: 'Kongres 2021' },
+          { src: 'https://www.esccovers.com/wp-content/uploads/2022/10/albania-hall-672x372.jpg', title: 'Kongres 2023' },
+          { src: 'https://www.artstreetecture.com/uploads/img/913.jpeg', title: 'Kongres 2021' },          
+          { src: 'https://tirana.al/uploads/images/points-of-interes/20190704141410_pallati-i-kongreseve-foto.jpg', title: 'Kongres 2025' }
+        ]
+      },
+      {
+        lat: 41.3262821,
+        lng: 19.807422,
+        image: 'fotot/pallati_i_sportit_Farie_Hoti/1930.webp',
+        key: 'farie',
+        timelineImages: [
+          { src: 'fotot/pallati_i_sportit_Farie_Hoti/1930.webp', title: 'Sport 1930' },
+          { src: 'https://photos.wikimapia.org/p/00/08/63/48/87_full.jpg', title: 'Sport 2022' },          
+          { src: 'https://ata.gov.al/wp-content/uploads/2022/01/25.jpg', title: 'Sport 2025' }
+        ]
+      },
+      {
+        lat: 41.3332484,
+        lng: 19.8014851,
+        image: 'fotot/pallati_i_sportit_partizani/1997.webp',
+        key: 'partizani',
+        timelineImages: [
+          { src: 'fotot/pallati_i_sportit_partizani/1962.webp', title: 'Sport 1962' },
+          { src: 'fotot/pallati_i_sportit_partizani/1964.webp', title: 'Sport 1964' },
+          { src: 'fotot/pallati_i_sportit_partizani/1968.webp', title: 'Sport 1968' },
+          { src: 'fotot/pallati_i_sportit_partizani/1975.webp', title: 'Sport 1975' },
+          { src: 'fotot/pallati_i_sportit_partizani/1997.webp', title: 'Sport 1997' },
+          { src: 'https://api.architectuul.org/media/54255027-0678-4bb3-ba7c-14266d7b5e1b/1312x.jpg', title: 'Sport 1999' },
+          { src: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Tirana_Sports_Palace_%28OSCAL19_trip%29.jpg', title: 'Sport 2001' },
+          { src: 'https://gowild.al/storage/places/November2023/kRcDPp0h7Jusa2RFmolF.png', title: 'Sport 2005' },
+          { src: 'https://cdnimpuls.com/politiko.al/media3/-640-0-65da401f8b3d5.jpg', title: 'Sport 2016' },
+          { src: 'https://shqiptarja.com/uploads/780x440/1693382355_pallatiisportit.JPG', title: 'Sport 2025' }
+        ]
+      },
+      {
+        lat: 41.3262825,
+        lng: 19.8192843,
+        image: 'fotot/para_ministrive/2025.webp',
+        key: 'ministrat',
+        timelineImages: [
+          { src: 'fotot/para_ministrive/1930.webp', title: 'Ministri 1930' },
+          { src: 'fotot/para_ministrive/1938_1.webp', title: 'Ministri 1938' },
+          { src: 'fotot/para_ministrive/1938_2.webp', title: 'Ministri 1938' },
+          { src: 'fotot/para_ministrive/1940.webp', title: 'Ministri 1940' },
+          { src: 'fotot/para_ministrive/1942.webp', title: 'Ministri 1942' },
+          { src: 'fotot/para_ministrive/1943.webp', title: 'Ministri 1943' },
+          { src: 'fotot/para_ministrive/1944.webp', title: 'Ministri 1944' },
+          { src: 'fotot/para_ministrive/1946.webp', title: 'Ministri 1946' },
+          { src: 'fotot/para_ministrive/1958.webp', title: 'Ministri 1958' },
+          { src: 'fotot/para_ministrive/2021.webp', title: 'Ministri 2021' },
+          { src: 'fotot/para_ministrive/2025.webp', title: 'Ministri 2025' }
+        ]
+      },
+      {
+        lat: 41.3275,
+        lng: 19.81889,
+        image: 'fotot/parlamenti/2015.webp',
+        key: 'parlament',
+        timelineImages: [
+          { src: 'https://www.radiandradi.com/wp-content/uploads/2019/03/50858156_851764218543946_7901652351805554688_n.jpg', title: 'Parlament 1975' },
+          { src: 'fotot/parlamenti/1918.webp', title: 'Parlament 1918' },
+          { src: 'fotot/parlamenti/1920.webp', title: 'Parlament 1920' },
+          { src: 'fotot/parlamenti/2012.webp', title: 'Parlament 2012' },
+          { src: 'fotot/parlamenti/2015.webp', title: 'Parlament 2015' },
+          { src: 'https://exit.al/en/wp-content/uploads/sites/3/2021/09/kuvendi.jpg', title: 'Parlament 2025' }
+        ]
+      },
+      {
+        lat: 41.3166196,
+        lng: 19.8217354,
+        image: 'fotot/politekniku/2025.webp',
+        key: 'politeknik',
+        timelineImages: [
+          { src: 'fotot/politekniku/1940.webp', title: 'Politeknik 1940' },
+          { src: 'fotot/politekniku/1958.webp', title: 'Politeknik 1958' },
+          { src: 'fotot/politekniku/1960.webp', title: 'Politeknik 1930' },
+          { src: 'fotot/politekniku/2000.webp', title: 'Politeknik 2000' },
+          { src: 'fotot/politekniku/2018.webp', title: 'Politeknik 2018' },
+          { src: 'fotot/politekniku/2025.webp', title: 'Politeknik 2025' }
+        ]
+      },
+      {
+        lat: 41.3191622,
+        lng: 19.8351749,
+        image: 'fotot/qytet_studenti/2000.webp',
+        key: 'student',
+        timelineImages: [
+          { src: 'https://memorie.al/wp-content/uploads/2020/02/1-3.jpg', title: 'Student 1991' },
+          { src: 'fotot/qytet_studenti/1999.webp', title: 'Student 1999' },
+          { src: 'fotot/qytet_studenti/1999.webp', title: 'Student 2000' },
+          { src: 'https://top-channel.tv/wp-content/uploads/2018/08/QS.jpg', title: 'Student 2019' },
+          { src: 'https://www.balkanweb.com/wp-content/uploads/2019/07/qyteti-studenti-i-ri-8.jpeg', title: 'Student 2023' },
+          { src: 'https://ata.gov.al/wp-content/uploads/2023/02/6460bb36-40b3-44a0-93f9-edd63333e071.jpg', title: 'Student 2024' },
+          { src: 'https://javanews.al/wp-content/uploads/2019/07/Konvikte-Tirane-bashkia-7.jpg', title: 'Student 2025' }
+        ]
+      },
+      {
+        lat: 41.3482822,
+        lng: 19.7598156,
+        image: 'fotot/rruga_28_nentori/2025.webp',
+        key: 'nentori',
+        timelineImages: [
+          { src: 'fotot/rruga_28_nentori/1616.webp', title: '28 Nëntori 1616' },
+          { src: 'fotot/rruga_28_nentori/1620.webp', title: '28 Nëntori 1620' },
+          { src: 'fotot/rruga_28_nentori/1780.webp', title: '28 Nëntori 1780' },
+          { src: 'fotot/rruga_28_nentori/1880.webp', title: '28 Nëntori 1880' },
+          { src: 'fotot/rruga_28_nentori/1968.webp', title: '28 Nëntori 1968' },
+          { src: 'fotot/rruga_28_nentori/2025.webp', title: '28 Nëntori 2025' }
+        ]
+      },
+      {
+        lat: 41.3323945,
+        lng: 19.8197455,
+        image: 'fotot/rruga_e_barrikadave/2018.webp',
+        key: 'barrikada',
+        timelineImages: [
+          { src: 'fotot/rruga_e_barrikadave/1936.webp', title: 'Barrikada 1936' },
+          { src: 'fotot/rruga_e_barrikadave/1937.webp', title: 'Barrikada 1937' },
+          { src: 'fotot/rruga_e_barrikadave/1945.webp', title: 'Barrikada 1945' },
+          { src: 'fotot/rruga_e_barrikadave/2018.webp', title: 'Barrikada 2018' },
+          { src: 'fotot/rruga_e_barrikadave/2018.webp', title: 'Barrikada 2023' },
+          { src: 'https://crm-cdn.ams3.cdn.digitaloceanspaces.com/futurehome/storage/futurehome/2025/March/week3/450x337/340146_461660049_17871678582190493_8623885641421155857_n.jpg', title: 'Barrikada 2025' }
+        ]
+      },
+      {
+        lat: 41.3440669,
+        lng: 19.8365915,
+        image: 'fotot/rruga_e_dibres/2018.webp',
+        key: 'dibra',
+        timelineImages: [
+          { src: 'fotot/rruga_e_dibres/1917.webp', title: 'Rrg. Dibrës 1917' },
+          { src: 'fotot/rruga_e_dibres/1925.webp', title: 'Rrg. Dibrës 1925' },
+          { src: 'fotot/rruga_e_dibres/1927.webp', title: 'Rrg. Dibrës 1927' },
+          { src: 'fotot/rruga_e_dibres/1952.webp', title: 'Rrg. Dibrës 1952' },
+          { src: 'fotot/rruga_e_dibres/1960.webp', title: 'Rrg. Dibrës 1960' },
+          { src: 'fotot/rruga_e_dibres/2018.webp', title: 'Rrg. Dibrës 2018' },
+          { src: 'https://shqiptarja.com/uploads/780x440/1524157948_rruga.jpg', title: 'Rrg. Dibrës 2025' }
+        ]
+      },
+      {
+        lat: 41.330301,
+        lng: 19.8122287,
+        image: 'fotot/rruga_e_durresit/2018.webp',
+        key: 'durres',
+        timelineImages: [
+          { src: 'fotot/rruga_e_durresit/1930.webp', title: 'Rrg. Durrës 1930' },
+          { src: 'fotot/rruga_e_durresit/1950.webp', title: 'Rrg. Durrës 1950' },
+          { src: 'fotot/rruga_e_durresit/2018.webp', title: 'Rrg. Durrës 2018' },
+          { src: 'https://media.merrjep.al/Image/302d1070-ffc5-466d-a20d-04b2950f6379/20240815/false/false/1280/960/rruga-e-durresit-japim-zyre-per-qira.jpeg?noLogo=true', title: 'Rrg. Durrës 2025' }
+        ]
+      },
+      {
+        lat: 41.3245844,
+        lng: 19.799465,
+        image: 'fotot/rruga_e_kavajes/2018.webp',
+        key: 'kavaja',
+        timelineImages: [
+          { src: 'fotot/rruga_e_kavajes/1917.webp', title: 'Rrg. Kavaja 1917' },
+          { src: 'fotot/rruga_e_kavajes/1929.webp', title: 'Rrg. Kavaja 1929' },
+          { src: 'fotot/rruga_e_kavajes/1932.webp', title: 'Rrg. Kavaja 1932' },
+          { src: 'fotot/rruga_e_kavajes/1954.webp', title: 'Rrg. Kavaja 1954' },
+          { src: 'fotot/rruga_e_kavajes/1962.webp', title: 'Rrg. Kavaja 1962' },
+          { src: 'fotot/rruga_e_kavajes/1967.webp', title: 'Rrg. Kavaja 1967' },
+          { src: 'fotot/rruga_e_kavajes/1968.webp', title: 'Rrg. Kavaja 1968' },
+          { src: 'fotot/rruga_e_kavajes/1970.webp', title: 'Rrg. Kavaja 1970' },
+          { src: 'fotot/rruga_e_kavajes/1971.webp', title: 'Rrg. Kavaja 1971' },
+          { src: 'fotot/rruga_e_kavajes/2000.webp', title: 'Rrg. Kavaja 2000' },
+          { src: 'fotot/rruga_e_kavajes/2018.webp', title: 'Rrg. Kavaja 2018' },
+          { src: 'https://d1ia6vt0h4qxok.cloudfront.net/1217671690361800676953498401_337546.jpg', title: 'Rrg. Kavaja 2025' }
+        ]
+      },
+      {
+        lat: 41.3289166,
+        lng: 19.8234297,
+        image: 'fotot/rruga_lurigj_gurakuqi/2019.webp',
+        key: 'luigj',
+        timelineImages: [
+          { src: 'fotot/rruga_lurigj_gurakuqi/1936.webp', title: 'Rrg. Luigj 1936' },
+          { src: 'fotot/rruga_lurigj_gurakuqi/2018.webp', title: 'Rrg. Luigj 2018' },
+          { src: 'fotot/rruga_lurigj_gurakuqi/2019.webp', title: 'Rrg. Luigj 2019' },
+          { src: 'https://live.staticflickr.com/65535/53330016586_41a4267054_b.jpg', title: 'Rrg. Luigj 2025' }
+        ]
+      },
+      {
+        lat: 41.3335929,
+        lng: 19.8305168,
+        image: 'fotot/rruga_qemal_stafa/2018.webp',
+        key: 'qemal',
+        timelineImages: [
+          { src: 'fotot/rruga_qemal_stafa/2018.webp', title: 'Rrg. Stafa 2018' },
+          { src: 'https://ergishpk.com/images/Kreu/ergi_ergi-shpk_home_bulevardi-qemal-stafa.jpg', title: 'Rrg. Stafa 2025' }
+        ]
+      },
+      {
+        lat: 41.3519494,
+        lng: 19.7972766,
+        image: 'fotot/rruga_tasim_hoxha/2018.webp',
+        key: 'hoxha',
+        timelineImages: [
+          { src: 'fotot/rruga_tasim_hoxha/1927.webp', title: 'Rrg. Hoxha 1927' },
+          { src: 'fotot/rruga_tasim_hoxha/1937.webp', title: 'Rrg. Hoxha 1937' },
+          { src: 'fotot/rruga_tasim_hoxha/2018.webp', title: 'Rrg. Hoxha 2018' },
+          { src: 'https://www.dupron.al/images/users/MTY4MA==/NzI4Mg==/TueJan1815100620222448.jpg', title: 'Rrg. Hoxha 2025' }
+        ]
+      },
+      {
+        lat: 41.314818,
+        lng: 19.8169726,
+        image: 'fotot/Teatr_i_Kukullave_Tirane/2016.webp',
+        key: 'kukull',
+        timelineImages: [
+          { src: 'fotot/Teatr_i_Kukullave_Tirane/1924.webp', title: 'Teatri 1924' },
+          { src: 'https://content.unops.org/photos/_image1600x1000/Copy-of-parlamentimarubiok.jpg', title: 'Teatri 1930' },
+          { src: 'https://content.unops.org/photos/_image1600x1000/Copy-of-10-copy.jpg', title: 'Teatri 1964' },
+          { src: 'fotot/Teatr_i_Kukullave_Tirane/2016.webp', title: 'Teatri 2016' },
+          { src: 'https://i.ytimg.com/vi/LAKc8o8-prA/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGQgZShVMA8=&rs=AOn4CLARAl0HzibroCWOmR6xjGC3yeuogA', title: 'Teatri 2022' },
+          { src: 'https://www.visit-tirana.com/wp-content/uploads/2024/01/puppet-theater-3-768x432.jpeg', title: 'Teatri 2025' }
+        ]
+      },
+      {
+        lat: 41.3254991,
+        lng: 19.8213416,
+        image: 'fotot/vila_presidenciale/1930.webp',
+        key: 'vila',
+        timelineImages: [
+          { src: 'fotot/vila_presidenciale/1930.webp', title: 'Vila 1930' },
+          { src: 'https://shqiptarja.com/uploads/780x440/1640008121_20200619114454ishpallatiibrigadave.png', title: 'Vila 2025' }
+        ]
+      },
+
+    ];
+
+    // Function to show destination info in sidebar
+    function showDestinationInfo(location) {
+      if (!location) return;
+      currentLocation = location;
+      window.currentLocation = location;
+      window.currentLocationKey = location.key || '';
+      const sidebar = document.getElementById('sidebar');
+      const sidebarContent = document.getElementById('sidebar-content');
+      var mapRef = (typeof map !== 'undefined' && map) ? map : window.map;
+      
+      // Remove any existing highlight
+      if (currentHighlightedMarker) {
+        try { currentHighlightedMarker.setZIndexOffset(0); } catch (_) {}
+        currentHighlightedMarker = null;
+      }
+      if (currentHighlightedPolyline && mapRef) {
+        try { mapRef.removeLayer(currentHighlightedPolyline); } catch (_) {}
+        currentHighlightedPolyline = null;
+      }
+      
+      // Find and highlight the clicked marker
+      const marker = markers.find(m => 
+        m.getLatLng().lat === location.lat && 
+        m.getLatLng().lng === location.lng
+      );
+      
+      if (marker) {
+        marker.setZIndexOffset(1000); // Bring to front
+        currentHighlightedMarker = marker;
+      }
+      
+      // Show distance line
+      currentHighlightedPolyline = showDistanceLine(location.lat, location.lng);
+      
+      // Populate sidebar content
+      sidebarContent.innerHTML = `
+        <div class="sidebar-header">
+          <h2 class="sidebar-title">${translations[currentLanguage][location.key + '_title']}</h2>
+          <button class="close-sidebar" onclick="hideSidebar()">&times;</button>
+        </div>
+        <img src="${location.image}" alt="" onerror="this.onerror=null;this.src='images/logo1.webp';this.style.objectFit='contain';this.style.background='#f0ede6'" style="border: 1px solid #ddd; width: 100%; max-height:220px; object-fit:cover;">
+        <p style="font-size: 16px; line-height: 1.6; color: #555; margin: 15px 0;">${translations[currentLanguage][location.key + '_info']}</p>
+        <div style="margin-top: 20px;">
+          <button style="font-size:16px; background-color: #007bff; color: white; border: none; padding: 10px 20px; margin-top: 10px; cursor: pointer; border-radius: 5px; width: 100%;" 
+                  onclick='showTimeline()'>
+            ${translations[currentLanguage]['time_capsule_view']}
+          </button>
+        </div>
+        <div class="distance-info" style="margin-top: 20px; font-size: 16px; color: #666;">
+          <strong>${translations[currentLanguage]['distance_info']}</strong> ${calculateDistanceToSkenderbej(location.lat, location.lng).toFixed(2)} ${translations[currentLanguage]['km']}
+        </div>
+        <button type="button" class="btn" style="width:100%;margin-top:12px" onclick="ktToggleFavorite('${location.key}')">★ Preferitat</button>
+        <div id="kt-year-slider" style="margin-top:16px"></div>
+        <h3 style="margin-top:20px;font-size:18px">Komente</h3>
+        <div id="kt-comments-box"></div>
+      `;
+      
+      // Show the sidebar
+      sidebar.style.display = 'block';
+      window.currentLocationKey = location.key;
+      if (window.ktLoadComments) window.ktLoadComments(location.key, document.getElementById('kt-comments-box'));
+      // year slider from local timeline if available
+      if (window.ktBuildYearSlider && location.timelineImages) {
+        const photos = location.timelineImages.map(t => ({ year: (t.title||'').match(/\d{4}/)?.[0], url: t.src, title: t.title }));
+        window.ktBuildYearSlider(photos, document.getElementById('kt-year-slider'));
+      }
+    }
+
+
+    // Function to hide timeline
+    function hideTimeline() {
+      document.getElementById('timelineContainer').style.display = 'none';
+    }
+
+    // Function to show distance line on map
+    function showDistanceLine(lat, lng) {
+      var mapRef = (typeof map !== 'undefined' && map) ? map : window.map;
+      if (!mapRef || typeof L === 'undefined') return null;
+      var destination = L.latLng(lat, lng);
+      var skenderbej = L.latLng(skenderbejLat, skenderbejLng);
+      if (currentHighlightedPolyline) {
+        try { mapRef.removeLayer(currentHighlightedPolyline); } catch (_) {}
+      }
+      const polyline = L.polyline([skenderbej, destination], {
+        color: 'red',
+        weight: 3,
+        dashArray: '5, 5',
+        opacity: 0.7
+      }).addTo(mapRef);
+      return polyline;
+    }
+
+    // Function to hide sidebar and remove highlights
+    function hideSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.style.display = 'none';
+      
+      // Remove marker highlight
+      if (currentHighlightedMarker) {
+        currentHighlightedMarker.setZIndexOffset(0);
+        currentHighlightedMarker = null;
+      }
+      
+      // Remove polyline
+      if (currentHighlightedPolyline) {
+        map.removeLayer(currentHighlightedPolyline);
+        currentHighlightedPolyline = null;
+      }
+    }
+
+    // Helper function to calculate distance to Skenderbej Square
+    function calculateDistanceToSkenderbej(lat, lng) {
+      var destination = L.latLng(lat, lng);
+      var skenderbej = L.latLng(skenderbejLat, skenderbejLng);
+      return skenderbej.distanceTo(destination) / 1000; // Distance in km
+    }
+
+// Function to add markers to the map (with custom pins)
+function addMarkers() {
+    markers = [];
+
+    function resolvePhoto(location) {
+      var key = location && location.key;
+      var src = null;
+      if (window.KT_LOCATION_PHOTOS && key && window.KT_LOCATION_PHOTOS[key]) {
+        src = window.KT_LOCATION_PHOTOS[key];
+      } else if (location && location.image && String(location.image).indexOf('http') !== 0) {
+        src = location.image;
+      }
+      if (!src) src = 'images/logo1.webp';
+      // Absolute URL so it always loads from our server
+      if (src.indexOf('http') !== 0 && src.indexOf('//') !== 0) {
+        var base = (window.location && window.location.origin) ? window.location.origin + '/' : '/';
+        src = base + src.replace(/^\//, '');
+      }
+      return src;
+    }
+
+    function makePhotoIcon(photoUrl) {
+      // divIcon with <img> — never the default red Leaflet pin
+      var safe = String(photoUrl || 'images/logo1.webp').replace(/"/g, '&quot;');
+      return L.divIcon({
+        className: 'kt-map-photo-icon',
+        html: '<div class="kt-map-photo-wrap">' +
+              '<img class="kt-map-photo" src="' + safe + '" alt="" ' +
+              'onerror="this.onerror=null;this.src=\'' +
+              ((window.location && window.location.origin) ? window.location.origin : '') +
+              '/images/logo1.webp\';" />' +
+              '</div>',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -36]
+      });
+    }
+
+    if (typeof locations === 'undefined' || !locations.length) {
+      console.warn('No locations for markers');
+      return;
+    }
+
+    // Add markers in chunks so UI stays responsive
+    var i = 0;
+    function addChunk() {
+      var end = Math.min(i + 12, locations.length);
+      for (; i < end; i++) {
+        var location = locations[i];
+        var photo = resolvePhoto(location);
+        location.image = photo;
+        var marker = L.marker([location.lat, location.lng], {
+          icon: makePhotoIcon(photo),
+          riseOnHover: true
+        }).addTo(map);
+        marker.locationKey = location.key;
+        marker.on('click', (function (loc) {
+          return function () { showDestinationInfo(loc); };
+        })(location));
+        markers.push(marker);
+      }
+      if (i < locations.length) {
+        requestAnimationFrame(addChunk);
+      } else {
+        console.log('Markers with photos:', markers.length);
+      }
+    }
+    addChunk();
+}
+
+    // Function to change language
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      window.currentLanguage = lang;
+      updateTexts();
+      localStorage.setItem('languagePreference', lang);
+      window.changeLanguage = changeLanguage;
+      const langBtn = document.querySelector('[data-dropdown-toggle="language-dropdown-menu"]');
+      if (langBtn && translations[lang]) langBtn.childNodes.forEach?.(()=>{});
+      try {
+        if (langBtn) {
+          const label = translations[lang] && translations[lang]['language'];
+          // keep flag svg, update text node only is hard — set title
+          langBtn.setAttribute('title', label || lang);
+        }
+      } catch(_){}
+
+      
+      // Update sidebar content if visible
+      const sidebar = document.getElementById('sidebar');
+      if (sidebar.style.display === 'block') {
+        const activeMarker = markers.find(m => m === currentHighlightedMarker);
+        if (activeMarker) {
+          const location = locations.find(loc => 
+            loc.lat === activeMarker.getLatLng().lat && 
+            loc.lng === activeMarker.getLatLng().lng
+          );
+          if (location) {
+            showDestinationInfo(location);
+          }
+        }
+      }
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      addMarkers();
+    const savedLang = localStorage.getItem('languagePreference');
+    if (savedLang) {
+        changeLanguage(savedLang);
+    } else {
+        changeLanguage('en'); // Default to English
+    }
+});
+
+// Function to show polaroid gallery
+
+
+window.__ktTimelineState = { list: [], index: 0, zoom: 1, paused: false, timer: null };
+
+function ktResolvePhotoSrc(raw) {
+  if (!raw) return (location.origin || '') + '/images/logo1.webp';
+  var s = String(raw);
+  if (s.indexOf('http://') === 0 || s.indexOf('https://') === 0) return s;
+  return (location.origin || '') + '/' + s.replace(/^\//, '');
+}
+
+function ktTimelinePause(reason) {
+  var st = window.__ktTimelineState;
+  st.paused = true;
+  if (st.timer) { clearInterval(st.timer); st.timer = null; }
+  var hint = document.getElementById('kt-tl-hint');
+  if (hint) hint.textContent = reason || 'Ndalesë — shtyp Reset për të vazhduar';
+}
+
+function ktTimelineResume() {
+  var st = window.__ktTimelineState;
+  st.paused = false;
+  st.zoom = 1;
+  var img = document.getElementById('kt-tl-img');
+  if (img) img.style.transform = 'scale(1)';
+  var hint = document.getElementById('kt-tl-hint');
+  if (hint) hint.textContent = '';
+  ktTimelineStartAuto();
+}
+
+function ktTimelineStartAuto() {
+  var st = window.__ktTimelineState;
+  if (st.timer) clearInterval(st.timer);
+  if (st.paused || st.list.length < 2) return;
+  st.timer = setInterval(function () {
+    if (st.paused) return;
+    st.index = (st.index + 1) % st.list.length;
+    ktRenderTimelineSlide(true);
+  }, 4500);
+}
+
+function ktRenderTimelineSlide(animate) {
+  var st = window.__ktTimelineState;
+  if (!st.list.length) return;
+  var item = st.list[st.index];
+  var img = document.getElementById('kt-tl-img');
+  var yearEl = document.getElementById('kt-tl-year');
+  var capEl = document.getElementById('kt-tl-caption');
+  var cntEl = document.getElementById('kt-tl-counter');
+  if (!img) return;
+
+  var src = ktResolvePhotoSrc(item.src);
+  if (animate) {
+    img.classList.remove('kt-tl-fade-in');
+    void img.offsetWidth;
+    img.classList.add('kt-tl-fade-in');
+  }
+  img.style.transform = 'scale(' + (st.zoom || 1) + ')';
+  img.onload = function () { img.style.opacity = '1'; };
+  img.onerror = function () {
+    img.onerror = null;
+    // try local cover, then logo
+    var key = (window.currentLocation && window.currentLocation.key) || '';
+    var fb = (window.ktPhotoFor && key) ? window.ktPhotoFor(key) : 'images/logo1.webp';
+    if (String(fb).indexOf('http') !== 0) fb = ktResolvePhotoSrc(fb);
+    if (img.src.indexOf('logo1') === -1) img.src = (fb.indexOf('http') === 0 ? fb : ktResolvePhotoSrc('images/logo1.webp'));
+    else img.src = ktResolvePhotoSrc('images/logo1.webp');
+    img.style.objectFit = 'contain';
+    img.style.background = '#d4d0c8';
+  };
+  img.style.opacity = '0.4';
+  img.src = src;
+
+  var yearLabel = item.year || (String(item.title || '').match(/\d{4}/) || [''])[0] || '';
+  if (yearEl) yearEl.textContent = yearLabel;
+  if (capEl) capEl.textContent = item.title || yearLabel || '';
+  if (cntEl) cntEl.textContent = (st.index + 1) + ' / ' + st.list.length;
+}
+
+function ktBindTimelineControls() {
+  var prev = document.getElementById('kt-tl-prev');
+  var next = document.getElementById('kt-tl-next');
+  var zin = document.getElementById('kt-tl-zoom-in');
+  var zout = document.getElementById('kt-tl-zoom-out');
+  var reset = document.getElementById('kt-tl-reset');
+  var closeBtn = document.getElementById('kt-tl-close');
+  var img = document.getElementById('kt-tl-img');
+
+  if (prev && !prev.dataset.bound) {
+    prev.dataset.bound = '1';
+    prev.onclick = function () {
+      var st = window.__ktTimelineState;
+      st.index = (st.index - 1 + st.list.length) % st.list.length;
+      st.zoom = 1;
+      ktRenderTimelineSlide(true);
+      if (!st.paused) ktTimelineStartAuto();
+    };
+  }
+  if (next && !next.dataset.bound) {
+    next.dataset.bound = '1';
+    next.onclick = function () {
+      var st = window.__ktTimelineState;
+      st.index = (st.index + 1) % st.list.length;
+      st.zoom = 1;
+      ktRenderTimelineSlide(true);
+      if (!st.paused) ktTimelineStartAuto();
+    };
+  }
+  if (zin && !zin.dataset.bound) {
+    zin.dataset.bound = '1';
+    zin.onclick = function () {
+      var st = window.__ktTimelineState;
+      st.zoom = Math.min((st.zoom || 1) + 0.2, 3);
+      ktTimelinePause('Zoom aktiv — Reset për të vazhduar slideshow');
+      var im = document.getElementById('kt-tl-img');
+      if (im) im.style.transform = 'scale(' + st.zoom + ')';
+    };
+  }
+  if (zout && !zout.dataset.bound) {
+    zout.dataset.bound = '1';
+    zout.onclick = function () {
+      var st = window.__ktTimelineState;
+      st.zoom = Math.max((st.zoom || 1) - 0.2, 0.6);
+      ktTimelinePause('Zoom aktiv — Reset për të vazhduar slideshow');
+      var im = document.getElementById('kt-tl-img');
+      if (im) im.style.transform = 'scale(' + st.zoom + ')';
+    };
+  }
+  if (reset && !reset.dataset.bound) {
+    reset.dataset.bound = '1';
+    reset.onclick = function () { ktTimelineResume(); };
+  }
+  if (closeBtn && !closeBtn.dataset.bound) {
+    closeBtn.dataset.bound = '1';
+    closeBtn.onclick = function () { hidePolaroidGallery(); };
+  }
+  if (img && !img.dataset.bound) {
+    img.dataset.bound = '1';
+    img.onclick = function () {
+      // click image pauses slideshow
+      ktTimelinePause('Ndalesë — Reset për të vazhduar');
+    };
+  }
+}
+
+async function showPolaroidGallery(location) {
+  if (!location) return;
+  window.currentLocation = location;
+  var key = location.key || '';
+  // Static archive photos (bundled)
+  var list = window.ktTimelineFor ? window.ktTimelineFor(key) : [];
+  if (!list.length && location.timelineImages && location.timelineImages.length) {
+    list = location.timelineImages.map(function (t) {
+      return {
+        src: t.src,
+        title: t.title || key,
+        year: t.year || parseInt((String(t.title || '').match(/\d{4}/) || [0])[0], 10) || null
+      };
+    });
+  }
+
+  // User-contributed photos: ONLY status === 'approved' (pending never appear)
+  try {
+    var backendPhotos = await getPhotosFromBackend(key);
+    (backendPhotos || []).forEach(function (p) {
+      if (p.status && p.status !== 'approved') return;
+      if (!p.url) return;
+      list.push({
+        src: p.url,
+        title: p.description || (p.year ? String(p.year) : key),
+        year: p.year || null,
+        caption: p.description || '',
+        fromUser: true,
+        id: p.id
+      });
+    });
+  } catch (e) {
+    console.warn('Timeline: could not load approved user photos', e);
+  }
+
+  if (!list.length) {
+    list = [{ src: 'images/logo1.webp', title: key, year: null }];
+  }
+  list.sort(function (a, b) {
+    var ya = a.year || parseInt((String(a.title || '').match(/\d{4}/) || [0])[0], 10) || 0;
+    var yb = b.year || parseInt((String(b.title || '').match(/\d{4}/) || [0])[0], 10) || 0;
+    return yb - ya;
+  });
+
+  window.__ktTimelineState = { list: list, index: 0, zoom: 1, paused: false, timer: null };
+  var gal = document.getElementById('polaroidGallery');
+  if (gal) {
+    gal.classList.add('kt-tl-open');
+    gal.style.display = 'flex';
+  }
+  ktBindTimelineControls();
+  ktRenderTimelineSlide(true);
+  ktTimelineStartAuto();
+}
+
+function hidePolaroidGallery() {
+  var st = window.__ktTimelineState || {};
+  if (st.timer) clearInterval(st.timer);
+  st.timer = null;
+  st.paused = false;
+  st.zoom = 1;
+  var gal = document.getElementById('polaroidGallery');
+  if (gal) {
+    gal.style.display = 'none';
+    gal.classList.remove('kt-tl-open');
+  }
+  if (window.polaroidInterval) clearInterval(window.polaroidInterval);
+}
+
+function startPolaroidCarousel() { /* replaced by ktTimelineStartAuto */ }
+
+
+function showTimeline(keyOrLoc) {
+  var loc = null;
+  if (keyOrLoc && typeof keyOrLoc === 'object' && keyOrLoc.key) {
+    loc = keyOrLoc;
+  } else if (typeof keyOrLoc === 'string' && keyOrLoc && typeof locations !== 'undefined') {
+    loc = locations.find(function (l) { return l.key === keyOrLoc; }) || null;
+  }
+  if (!loc) {
+    loc = (typeof currentLocation !== 'undefined' ? currentLocation : null) || window.currentLocation || null;
+  }
+  if (!loc || !loc.key) {
+    var k = window.currentLocationKey;
+    if (k && typeof locations !== 'undefined') {
+      loc = locations.find(function (l) { return l.key === k; }) || null;
+    }
+  }
+  if (!loc) {
+    alert('Zgjidh më parë një vend në hartë (kliko një marker).');
+    return;
+  }
+  window.currentLocation = loc;
+  try { currentLocation = loc; } catch (_) {}
+  window.currentLocationKey = loc.key;
+  showPolaroidGallery(loc);
+}
+window.showTimeline = showTimeline;                                           
+
+// Flag to check if the submit listener is already added
+let formSubmitListenerAdded = false;
+
+function ktUploadMsg(sq, en) {
+  var lang = (typeof currentLanguage !== 'undefined' ? currentLanguage : (window.currentLanguage || 'sq'));
+  return lang === 'en' ? en : sq;
+}
+
+function ktApplyUploadLabels() {
+  var lang = (typeof currentLanguage !== 'undefined' ? currentLanguage : (window.currentLanguage || 'sq'));
+  var isEn = lang === 'en';
+  var map = {
+    'lbl-year': isEn ? 'Year:' : 'Viti:',
+    'lbl-caption': isEn ? 'Caption / description:' : 'Përshkrimi:',
+    'lbl-firstName': isEn ? 'First name:' : 'Emri:',
+    'lbl-lastName': isEn ? 'Last name:' : 'Mbiemri:',
+    'lbl-email': 'Email:',
+    'kt-upload-submit': isEn ? 'Submit for approval' : 'Dërgo për miratim',
+    'kt-upload-hint': isEn
+      ? 'The photo is sent for admin approval. It will appear in the timeline only after it is approved.'
+      : 'Fotoja dërgohet për miratim te admini. Do të shfaqet në timeline vetëm pasi të aprovohet.'
+  };
+  Object.keys(map).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = map[id];
+  });
+  var cap = document.getElementById('caption');
+  if (cap) cap.placeholder = isEn ? 'Write clearly in English or Albanian' : 'Shkruaj qartë në shqip ose anglisht';
+  var year = document.getElementById('year');
+  if (year) year.placeholder = isEn ? 'e.g. 1990' : 'p.sh. 1990';
+  var btn = document.getElementById('uploadImageButton');
+  if (btn) btn.textContent = isEn ? 'Upload Image' : 'Ngarko foto';
+}
+
+document.getElementById('uploadInput').addEventListener('change', function (e) {
+    const form = document.getElementById('imageUploadForm');
+    const file = e.target.files[0];
+
+    if (file) {
+        document.getElementById('formOverlay').style.display = 'flex';
+        form.reset();
+        // Re-apply logged-in name/email AFTER reset (reset was clearing autofill)
+        if (typeof window.applyUploadAutofill === 'function') {
+          window.applyUploadAutofill();
+        }
+        ktApplyUploadLabels();
+
+        if (!formSubmitListenerAdded) {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const submitButton = event.target.querySelector('button[type="submit"]') || event.target.querySelector('button');
+                submitButton.disabled = true;
+
+                const currentFile = document.getElementById('uploadInput').files[0];
+                if (!currentFile) {
+                    alert(ktUploadMsg('Nuk u zgjodh asnjë skedar!', 'No file selected!'));
+                    submitButton.disabled = false;
+                    return;
+                }
+
+                // Prefer values currently in the form (autofilled if logged in)
+                if (typeof window.applyUploadAutofill === 'function') {
+                  window.applyUploadAutofill();
+                }
+
+                const year = document.getElementById('year').value;
+                const caption = document.getElementById('caption').value;
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+
+                if (!firstName || !lastName || !email) {
+                    alert(ktUploadMsg(
+                      'Emri, mbiemri dhe email janë të detyrueshëm. Identifikohu ose plotësoji manualisht.',
+                      'First name, last name and email are required. Log in or fill them manually.'
+                    ));
+                    submitButton.disabled = false;
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('image', currentFile);
+                formData.append('caption', caption || '');
+                formData.append('locationKey', (typeof currentLocation !== 'undefined' && currentLocation && currentLocation.key) ? currentLocation.key : (window.currentLocationKey || ''));
+                formData.append('year', year || '');
+                formData.append('firstName', firstName || '');
+                formData.append('lastName', lastName || '');
+                formData.append('email', email || '');
+
+                try {
+                    const headers = {};
+                    const tok = localStorage.getItem('KT_TOKEN');
+                    if (tok) headers['Authorization'] = 'Bearer ' + tok;
+
+                    const response = await fetch((window.KT_API && window.KT_API.API_BASE ? window.KT_API.API_BASE : '/api/v1') + '/photos', {
+                        method: 'POST',
+                        headers: headers,
+                        body: formData
+                    });
+
+                    const responseData = await response.json().catch(() => ({}));
+                    if (!response.ok) {
+                        throw new Error(responseData.message || ktUploadMsg('Ngarkimi dështoi', 'Upload failed'));
+                    }
+
+                    // NEVER add to timeline here. Pending photos are invisible until admin approves.
+                    alert(responseData.message || ktUploadMsg(
+                      'Foto u dërgua me sukses. NUK shfaqet në timeline derisa admini ta aprovojë. Pastaj do të shfaqet automatikisht në lokacionin përkatës.',
+                      'Photo sent successfully. It will NOT appear in the timeline until an admin approves it. After approval it shows on that location\'s timeline.'
+                    ));
+
+                    document.getElementById('formOverlay').style.display = 'none';
+                    try { document.getElementById('uploadInput').value = ''; } catch (_) {}
+                    // Do not call loadPhotos / do not append any figure to polaroidContent
+                    return;
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    alert(error.message || ktUploadMsg('Gabim gjatë ngarkimit.', 'Upload error.'));
+                } finally {
+                    submitButton.disabled = false;
+                }
+            });
+
+            formSubmitListenerAdded = true;
+        }
+    }
+});
+
+var closeFormBtn = document.getElementById('closeFormBtn') || document.getElementById('kt-form-close');
+if (closeFormBtn) {
+  closeFormBtn.addEventListener('click', function() {
+    document.getElementById('formOverlay').style.display = 'none';
+  });
+}
+
+
+
+async function getPhotosFromBackend(location){
+  try {
+      const key = typeof location === 'string' ? location : (location.key || location);
+      const responseData = await window.KT_API.getPhotosFromBackend(key);
+      // Backend already filters status=approved; double-check on client
+      const photos = (responseData.data || [])
+        .filter(function (p) { return !p.status || p.status === 'approved'; })
+        .map(p => {
+          var base = (typeof location === 'object' && location && location.origin)
+            ? location.origin
+            : (window.location.origin || 'http://localhost:5000');
+          var url = p.imageUrl || '';
+          if (url && url.indexOf('http') !== 0) {
+            url = base.replace(/\/$/, '') + (url.charAt(0) === '/' ? url : '/' + url);
+          }
+          return {
+            url: url,
+            year: p.year,
+            description: p.caption,
+            name: p.contributor ? (p.contributor.firstName + ' ' + p.contributor.lastName) : '',
+            status: p.status || 'approved',
+            id: p._id
+          };
+        });
+      return photos;
+  } catch (error) {
+      console.error('Error loading photos:', error);
+      return [];
+  }
+}
+
+// loadPhotos is intentionally a no-op for the polaroid stack —
+// timeline uses showPolaroidGallery which only merges APPROVED backend photos.
+async function loadPhotos(_location) {
+  return;
+}
+
+
+
+async function renderPhoto(photo) {
+
+  const { url, year, description, name } = photo; 
+
+
+
+  // Create temporary figure for measurement
+
+  const tempFigure = document.createElement('figure');
+
+  tempFigure.style.visibility = 'hidden';
+
+  tempFigure.innerHTML = `
+
+      <h1 class="year">${year || 'Unknown Year'}</h1>
+
+      <div class="img" style="background-image: url(${url})"></div>
+
+      <figcaption>
+
+          <h2>${description || 'New Image'}</h2>
+
+          <h2>${name || 'New Image'}</h2>
+
+          <p></p>
+
+      </figcaption>
+
+  `;
+
+  document.getElementById('polaroidContent').appendChild(tempFigure);
+
+
+
+  // Wait for rendering
+
+  await new Promise(resolve => requestAnimationFrame(resolve));
+
+
+
+  // Get natural stacking position
+
+  const newIndex = [...document.querySelectorAll('.polaroid-figure')]
+
+      .findIndex(fig => fig === tempFigure);
+
+
+
+  // Remove temporary figure
+
+  tempFigure.remove();
+
+
+
+  // Create final figure with calculated position
+
+  const figure = document.createElement('figure');
+
+  figure.className = 'polaroid-figure';
+  
+
+
+  const topPos = 20 + (20 * newIndex);
+
+  const leftPos = 10 + (5 * newIndex);
+
+  const rotations = [-5, 3, -2, 4, -1];
+
+  const rotation = rotations[newIndex % rotations.length];
+
+  const scale = 0.8 + (0.05 * newIndex);
+
+
+
+  Object.assign(figure.style, {
+
+      top: `${topPos}px`,
+
+      left: `${leftPos}%`,
+
+      transform: `rotate(${rotation}deg) scale(${scale})`,
+
+      zIndex: newIndex,
+
+      position: 'absolute',
+
+      transition: 'all 0.5s ease-in-out'
+
+  });
+
+
+
+  document.getElementById('polaroidContent').appendChild(figure);
+
+  sortPhotosByNewest();
+
+}
+function sortPhotosByNewest() {
+    const container = $('#polaroidContent');
+    const figures = $('.polaroid-figure').get();
+    
+    // Sort figures by year in descending order (newest to oldest)
+    figures.sort((a, b) => {
+        const yearA = parseInt($(a).find('.year').text()) || 0;
+        const yearB = parseInt($(b).find('.year').text()) || 0;
+        return yearB - yearA; // DESCENDING
+    });
+
+    // Clear container and re-append sorted figures
+    container.empty();
+    
+    figures.forEach((fig, index) => {
+        const topPos = 20 + (20 * index);
+        const leftPos = 10 + (5 * index);
+        const rotations = [-5, 3, -2, 4, -1];
+        const rotation = rotations[index % rotations.length];
+        const scale = 0.8 + (0.05 * index);
+        
+        $(fig).css({
+            'top': `${topPos}px`,
+            'left': `${leftPos}%`,
+            'transform': `rotate(${rotation}deg) scale(${scale})`,
+            'z-index': index
+        });
+        
+        container.append(fig);
+    });
+
+    // Reset carousel animation
+    $('.polaroid-figure').removeClass("current prev next");
+    $('.polaroid-figure').addClass("next").first().removeClass("next").addClass("current");
+    clearInterval(window.polaroidInterval);
+    startPolaroidCarousel();
+}fileInput.addEventListener('change', function(e) {
+    selectedFile = e.target.files[0];
+
+    imageUploadForm.style.display = 'block';
+    imageUploadForm.style.zIndex = 100;
+    imageUploadForm.style.position = 'absolute'; // Important for z-index
+
+    timeline.classList.add('blocked');  // This disables interaction
+    timeline.style.zIndex = 1;
+});
+timeline.classList.remove('blocked');
+imageUploadForm.style.display = 'none';
+selectedFile = null;
+
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+  <script src="js/script.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js" defer></script>
+<section class="clients">
+    <div class="swiper clients-slider">
+        <div class="swiper-wrapper">
+            <!-- Imazhe që do të lëvizin -->
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+            <!-- Kjo pjesë është për përsëritjen e imazheve -->
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+            <div class="swiper-slide"><img src="https://ilingua.al/wp-content/uploads/2024/03/Bashkia-Tirane.png" alt="Bashkia Tiranë"></div>
+            <div class="swiper-slide"><img src="images/web.webp" alt="Web"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Swiper init for clients slider -->
+<script>
+    var swiper = new Swiper(".clients-slider", {
+        loop: true,  // Lëvizje pafund
+        autoplay: {
+            delay: 0,  // Lëvizje e vazhdueshme
+            disableOnInteraction: false,  // Lëvizja vazhdon edhe pas ndërveprimit
+        },
+        speed: 2000,  // Shpejtësia e lëvizjes (më e ngadalshme - 8 sekonda për një cikël)
+        slidesPerView: "auto",  // Imazhet përshtaten sipas madhësisë
+        spaceBetween: 30,  // Distancë mes imazheve
+        centeredSlides: true,  // Lëvizja fillon nga e majta
+        allowTouchMove: false,  // Nuk lejohet ndërveprimi manual
+    });
+</script>
+
+<!-- CSS për stilizim -->
+<style>
+    .clients {
+        padding: 20px 0;
+        background: #f9f9f9;
+        overflow: hidden;
+    }
+
+    .clients-slider {
+        display: flex;
+        width: 100%;
+        margin: auto;
+        white-space: nowrap;
+    }
+
+    .clients-slider img {
+        height: 60px;  /* Mund ta ndryshosh për madhësi më të madhe */
+        width: auto;
+        object-fit: contain;
+        transition: 0.3s ease;
+        padding: 5px; /* Hapësirë rreth imazheve */
+        margin: 0 20px; /* Distancë mes imazheve */
+    }
+
+    .clients-slider img:hover {
+        transform: scale(1.05);
+    }
+
+    .swiper-slide {
+        width: auto !important;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+
+
+    #timelineContainer {
+    position: relative;
+}
+
+#timeline {
+    /* Timeline styles */
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;  /* Timeline është pas formës */
+}
+#timeline.blocked {
+    pointer-events: none;         /* Disables interaction */
+    animation-play-state: paused; /* Pauses CSS animation */
+    filter: grayscale(100%);      /* Optional: visual effect */
+    opacity: 0.4;                 /* Optional: fade to show it's inactive */
+}
+#timeline.blocked {
+    overflow: hidden;    /* Stops scrolling */
+}
+
+#imageUploadForm {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+}
+
+
+#formOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* dark semi-transparent background */
+  display: none; /* initially hidden */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* very high to stay on top */
+}
+
+#formContainer {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#formContainer input,
+#formContainer button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#closeFormBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+#closeFormBtn:hover {
+    background-color: #d32f2f;
+}
+
+
+
+</style>
+
+
+<script id="kt-reveal-init">
+(function(){
+  function init(){
+    document.querySelectorAll('.gallery-item, .mapi, .kt-tour-card, .contact-box, .content-area section').forEach(function(el){
+      el.classList.add('kt-reveal');
+    });
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.kt-reveal').forEach(function(el){ obs.observe(el); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+  setTimeout(init, 1500);
+})();
+</script>
+
+
+<script id="kt-lang-fix">
+(function () {
+  function applyLang(lang) {
+    lang = (lang === 'sq' || lang === 'al') ? 'al' : 'en';
+    try {
+      if (typeof window.changeLanguage === 'function') window.changeLanguage(lang);
+      else if (typeof changeLanguage === 'function') changeLanguage(lang);
+    } catch (e) { console.error('lang', e); }
+    window.currentLanguage = lang;
+    try { currentLanguage = lang; } catch (_) {}
+    localStorage.setItem('languagePreference', lang);
+    document.querySelectorAll('.kt-lang-btn').forEach(function (b) {
+      var l = b.getAttribute('data-lang');
+      b.classList.toggle('active', l === lang || (lang === 'al' && l === 'al'));
+    });
+    if (typeof ktApplyUploadLabels === 'function') {
+      try { ktApplyUploadLabels(); } catch (_) {}
+    }
+  }
+  function bind() {
+    document.querySelectorAll('#kt-lang-switch .kt-lang-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        applyLang(btn.getAttribute('data-lang'));
+      });
+    });
+    var saved = localStorage.getItem('languagePreference') || 'en';
+    if (saved === 'sq') saved = 'al';
+    applyLang(saved);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
+})();
+</script>
+
+
+<script id="kt-upload-autofill">
+(function () {
+  function currentUser() {
+    try { return JSON.parse(localStorage.getItem('KT_USER') || 'null'); } catch (e) { return null; }
+  }
+  function applyUploadAutofill() {
+    var u = currentUser();
+    var keys = ['firstName','lastName','email','contributorEmail','contributorName','name'];
+    if (!u || !u.email) {
+      keys.forEach(function (id) {
+        var el = document.getElementById(id) || document.querySelector('[name="'+id+'"]');
+        if (el && el.type !== 'file' && el.type !== 'password') {
+          el.readOnly = false;
+          el.removeAttribute('readonly');
+          el.style.opacity = '1';
+          el.title = '';
+        }
+      });
+      return;
+    }
+    var parts = String(u.name || '').trim().split(/\s+/).filter(Boolean);
+    var first = parts[0] || (u.email ? u.email.split('@')[0] : '');
+    var last = parts.length > 1 ? parts.slice(1).join(' ') : first;
+    var map = {
+      firstName: first,
+      lastName: last,
+      email: u.email || '',
+      contributorEmail: u.email || '',
+      contributorName: u.name || first,
+      name: u.name || first
+    };
+    Object.keys(map).forEach(function (key) {
+      var el = document.getElementById(key) || document.querySelector('[name="'+key+'"]');
+      if (el && map[key] && el.type !== 'file' && el.type !== 'password') {
+        el.value = map[key];
+        el.readOnly = true;
+        el.setAttribute('readonly', 'readonly');
+        el.style.opacity = '0.85';
+        var lang = window.currentLanguage || (typeof currentLanguage !== 'undefined' ? currentLanguage : 'sq');
+        el.title = lang === 'en'
+          ? 'From your account — only change year and caption'
+          : 'Nga llogaria jote — ndrysho vetëm vitin dhe përshkrimin';
+      }
+    });
+  }
+  window.applyUploadAutofill = applyUploadAutofill;
+
+  function validateUploadForm(form) {
+    var caption = form.querySelector('#caption, [name="caption"], [name="description"]');
+    var year = form.querySelector('#year, [name="year"]');
+    if (caption && window.ktValidateCaption) {
+      var err = window.ktValidateCaption(caption.value);
+      if (err) { alert(err); caption.focus(); return false; }
+    }
+    if (year && window.ktValidateYear) {
+      var errY = window.ktValidateYear(year.value);
+      if (errY) { alert(errY); year.focus(); return false; }
+    }
+    return true;
+  }
+  document.addEventListener('submit', function (e) {
+    var form = e.target;
+    if (!form) return;
+    if (form.id === 'imageUploadForm' || form.querySelector('#caption')) {
+      applyUploadAutofill();
+      if (!validateUploadForm(form)) { e.preventDefault(); e.stopPropagation(); }
+    }
+    var msg = form.querySelector('#message, [name="message"]');
+    if (msg && window.ktValidateCaption) {
+      var err = window.ktValidateCaption(msg.value);
+      if (err) { e.preventDefault(); alert(err); }
+    }
+  }, true);
+  document.addEventListener('DOMContentLoaded', function () {
+    applyUploadAutofill();
+    if (typeof ktApplyUploadLabels === 'function') ktApplyUploadLabels();
+  });
+  setTimeout(applyUploadAutofill, 800);
+  var _set = localStorage.setItem.bind(localStorage);
+  localStorage.setItem = function (k, v) { _set(k, v); if (k === 'KT_USER' || k === 'KT_TOKEN') setTimeout(applyUploadAutofill, 50); };
+  var _rm = localStorage.removeItem.bind(localStorage);
+  localStorage.removeItem = function (k) { _rm(k); if (k === 'KT_USER' || k === 'KT_TOKEN') setTimeout(applyUploadAutofill, 50); };
+})();
+</script>
+
+
+<script id="kt-force-close-btn">
+(function () {
+  function ensureClose() {
+    var gal = document.getElementById('polaroidGallery');
+    if (!gal) return;
+    var btn = document.getElementById('kt-tl-close');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.id = 'kt-tl-close';
+      btn.className = 'polaroid-close kt-tl-close-btn';
+      btn.innerHTML = '✕';
+      btn.title = 'Mbyll';
+      gal.appendChild(btn);
+    }
+    btn.onclick = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof hidePolaroidGallery === 'function') hidePolaroidGallery();
+      else {
+        gal.style.display = 'none';
+        gal.classList.remove('kt-tl-open');
+      }
+    };
+  }
+  document.addEventListener('DOMContentLoaded', ensureClose);
+  setInterval(ensureClose, 2000);
+})();
+</script>
+
+
+<script id="kt-close-buttons">
+(function () {
+  function bind() {
+    var tlClose = document.getElementById('kt-tl-close');
+    var tlInner = document.getElementById('kt-tl-close-inner');
+    var formClose = document.getElementById('kt-form-close');
+    function closeTl(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (typeof hidePolaroidGallery === 'function') hidePolaroidGallery();
+      else {
+        var g = document.getElementById('polaroidGallery');
+        if (g) { g.style.display = 'none'; g.classList.remove('kt-tl-open'); }
+      }
+    }
+    function closeForm(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      var o = document.getElementById('formOverlay');
+      if (o) o.style.display = 'none';
+    }
+    if (tlClose) tlClose.onclick = closeTl;
+    if (tlInner) tlInner.onclick = closeTl;
+    if (formClose) formClose.onclick = closeForm;
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
+  setTimeout(bind, 1000);
+})();
+</script>
+
+<script src="js/toast.js" defer></script>
+</body>
+</html>

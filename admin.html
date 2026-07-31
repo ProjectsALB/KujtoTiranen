@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta name="theme-color" content="#0F2C1A">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Kujto Tiranën</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c1a12; --panel: #13241a; --card: #1a3024;
+      --border: rgba(255,255,255,.08); --text: #f3f0e8; --muted: #9aaf9f;
+      --accent: #c9a227; --green: #2d8a5c; --red: #c44536; --blue: #3b82f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 1.85rem; margin-bottom: .35rem; }
+    .sub { color: var(--muted); font-size: .95rem; margin-bottom: 1.5rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.35rem 1.5rem; margin-bottom: 1rem;
+    }
+    .login-card { max-width: 420px; margin: 12vh auto; }
+    label { display: block; font-size: .8rem; color: var(--muted); margin: .75rem 0 .35rem; }
+    input {
+      width: 100%; padding: .75rem 1rem; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--panel); color: var(--text); font-size: .95rem;
+    }
+    input:focus { outline: none; border-color: var(--accent); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+      padding: .7rem 1.25rem; border: none; border-radius: 999px; font-weight: 600;
+      font-size: .9rem; cursor: pointer; transition: .2s;
+    }
+    .btn-primary { background: var(--accent); color: #111; }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-blue { background: var(--blue); color: #fff; }
+    .topbar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+    .tabs { display: flex; gap: .5rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .tab {
+      padding: .55rem 1.1rem; border-radius: 999px; border: 1px solid var(--border);
+      background: transparent; color: var(--muted); cursor: pointer; font-weight: 500;
+    }
+    .tab.active { background: var(--accent); color: #111; border-color: var(--accent); }
+    .row { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: flex-start; }
+    .row img { width: 200px; height: 140px; object-fit: cover; border-radius: 12px; background: #000; }
+    .meta { font-size: .88rem; color: var(--muted); line-height: 1.55; }
+    .meta b { color: var(--text); }
+    .actions { margin-top: 1rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+    .empty { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+    .err { color: #f87171; margin-top: .75rem; font-size: .9rem; }
+    .ok { color: #4ade80; margin-top: .75rem; font-size: .9rem; }
+    .badge {
+      display: inline-block; padding: .2rem .55rem; border-radius: 6px;
+      background: rgba(201,162,39,.2); color: var(--accent); font-size: .75rem; font-weight: 600;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } .row img { width: 100%; height: 180px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- LOGIN -->
+    <div id="loginBox" class="card login-card">
+      <h1>Admin Panel</h1>
+      <p class="sub">Kujto Tiranën — moderim & cilësime</p>
+      <label>Email</label>
+      <input id="email" type="email" value="" autocomplete="off" autocapitalize="off" />
+      <label>Password</label>
+      <input id="password" type="password" value="" autocomplete="new-password" />
+      <div style="margin-top:1.25rem">
+        <button class="btn btn-primary" style="width:100%" onclick="login()">Hyr</button>
+      </div>
+      <p id="loginErr" class="err"></p>
+      <p class="sub" style="margin-top:1rem;font-size:.85rem;opacity:.8">
+        Pas <code>npm run seed</code>: <b>admin@kujtotiranen.al</b> / <b>Admin123!</b><br>
+        Hap paneli nga <code>http://localhost:5000/admin</code>
+      </p>
+    </div>
+
+    <!-- PANEL -->
+    <div id="panel" style="display:none">
+      <div class="topbar">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="sub" style="margin:0">Mirë se erdhe, Admin</p>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn btn-ghost" onclick="loadPending()">↻ Refresh</button>
+          <button class="btn btn-red" onclick="logout()">Dil</button>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="pending" onclick="showTab('pending')">Foto në pritje</button>
+        <button class="tab" data-tab="password" onclick="showTab('password')">Ndrysho password</button>
+      </div>
+
+      <div id="tab-pending">
+        <div id="list"><div class="empty">Duke ngarkuar...</div></div>
+      </div>
+
+      <div id="tab-password" style="display:none">
+        <div class="card" style="max-width:480px">
+          <h1 style="font-size:1.3rem">Ndrysho fjalëkalimin</h1>
+          <p class="sub">Ndryshimi ruhet në databazë — herën tjetër hyn me password-in e ri.</p>
+          <label>Password aktual</label>
+          <input id="curPass" type="password" />
+          <label>Password i ri</label>
+          <input id="newPass" type="password" />
+          <label>Përsërit password-in e ri</label>
+          <input id="newPass2" type="password" />
+          <div style="margin-top:1.25rem">
+            <button class="btn btn-primary" onclick="changePassword()">Ruaj password-in</button>
+          </div>
+          <p id="passMsg" class="ok"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = (function () {
+      try { var s = localStorage.getItem('KT_API_BASE'); if (s) return s; } catch (_) {}
+      var host = location.hostname || 'localhost';
+      var port = location.port || '';
+      if ((host === 'localhost' || host === '127.0.0.1') && port === '5000') return location.origin + '/api/v1';
+      if (host === 'localhost' || host === '127.0.0.1') return 'http://localhost:5000/api/v1';
+      return location.origin + '/api/v1';
+    })();
+    const token = () => localStorage.getItem('KT_TOKEN');
+
+    function showTab(name) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+      document.getElementById('tab-pending').style.display = name === 'pending' ? 'block' : 'none';
+      document.getElementById('tab-password').style.display = name === 'password' ? 'block' : 'none';
+      if (name === 'pending') loadPending();
+    }
+
+    async function login() {
+      var errEl = document.getElementById('loginErr');
+      errEl.style.color = '#666';
+      errEl.textContent = 'Duke u identifikuar...';
+      var email = (document.getElementById('email').value || '').trim().toLowerCase();
+      var password = document.getElementById('password').value || '';
+      if (!email || !password) {
+        errEl.style.color = '#c44536';
+        errEl.textContent = 'Vendos email dhe password.';
+        return;
+      }
+      try {
+        const res = await fetch(API + '/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, password: password }),
+        });
+        var data = {};
+        try { data = await res.json(); } catch (_) {}
+        if (!res.ok) throw new Error(data.message || ('Login dështoi (' + res.status + ')'));
+        if (!data.user || data.user.role !== 'admin') throw new Error('Ky llogari nuk është admin');
+        localStorage.setItem('KT_TOKEN', data.token);
+        localStorage.setItem('KT_USER', JSON.stringify({
+          id: data.user.id, name: data.user.name, email: data.user.email, role: data.user.role
+        }));
+        document.getElementById('password').value = '';
+        document.getElementById('loginBox').style.display = 'none';
+        document.getElementById('panel').style.display = 'block';
+        loadPending();
+      } catch (e) {
+        errEl.style.color = '#c44536';
+        var msg = e.message || String(e);
+        if (/Failed to fetch|NetworkError|fetch/i.test(msg)) {
+          msg = 'Nuk lidhet me API (' + API + '). Nis backend: cd backend && npm start';
+        }
+        errEl.textContent = msg;
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      ['email', 'password'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') { ev.preventDefault(); login(); }
+        });
+      });
+      try {
+        var tok = localStorage.getItem('KT_TOKEN');
+        var u = JSON.parse(localStorage.getItem('KT_USER') || 'null');
+        if (tok && u && u.role === 'admin') {
+          document.getElementById('loginBox').style.display = 'none';
+          document.getElementById('panel').style.display = 'block';
+          loadPending();
+        }
+      } catch (_) {}
+    });
+
+    function logout() {
+      localStorage.removeItem('KT_TOKEN');localStorage.removeItem('KT_USER');try{sessionStorage.clear();document.getElementById('password').value='';document.getElementById('email').value='';}catch(e){};
+      location.reload();
+    }
+
+    async function loadPending() {
+      const list = document.getElementById('list');
+      list.innerHTML = '<div class="empty">Duke ngarkuar...</div>';
+      try {
+        const res = await fetch(API + '/photos/admin/pending', {
+          headers: { Authorization: 'Bearer ' + token() },
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message);
+        if (!data.data.length) {
+          list.innerHTML = '<div class="empty">Nuk ka foto në pritje 🎉</div>';
+          return;
+        }
+        list.innerHTML = data.data.map(p => {
+          const img = (location.port === '5000' ? '' : 'http://localhost:5000') + p.imageUrl;
+          return `
+          <div class="card">
+            <div class="row">
+              <img src="${img}" alt="" onerror="this.style.opacity=.3" />
+              <div style="flex:1">
+                <span class="badge">${p.locationKey}</span>
+                <div class="meta" style="margin-top:.6rem">
+                  <div><b>Viti:</b> ${p.year}</div>
+                  <div><b>Caption:</b> ${p.caption}</div>
+                  <div><b>Nga:</b> ${p.contributor.firstName} ${p.contributor.lastName} · ${p.contributor.email}</div>
+                  <div><b>Data:</b> ${new Date(p.createdAt).toLocaleString()}</div>
+                </div>
+                <div class="actions">
+                  <button class="btn btn-green" onclick="moderate('${p._id}','approved')">✓ Aprovo</button>
+                  <button class="btn btn-red" onclick="moderate('${p._id}','rejected')">✕ Refuzo</button>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+      } catch (e) {
+        list.innerHTML = '<div class="empty">' + e.message + '</div>';
+      }
+    }
+
+    async function moderate(id, status) {
+      const res = await fetch(API + '/photos/' + id + '/moderate', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token() },
+        body: JSON.stringify({ status }),
+      });
+      const data = await res.json();
+      if (!res.ok) return alert(data.message);
+      loadPending();
+    }
+
+    async function changePassword() {
+      const msg = document.getElementById('passMsg');
+      msg.className = 'ok';
+      msg.textContent = '';
+      const currentPassword = document.getElementById('curPass').value;
+      const newPassword = document.getElementById('newPass').value;
+      const newPass2 = document.getElementById('newPass2').value;
+      if (newPassword !== newPass2) {
+        msg.className = 'err';
+        msg.textContent = 'Password-et e reja nuk përputhen';
+        return;
+      }
+      try {
+        const res = await fetch(API + '/auth/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token() },
+          body: JSON.stringify({ currentPassword, newPassword }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message);
+        msg.className = 'ok';
+        msg.textContent = data.message + ' Dil dhe hy përsëri me password-in e ri.';
+        document.getElementById('curPass').value = '';
+        document.getElementById('newPass').value = '';
+        document.getElementById('newPass2').value = '';
+      } catch (e) {
+        msg.className = 'err';
+        msg.textContent = e.message;
+      }
+    }
+
+    if (token()) {
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('panel').style.display = 'block';
+      loadPending();
+    }
+  </script>
+</body>
+</html>

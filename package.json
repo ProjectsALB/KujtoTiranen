@@ -1,0 +1,17 @@
+{
+  "name": "kujto-tiranen",
+  "version": "1.6.0",
+  "private": true,
+  "description": "Kujto Tiran\u00ebn \u2014 digital time-capsule for Tirana",
+  "scripts": {
+    "start": "npm --prefix backend start",
+    "dev": "npm --prefix backend run dev",
+    "seed": "npm --prefix backend run seed",
+    "install:all": "npm --prefix backend install",
+    "smoke": "sh scripts/smoke.sh",
+    "test": "npm --prefix backend test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

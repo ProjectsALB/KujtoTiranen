@@ -1,0 +1,20 @@
+Google OAuth setup (Kujto Tiranën)
+=================================
+
+1. Go to https://console.cloud.google.com/apis/credentials
+2. Create project (or select one)
+3. Configure OAuth consent screen (External, app name "Kujto Tirane")
+4. Create Credentials → OAuth client ID → Web application
+5. Authorized JavaScript origins:
+   - http://localhost:5000
+   - http://127.0.0.1:5000
+6. Authorized redirect URIs (optional for GIS button):
+   - http://localhost:5000
+7. Copy Client ID into backend/.env:
+
+   GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+
+8. Restart server: npm start
+
+Frontend will show "Continue with Google" in the login modal.
+Without Client ID, email/password login still works.

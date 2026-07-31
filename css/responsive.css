@@ -1,0 +1,869 @@
+/* ============================================================
+   KUJTO TIRANËN — Mobile / Samsung / iPad Responsive
+   ============================================================ */
+
+/* Base fluid */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+img, video, iframe, svg {
+  max-width: 100%;
+  height: auto;
+}
+* {
+  -webkit-tap-highlight-color: rgba(15, 44, 26, 0.12);
+}
+
+/* Touch-friendly targets */
+button, .btn, a, .kt-lang-btn, #kt-auth-btn, .pagination-button {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Header always usable */
+.header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.5rem 0.75rem !important;
+  padding: 0.7rem max(1rem, env(safe-area-inset-right)) 0.7rem max(1rem, env(safe-area-inset-left)) !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+.header .logo {
+  font-size: clamp(1.5rem, 4vw, 2rem) !important;
+  flex-shrink: 0;
+}
+.header .icons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ========== TABLET (iPad) ========== */
+@media (max-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+  .mapi {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .mapi .image, .mapi .content {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .contact-box {
+    grid-template-columns: 1fr !important;
+  }
+  .kt-tours-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  #map {
+    height: 420px !important;
+    min-height: 360px;
+  }
+}
+
+/* ========== MOBILE / PHONE ========== */
+@media (max-width: 768px) {
+  /* Header mobile */
+  .header {
+    padding: 0.6rem 0.9rem !important;
+    position: sticky !important;
+    top: 0;
+  }
+  .header .logo {
+    font-size: 1.6rem !important;
+    order: 1;
+  }
+  .header .icons {
+    order: 2;
+    margin-left: auto;
+  }
+  #kt-lang-switch {
+    order: 3;
+  }
+  #kt-auth-btn, .kt-login-btn {
+    order: 4;
+    padding: 0.5rem 0.9rem !important;
+    font-size: 1.3rem !important;
+  }
+
+  .header #menu-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  /* Slide-in nav */
+  .header .navbar {
+    position: fixed !important;
+    top: 0;
+    left: -100%;
+    width: min(85vw, 320px);
+    height: 100vh;
+    height: 100dvh;
+    background: #fff !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 5rem 1.5rem 2rem !important;
+    box-shadow: 8px 0 40px rgba(0,0,0,0.15);
+    transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 100010 !important;
+    overflow-y: auto;
+  }
+  .header .navbar.active {
+    left: 0 !important;
+  }
+  .header .navbar a {
+    width: 100%;
+    padding: 1rem 1.2rem !important;
+    font-size: 1.7rem !important;
+    margin: 0.2rem 0 !important;
+    border-radius: 12px !important;
+  }
+  .header .navbar #nav-close {
+    display: block !important;
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    font-size: 2.2rem;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+  }
+
+  /* Backdrop when menu open */
+  body.nav-open::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 100009;
+  }
+
+  /* Hero */
+  .zoom-out-container {
+    margin-top: 0 !important;
+    min-height: 42vh !important;
+    height: 42vh !important;
+    border-radius: 0 0 20px 20px !important;
+  }
+  .opening-sequence h1 {
+    font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+    width: 90% !important;
+    left: 50% !important;
+  }
+  .opening-sequence p {
+    font-size: 1.3rem !important;
+    width: 90% !important;
+  }
+
+  /* Map */
+  .harta {
+    padding: 1.5rem 0.8rem !important;
+  }
+  .harta h1, #klevi {
+    font-size: 2.2rem !important;
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+  #map {
+    height: 55vh !important;
+    min-height: 280px !important;
+    max-height: 480px;
+    border-radius: 16px !important;
+    width: 100% !important;
+  }
+  .kt-filters {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    margin: 0.6rem !important;
+    padding: 1rem !important;
+  }
+  .kt-filters label {
+    width: 100%;
+  }
+  .kt-filters select {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 1.4rem !important;
+  }
+
+  /* Sidebar full width overlay on mobile */
+  .sidebar {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 70vh !important;
+    bottom: 0 !important;
+    top: auto !important;
+    overflow-y: auto;
+    z-index: 5000 !important;
+  }
+  .sidebar-content {
+    padding: 1.2rem !important;
+  }
+  .sidebar img {
+    max-height: 180px;
+    object-fit: cover;
+  }
+
+  /* Gallery */
+  .gallery-container {
+    padding: 3rem 1rem !important;
+  }
+  .gallery {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+  }
+  .gallery-item {
+    max-width: 100% !important;
+  }
+  .pagination {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+  }
+
+  /* Content sections */
+  .mapi {
+    flex-direction: column !important;
+    padding: 2rem 1rem !important;
+    gap: 1.5rem !important;
+  }
+  .content-area .container {
+    padding: 2rem 1rem !important;
+  }
+  .content-area .row {
+    flex-direction: column !important;
+  }
+
+  /* Tours */
+  .kt-tours-section {
+    padding: 3rem 1rem !important;
+  }
+  .kt-tours-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Contact */
+  .contact-container {
+    padding: 2rem 1rem !important;
+  }
+  .contact-box {
+    grid-template-columns: 1fr !important;
+    margin: 0 auto;
+  }
+  .contact-box .left {
+    min-height: 120px;
+  }
+  .field {
+    font-size: 16px !important; /* prevents iOS zoom on focus */
+  }
+
+  /* Search form */
+  .search-form {
+    width: 100% !important;
+    padding: 1rem !important;
+  }
+  .search-form input {
+    font-size: 16px !important;
+    width: 100% !important;
+  }
+
+  /* Auth modal */
+  .kt-auth-box {
+    width: calc(100% - 1.5rem) !important;
+    max-width: 100% !important;
+    padding: 1.5rem 1.2rem !important;
+    margin: 0.5rem;
+  }
+  #kt-google-btn > div {
+    width: 100% !important;
+  }
+
+  /* Tour HUD */
+  #kt-tour-hud {
+    left: 0.5rem !important;
+    right: 0.5rem !important;
+    transform: none !important;
+    width: auto !important;
+  }
+  .kt-tour-hud-inner {
+    min-width: 0 !important;
+    width: 100%;
+  }
+  .kt-tour-hud-actions {
+    flex-wrap: wrap;
+  }
+  .kt-tour-hud-actions button {
+    flex: 1;
+    min-width: 90px;
+  }
+
+  /* Fav panel */
+  .kt-fav-inner {
+    width: calc(100% - 1.5rem) !important;
+    max-height: 85vh !important;
+  }
+
+  /* Polaroid / timeline */
+  .timeline-container,
+  #timelineContainer {
+    padding: 1rem !important;
+  }
+  .polaroid-figure {
+    max-width: 90vw !important;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 1rem !important;
+    text-align: center;
+  }
+  .footer .box-container {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+
+  /* To-top */
+  .to-top {
+    right: 1rem !important;
+    bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  /* Leaflet controls larger */
+  .leaflet-control-zoom a {
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 18px !important;
+  }
+}
+
+/* ========== SMALL PHONES ========== */
+@media (max-width: 400px) {
+  .header .logo {
+    font-size: 1.4rem !important;
+  }
+  #kt-auth-btn span {
+    display: none; /* icon only on very small */
+  }
+  .kt-lang-btn {
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+  }
+  .opening-sequence h1 {
+    font-size: 2rem !important;
+  }
+}
+
+/* ========== iPad landscape / large tablet ========== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header .navbar {
+    gap: 0.2rem;
+  }
+  .header .navbar a {
+    padding: 0.5rem 0.8rem !important;
+    font-size: 1.35rem !important;
+  }
+  .gallery {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  #map {
+    height: 480px !important;
+  }
+}
+
+/* Landscape phone */
+@media (max-height: 500px) and (orientation: landscape) {
+  .zoom-out-container {
+    height: 70vh !important;
+    min-height: 200px !important;
+  }
+  .header .navbar {
+    width: min(70vw, 280px);
+  }
+  #map {
+    height: 70vh !important;
+  }
+}
+
+/* Prevent horizontal scroll from absolute elements */
+.cont, .mapi, .gallery-container, .content-area {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   MOBILE FIXES v2 — header full, images scaled, map + legend small
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  :root {
+    --header-h: auto;
+  }
+
+  .header {
+    height: auto !important;
+    min-height: 56px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0.5rem 0.8rem !important;
+    gap: 0.4rem !important;
+  }
+
+  .header .logo {
+    font-size: 1.5rem !important;
+    margin-right: 0.4rem !important;
+    gap: 0.4rem !important;
+    max-width: 42%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .header .logo i {
+    font-size: 1.4rem !important;
+  }
+
+  .header .icons a,
+  .header .icons div {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.5rem !important;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  #kt-lang-switch {
+    margin-left: 0 !important;
+    padding: 2px !important;
+    flex-shrink: 0;
+  }
+  .kt-lang-btn {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    min-height: 32px !important;
+    min-width: 36px !important;
+  }
+
+  #kt-auth-btn,
+  .kt-login-btn {
+    padding: 6px 12px !important;
+    font-size: 1.25rem !important;
+    min-height: 36px !important;
+    flex-shrink: 0;
+  }
+
+  /* Hero smaller on tablet */
+  .zoom-out-container {
+    margin-top: 0 !important;
+    height: 36vh !important;
+    min-height: 220px !important;
+    max-height: 380px !important;
+  }
+
+  /* Gallery images — smaller, not cropped weird */
+  .gallery-image-container {
+    aspect-ratio: 16 / 10 !important;
+    max-height: 220px !important;
+  }
+  .gallery-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+  .gallery-item {
+    transform: none !important;
+  }
+  .gallery-item:hover {
+    transform: translateY(-4px) !important;
+  }
+  .gallery-item:hover .gallery-image {
+    transform: scale(1.03) !important;
+  }
+  .image-title {
+    font-size: 1.35rem !important;
+    padding: 0.8rem !important;
+  }
+
+  /* Map smaller */
+  #map {
+    height: 340px !important;
+    min-height: 280px !important;
+    max-height: 380px !important;
+  }
+  .map-container,
+  .cont {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* Legend compact */
+  .legend {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+    max-width: 140px !important;
+    max-height: 160px !important;
+    overflow-y: auto !important;
+    line-height: 1.25 !important;
+    border-radius: 8px !important;
+  }
+  .legend-item {
+    gap: 4px !important;
+    margin-bottom: 3px !important;
+    font-size: 10px !important;
+  }
+  .legend-item img {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-h: 56px;
+  }
+
+  /* Header: one compact row — logo | menu+search | EN SQ | Hyr */
+  .header {
+    height: auto !important;
+    min-height: 52px !important;
+    flex-wrap: nowrap !important;
+    padding: 0.4rem 0.6rem !important;
+    gap: 0.35rem !important;
+  }
+
+  .header .logo {
+    font-size: 1.35rem !important;
+    max-width: 28vw;
+    order: 0;
+    margin-right: auto !important;
+  }
+
+  .header .navbar {
+    /* off-canvas — don't take space in row */
+  }
+
+  .header .icons {
+    order: 1;
+    margin-left: 0 !important;
+    gap: 0.15rem !important;
+  }
+
+  #kt-lang-switch {
+    order: 2;
+  }
+
+  #kt-auth-btn,
+  .kt-login-btn {
+    order: 3;
+    padding: 5px 10px !important;
+    font-size: 1.2rem !important;
+  }
+  #kt-auth-btn .kt-auth-name,
+  #kt-auth-btn-label {
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Content offset under fixed header */
+  .zoom-out-container {
+    margin-top: 52px !important;
+    height: 32vh !important;
+    min-height: 180px !important;
+    max-height: 280px !important;
+  }
+  .opening-sequence h1 {
+    font-size: 2rem !important;
+    padding: 0 0.5rem;
+  }
+  .opening-sequence p {
+    display: none; /* less clutter on small screens */
+  }
+
+  .cont,
+  .map-container {
+    margin-top: 0 !important;
+    min-height: auto !important;
+    padding-bottom: 1rem !important;
+  }
+
+  /* Map — clearly smaller on phone */
+  #map {
+    height: 260px !important;
+    min-height: 220px !important;
+    max-height: 280px !important;
+    border-radius: 12px !important;
+  }
+
+  .harta h1,
+  #klevi {
+    font-size: 1.8rem !important;
+    margin-bottom: 0.6rem !important;
+  }
+
+  .kt-filters {
+    padding: 0.7rem !important;
+    margin: 0.4rem 0 !important;
+    font-size: 1.2rem !important;
+  }
+  .kt-filters select {
+    font-size: 1.3rem !important;
+    padding: 0.5rem !important;
+  }
+  #kt-filter-apply {
+    width: 100%;
+    padding: 0.7rem !important;
+    font-size: 1.3rem !important;
+  }
+
+  /* Legend — small corner on mobile */
+  .legend {
+    font-size: 9px !important;
+    padding: 4px 6px !important;
+    max-width: 110px !important;
+    max-height: 120px !important;
+    line-height: 1.2 !important;
+    opacity: 0.92;
+  }
+  .legend-item {
+    margin-bottom: 2px !important;
+    gap: 3px !important;
+  }
+  .legend-item img {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  /* Leaflet zoom buttons smaller */
+  .leaflet-control-zoom a {
+    width: 30px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    font-size: 14px !important;
+  }
+  .leaflet-control-attribution {
+    font-size: 9px !important;
+    max-width: 50%;
+  }
+
+  /* Gallery destinations — full width, image not half-cut */
+  .gallery-container {
+    padding: 2rem 0.8rem !important;
+  }
+  .gallery {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.8rem !important;
+  }
+  .gallery-image-container {
+    aspect-ratio: 1 / 1 !important;
+    max-height: 160px !important;
+  }
+  .gallery-image {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+  .image-title {
+    font-size: 1.15rem !important;
+    padding: 0.5rem 0.6rem !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Sidebar images scaled */
+  .sidebar {
+    padding: 1rem !important;
+    max-height: 55vh !important;
+  }
+  .sidebar img {
+    width: 100% !important;
+    max-height: 140px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+  }
+  .sidebar-title {
+    font-size: 1.6rem !important;
+  }
+  .sidebar-content p {
+    font-size: 1.3rem !important;
+  }
+
+  /* Other section images */
+  .mapi .image img {
+    max-height: 220px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+  .card img,
+  .profile-card img {
+    max-height: 180px !important;
+    object-fit: cover !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .header .logo {
+    font-size: 1.2rem !important;
+    max-width: 26vw;
+  }
+  #kt-auth-btn-label {
+    display: none !important;
+  }
+  .gallery {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+  }
+  .gallery-image-container {
+    max-height: 130px !important;
+  }
+  #map {
+    height: 220px !important;
+    min-height: 200px !important;
+  }
+  .legend {
+    max-width: 95px !important;
+    max-height: 100px !important;
+    font-size: 8px !important;
+  }
+}
+
+/* iPad portrait */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header {
+    flex-wrap: nowrap !important;
+  }
+  .header .logo {
+    max-width: none;
+    font-size: 1.7rem !important;
+  }
+  #map {
+    height: 320px !important;
+    max-height: 360px !important;
+  }
+  .legend {
+    max-width: 160px !important;
+    max-height: 180px !important;
+    font-size: 11px !important;
+  }
+  .gallery-image-container {
+    max-height: 200px !important;
+  }
+}
+
+/* ===== Hero title FULL text (not "Welcome to Ku...") ===== */
+.opening-sequence {
+  width: min(94%, 720px) !important;
+  max-width: 94vw !important;
+  padding: 0 0.75rem !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+.opening-sequence h1 {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.15 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  /* Desktop default — still readable */
+  font-size: clamp(2.4rem, 5vw, 5.2rem) !important;
+}
+
+@media (max-width: 768px) {
+  .opening-sequence {
+    width: 96% !important;
+    max-width: 96vw !important;
+    padding: 0 0.5rem !important;
+  }
+  .opening-sequence h1 {
+    font-size: clamp(1.7rem, 6.5vw, 2.4rem) !important;
+    margin-bottom: 0.6rem !important;
+    letter-spacing: -0.01em !important;
+  }
+  .opening-sequence p {
+    display: block !important;
+    font-size: clamp(1.1rem, 3.5vw, 1.4rem) !important;
+    line-height: 1.35 !important;
+    padding: 0 0.25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .opening-sequence h1 {
+    font-size: 1.55rem !important;
+  }
+}
+
+
+/* CLOSE BUTTON — always on top, impossible to miss */
+#kt-tl-close,
+button.polaroid-close,
+button.kt-tl-close-btn {
+  position: fixed !important;
+  top: 16px !important;
+  right: 16px !important;
+  left: auto !important;
+  bottom: auto !important;
+  z-index: 999999 !important;
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 3px solid #fff !important;
+  border-radius: 50% !important;
+  background: #c0392b !important;
+  color: #ffffff !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 50px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+#kt-tl-close:hover,
+button.polaroid-close:hover {
+  background: #e74c3c !important;
+  transform: scale(1.1) !important;
+}
+/* Only show when gallery open */
+#polaroidGallery[style*="display: none"] #kt-tl-close,
+#polaroidGallery[style*="display:none"] #kt-tl-close {
+  display: none !important;
+}
+#polaroidGallery[style*="display: flex"] #kt-tl-close,
+#polaroidGallery[style*="display:flex"] #kt-tl-close,
+#polaroidGallery.kt-tl-open #kt-tl-close {
+  display: flex !important;
+}

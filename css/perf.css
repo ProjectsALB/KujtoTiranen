@@ -1,0 +1,46 @@
+
+/* Speed: lighter animations & lazy paint */
+.gallery-item, .kt-tour-card, .mapi, .content-area section {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.zoom-out-image {
+  animation: none !important;
+}
+.polaroid-figure {
+  will-change: transform;
+}
+.leaflet-tile {
+  filter: none;
+}
+/* Smaller map markers paint */
+.kt-map-photo-wrap, .kt-map-photo {
+  width: 36px !important;
+  height: 36px !important;
+}
+.leaflet-div-icon.kt-map-photo-icon {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+
+/* Leaflet tiles must not inherit global img max-width */
+.leaflet-container img.leaflet-tile,
+.leaflet-tile-container img,
+img.leaflet-tile {
+  max-width: none !important;
+  max-height: none !important;
+  width: 256px !important;
+  height: 256px !important;
+}
+.leaflet-container,
+#map {
+  width: 100% !important;
+  min-height: 360px;
+}
