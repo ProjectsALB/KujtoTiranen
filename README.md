@@ -3,14 +3,18 @@
 **SQL · Data Modeling · Business Intelligence**  
 Kristina Spahi · Data Analyst
 
-[![GitHub](https://img.shields.io/badge/GitHub-ProjectsALB-181717?logo=github)](https://github.com/ProjectsALB/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![SQL](https://img.shields.io/badge/SQL-Window%20Functions%20%7C%20CTEs-orange)](sql/)
-[![Tableau](https://img.shields.io/badge/Tableau-Interactive%20Dashboards-e97627)](tableau/)
+[![GitHub](https://img.shields.io/badge/GitHub-ProjectsALB-181717?logo=github)](https://github.com/ProjectsALB)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![SQL](https://img.shields.io/badge/SQL-Window%20Functions-orange)](./sql)
+[![Tableau](https://img.shields.io/badge/Tableau-Dashboards-e97627)](./tableau)
 
-End-to-end analysis of a multi-store computer hardware retailer. The project covers relational database design, advanced SQL analytics, data quality checks, and interactive reporting in Tableau.
+End-to-end analysis of a multi-store computer hardware retailer. Covers relational database design, advanced SQL analytics, data quality checks, and interactive Tableau reporting.
 
-![Dashboard Preview](visuals/dashboard_preview.png)
+---
+
+## Dashboard Preview
+
+![Dashboard Preview](./visuals/dashboard_preview.png)
 
 ---
 
@@ -18,7 +22,7 @@ End-to-end analysis of a multi-store computer hardware retailer. The project cov
 
 A computer retail chain needs clear visibility into store performance, product mix, customer demographics, and sales trends. Without structured analysis, decisions on inventory, pricing, and regional strategy rely on incomplete or siloed data.
 
-This project builds a structured analytical layer on top of transactional data to answer core business questions and support data-driven decision making.
+This project builds a structured analytical layer on top of transactional data to answer core business questions and support data-driven decisions.
 
 ---
 
@@ -38,45 +42,52 @@ This project builds a structured analytical layer on top of transactional data t
 | # | Question | Analytical Approach |
 |---|----------|---------------------|
 | 1 | Which cities have the most active sellers? | Aggregation + ranking |
-| 2 | Which stores generate the highest total revenue? | `SUM` + `RANK()` window function |
+| 2 | Which stores generate the highest total revenue? | `SUM` + `RANK()` |
 | 3 | How do sales break down by age group? | Demographic segmentation |
 | 4 | Which products sell best in which regions? | Multi-table joins + regional grouping |
 | 5 | How do RAM / CPU / screen size affect laptop sales? | Product attribute analysis |
 | 6 | What are MoM and YoY sales trends? | `LAG()` window functions |
-| 7 | Who are the top-spending customers vs. average? | Customer-level ranking + comparison |
-| 8 | What is each product’s contribution % to store revenue? | Windowed totals + percentage of total |
+| 7 | Who are the top-spending customers vs. average? | Customer-level ranking |
+| 8 | What is each product’s contribution % to store revenue? | Windowed totals + % of total |
 
 ---
 
 ## Methodology
 
 ### 1. Data Modeling
-- Designed relational schema covering stores (`Dyqani`), products, invoices (`Fature`), line items, and trading relationships
-- Defined primary/foreign keys and relationships for multi-store, multi-product analysis
-- ER diagram available in `data/schema/relational_model.jpg`
+- Relational schema for stores (`Dyqani`), products, invoices (`Fature`), line items, and trading relationships
+- Primary/foreign keys for multi-store, multi-product analysis
+- ER diagram: [`data/schema/relational_model.jpg`](./data/schema/relational_model.jpg)
 
 ### 2. SQL Analytics
-Scripts are organized by analytical complexity:
 
 | Stage | Focus | Techniques |
 |-------|-------|------------|
 | Schema | DDL | Tables, constraints, relationships |
 | Objects | Database objects | Triggers, views, stored procedures |
-| Joins | Multi-table analysis | Inner/outer joins across stores, products, invoices |
+| Joins | Multi-table analysis | Joins across stores, products, invoices |
 | Aggregations | Summary metrics | `GROUP BY`, `SUM`, `AVG`, `COUNT` |
-| Math / derived metrics | Pricing & quantity logic | Calculated fields |
 | Window functions | Ranking & trends | `RANK()`, `LAG()`, running totals, contribution % |
-| Advanced reports | Business-ready outputs | Combined techniques for stakeholder questions |
+| Advanced reports | Business outputs | Combined techniques for stakeholder questions |
 | Data cleaning | Quality | Duplicate detection, outlier handling |
 
+Scripts live in [`sql/`](./sql) and run in order (`00` → `09`).
+
 ### 3. Visualization
-- Built multiple Tableau workbooks covering revenue by store/region, age-group spending, product performance, and time trends
-- Focused on clarity for non-technical stakeholders
+Interactive Tableau workbooks in [`tableau/`](./tableau), including:
+
+- Sales by product and category
+- Revenue by store and region
+- Purchases by age group
+- Top customers by spend
+- Monthly and daily sales trends
+- Average sale value by city
 
 ### 4. Documentation & Reproducibility
-- Ordered SQL scripts for repeatable execution
-- Exported key query results as CSV
-- Master analysis script consolidating core business queries
+- Ordered SQL scripts
+- Exported query results as CSV in [`data/results/`](./data/results)
+- Master analysis file: [`sql/00_MASTER_ANALYSIS.sql`](./sql/00_MASTER_ANALYSIS.sql)
+- Project presentation: [`Computer_Store_Sales_Analysis_Presentation.pptx`](./Computer_Store_Sales_Analysis_Presentation.pptx)
 
 ---
 
@@ -84,14 +95,14 @@ Scripts are organized by analytical complexity:
 
 | Area | Insight |
 |------|---------|
-| **Store performance** | Dyqani Mu (~2.17M) and Dyqani Beta (~2.04M) lead total revenue by a clear margin |
-| **Geographic activity** | New York (12), Los Angeles (10), and San Jose (10) have the highest seller counts |
-| **Customer segments** | Age group 25–34 accounts for the highest observed spend |
-| **Product preferences** | Higher-spec configurations (e.g. 16GB RAM + Intel Core i5/i9) show stronger demand |
-| **Regional mix** | Product demand varies by city/region (storage, monitors, peripherals) |
-| **Time trends** | Window functions enable YoY and MoM comparison for trend monitoring |
+| **Store performance** | Dyqani Mu (~2.17M) and Dyqani Beta (~2.04M) lead total revenue |
+| **Geographic activity** | New York (12), Los Angeles (10), San Jose (10) have the highest seller counts |
+| **Customer segments** | Age group 25–34 shows the highest observed spend |
+| **Product preferences** | Higher-spec configs (e.g. 16GB RAM + Intel Core i5/i9) show stronger demand |
+| **Regional mix** | Product demand varies by region (storage, monitors, peripherals) |
+| **Time trends** | Window functions enable YoY and MoM comparison |
 
-> Full result sets: `data/results/`
+Full result sets: [`data/results/`](./data/results)
 
 ---
 
@@ -99,12 +110,12 @@ Scripts are organized by analytical complexity:
 
 | Category | Skills |
 |----------|--------|
-| **SQL** | Complex joins, aggregations, window functions (`RANK`, `LAG`, partition logic), ranking, contribution analysis |
+| **SQL** | Complex joins, aggregations, window functions (`RANK`, `LAG`), ranking, contribution analysis |
 | **Data Modeling** | Relational design, normalization, constraints, ER modeling |
 | **Data Quality** | Duplicate checks, outlier review, cleaning scripts |
-| **BI / Visualization** | Tableau dashboard design for business audiences |
-| **Business Analysis** | Translating business questions into measurable metrics and actionable insights |
-| **Documentation** | Structured repository, reproducible scripts, clear README and presentation |
+| **BI / Visualization** | Tableau dashboards for business audiences |
+| **Business Analysis** | Turning business questions into metrics and insights |
+| **Documentation** | Structured repo, reproducible scripts, clear deliverables |
 
 ---
 
@@ -118,13 +129,13 @@ computer-store-sales-analysis/
 ├── Computer_Store_Sales_Analysis_Presentation.pptx
 │
 ├── sql/
-│   ├── 00_MASTER_ANALYSIS.sql          # Core business questions
-│   ├── 01_schema_*.sql                 # DDL – tables & relationships
+│   ├── 00_MASTER_ANALYSIS.sql
+│   ├── 01_schema_*.sql
 │   ├── 02_triggers_views_procedures.sql
-│   ├── 03_joins_analysis*.sql          # Multi-table JOINs
+│   ├── 03_joins_analysis*.sql
 │   ├── 04_aggregations.sql
 │   ├── 04_math_functions*.sql
-│   ├── 05_window_functions.sql         # RANK, LAG, running totals
+│   ├── 05_window_functions.sql
 │   ├── 06_advanced_reports*.sql
 │   ├── 06_business_queries.sql
 │   ├── 07_data_analysis.sql
@@ -134,9 +145,9 @@ computer-store-sales-analysis/
 ├── data/
 │   ├── schema/
 │   │   └── relational_model.jpg
-│   └── results/                        # Query outputs (CSV)
+│   └── results/                    # CSV query outputs
 │
-├── tableau/                            # Interactive workbooks (.twb)
+├── tableau/                        # .twb workbooks
 │
 └── visuals/
     └── dashboard_preview.png
@@ -146,27 +157,28 @@ computer-store-sales-analysis/
 
 ## Tech Stack
 
-- **SQL** – Schema design, joins, aggregations, window functions, ranking, trend analysis
-- **Tableau** – Interactive dashboards for store, product, region, and demographic views
-- **Data Quality** – Cleaning and validation scripts
-- **Documentation** – ER diagram, presentation, exported results
+- **SQL** — schema design, joins, aggregations, window functions, ranking, trend analysis
+- **Tableau** — interactive dashboards (store, product, region, demographics)
+- **Data quality** — cleaning and validation scripts
+- **Documentation** — ER diagram, presentation, exported results
 
 ---
 
 ## Getting Started
 
-### Database
-1. Run schema scripts (`01_schema_*.sql`) in order
+### 1. Database
+1. Run schema scripts in [`sql/`](./sql) (`01_schema_*.sql`)
 2. Load source data
-3. Apply `02_triggers_views_procedures.sql`
-4. Execute analysis scripts (`03` → `09`) or use `00_MASTER_ANALYSIS.sql`
+3. Apply [`02_triggers_views_procedures.sql`](./sql/02_triggers_views_procedures.sql)
+4. Run analysis scripts (`03` → `09`) or use [`00_MASTER_ANALYSIS.sql`](./sql/00_MASTER_ANALYSIS.sql)
 
-### Tableau
-Open any `.twb` file in the `tableau/` folder with Tableau Desktop or Tableau Public.
+### 2. Tableau
+Open any `.twb` file from [`tableau/`](./tableau) in Tableau Desktop or Tableau Public.
 
-### Results & Presentation
-- Sample outputs: `data/results/`
-- Project presentation: `Computer_Store_Sales_Analysis_Presentation.pptx`
+### 3. Results & Presentation
+- Sample outputs → [`data/results/`](./data/results)
+- Presentation → [`Computer_Store_Sales_Analysis_Presentation.pptx`](./Computer_Store_Sales_Analysis_Presentation.pptx)
+- ER diagram → [`data/schema/relational_model.jpg`](./data/schema/relational_model.jpg)
 
 ---
 
@@ -214,15 +226,15 @@ ORDER BY Year;
 
 ## Deliverables
 
-| Deliverable | Location |
-|-------------|----------|
-| Relational schema (DDL) | `sql/01_schema_*.sql` |
-| ER diagram | `data/schema/relational_model.jpg` |
-| Analytical SQL (ordered) | `sql/00` → `sql/09` |
-| Query result sets | `data/results/` |
-| Tableau workbooks | `tableau/` |
-| Project presentation | `Computer_Store_Sales_Analysis_Presentation.pptx` |
-| Dashboard preview | `visuals/dashboard_preview.png` |
+| Deliverable | Path |
+|-------------|------|
+| Relational schema (DDL) | [`sql/01_schema_*.sql`](./sql) |
+| ER diagram | [`data/schema/relational_model.jpg`](./data/schema/relational_model.jpg) |
+| Analytical SQL | [`sql/`](./sql) (`00` → `09`) |
+| Query result CSVs | [`data/results/`](./data/results) |
+| Tableau workbooks | [`tableau/`](./tableau) |
+| Project presentation | [`Computer_Store_Sales_Analysis_Presentation.pptx`](./Computer_Store_Sales_Analysis_Presentation.pptx) |
+| Dashboard preview | [`visuals/dashboard_preview.png`](./visuals/dashboard_preview.png) |
 
 ---
 
@@ -232,11 +244,11 @@ ORDER BY Year;
 Computer Engineer · Data Analyst · Full-Stack Developer
 
 - Email: [26spahikristi@gmail.com](mailto:26spahikristi@gmail.com)
-- GitHub: [github.com/ProjectsALB](https://github.com/ProjectsALB/)
+- GitHub: [github.com/ProjectsALB](https://github.com/ProjectsALB)
 
 ---
 
 ## License
 
-MIT License — see [LICENSE](LICENSE).  
+This project is licensed under the [MIT License](./LICENSE).  
 Shared for portfolio and educational use.
