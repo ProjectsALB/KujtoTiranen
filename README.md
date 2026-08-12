@@ -57,27 +57,31 @@ This project builds a structured analytical layer on top of transactional data t
 ### 1. Data Modeling
 - Relational schema for stores (`Dyqani`), products, invoices (`Fature`), line items, and trading relationships
 - Primary/foreign keys for multi-store, multi-product analysis
-- ER diagram available in `data/schema/relational_model.jpg`
+- ER diagram: `data/schema/relational_model.jpg`
 
 ### 2. SQL Analytics
 
-| Stage | Focus | Techniques |
-|-------|-------|------------|
-| Schema | DDL | Tables, constraints, relationships |
-| Objects | Database objects | Triggers, views, stored procedures |
-| Joins | Multi-table analysis | Joins across stores, products, invoices |
-| Aggregations | Summary metrics | `GROUP BY`, `SUM`, `AVG`, `COUNT` |
-| Window functions | Ranking & trends | `RANK()`, `LAG()`, running totals, contribution % |
-| Advanced reports | Business outputs | Combined techniques for stakeholder questions |
-| Data cleaning | Quality | Duplicate detection, outlier handling |
+Scripts are organized by complexity in the `sql/` folder:
 
-All scripts are in the `sql/` folder and are meant to be run in order (`00` → `09`).
+| File / pattern | Focus |
+|----------------|-------|
+| `01_schema_*.sql` | DDL – tables and relationships |
+| `02_triggers_views_procedures.sql` | Triggers, views, stored procedures |
+| `03_joins_analysis*.sql` | Multi-table JOINs |
+| `04_aggregations.sql` | `GROUP BY`, `SUM`, `AVG`, `COUNT` |
+| `04_math_functions*.sql` | Calculated metrics |
+| `05_window_functions.sql` | `RANK()`, `LAG()`, running totals |
+| `06_advanced_reports*.sql` / `06_business_queries.sql` | Business reports |
+| `07_data_analysis.sql` | Broader analysis |
+| `08_data_cleaning.sql` | Duplicates and outliers |
+| `09_extra_queries_*.sql` | Additional queries |
+| `00_MASTER_ANALYSIS.sql` | Core business questions in one place |
 
 ### 3. Visualization
-Tableau workbooks are in the `tableau/` folder. Open them with **Tableau Desktop** or **Tableau Public** (they cannot be opened directly in the browser on GitHub).
+Tableau workbooks (`.twb`) are in the `tableau/` folder. Open them with Tableau Desktop or Tableau Public — they are not viewable inside GitHub.
 
-Included views:
-- Sales by product and category
+Examples:
+- Sales by product / category
 - Revenue by store and region
 - Purchases by age group
 - Top customers by spend
@@ -86,9 +90,9 @@ Included views:
 
 ### 4. Documentation & Reproducibility
 - Ordered SQL scripts in `sql/`
-- Exported query results as CSV in `data/results/`
-- Master analysis file: `sql/00_MASTER_ANALYSIS.sql`
-- Project presentation: `Computer_Store_Sales_Analysis_Presentation.pptx`
+- Query outputs exported as CSV in `data/results/`
+- Master file: `sql/00_MASTER_ANALYSIS.sql`
+- Presentation: `Computer_Store_Sales_Analysis_Presentation.pptx`
 
 ---
 
@@ -103,7 +107,7 @@ Included views:
 | **Regional mix** | Product demand varies by region (storage, monitors, peripherals) |
 | **Time trends** | Window functions enable YoY and MoM comparison |
 
-Full result sets are in `data/results/`.
+Source CSVs: `data/results/`
 
 ---
 
@@ -131,24 +135,65 @@ computer-store-sales-analysis/
 │
 ├── sql/
 │   ├── 00_MASTER_ANALYSIS.sql
-│   ├── 01_schema_*.sql
+│   ├── 01_schema_computershop.sql
+│   ├── 01_schema_customers.sql
+│   ├── 01_schema_invoices.sql
+│   ├── 01_schema_laptops.sql
+│   ├── 01_schema_laptops_alt.sql
+│   ├── 01_schema_product_list.sql
+│   ├── 01_schema_products.sql
+│   ├── 01_schema_products_alt.sql
+│   ├── 01_schema_stores.sql
+│   ├── 01_schema_trading.sql
 │   ├── 02_triggers_views_procedures.sql
-│   ├── 03_joins_analysis*.sql
+│   ├── 03_joins_analysis.sql
+│   ├── 03_joins_analysis_1.sql
+│   ├── 03_joins_analysis_2.sql
+│   ├── 03_joins_analysis_3.sql
 │   ├── 04_aggregations.sql
-│   ├── 04_math_functions*.sql
+│   ├── 04_math_functions.sql
+│   ├── 04_math_functions_2.sql
 │   ├── 05_window_functions.sql
-│   ├── 06_advanced_reports*.sql
+│   ├── 06_advanced_reports.sql
+│   ├── 06_advanced_reports_2.sql
 │   ├── 06_business_queries.sql
 │   ├── 07_data_analysis.sql
 │   ├── 08_data_cleaning.sql
-│   └── 09_extra_queries_*.sql
+│   ├── 09_extra_queries_1.sql
+│   └── 09_extra_queries_2.sql
 │
 ├── data/
 │   ├── schema/
 │   │   └── relational_model.jpg
-│   └── results/                    # CSV query outputs
+│   └── results/
+│       ├── available_stock.csv
+│       ├── cities_avg_sales.csv
+│       ├── customer_registrations_season.csv
+│       ├── customer_spend_2024.csv
+│       ├── daily_monthly_sales_report.csv
+│       ├── monthly_sales.csv
+│       ├── product_qty_avg_price.csv
+│       ├── products_by_region.csv
+│       ├── regions.csv
+│       ├── revenue_by_region.csv
+│       ├── sales_by_age_group.csv
+│       ├── sales_by_category.csv
+│       ├── store_total_revenue.csv
+│       ├── top_5_cities_by_sellers.csv
+│       ├── total_cost_by_product.csv
+│       ├── total_sales_by_category.csv
+│       └── total_sales_by_product.csv
 │
-├── tableau/                        # Tableau workbooks (.twb)
+├── tableau/                          # .twb workbooks (open in Tableau)
+│   ├── analiza e shitjeve per produkt.twb
+│   ├── blerjet sipas grupmoshave.twb
+│   ├── klinetet me blerjet me te shumta.twb
+│   ├── produktet e shitura ne rajone te ndryshme.twb
+│   ├── qytete me shitjet me te larta.twb
+│   ├── shitjet sipas kategorive.twb
+│   ├── shitjet totale mujore.twb
+│   ├── te ardhurat nga secili rajon.twb
+│   └── ...
 │
 └── visuals/
     └── dashboard_preview.png
@@ -168,21 +213,21 @@ computer-store-sales-analysis/
 ## Getting Started
 
 ### 1. Database
-1. Run the schema scripts in `sql/` (`01_schema_*.sql`) in order
-2. Load your source data
-3. Apply `sql/02_triggers_views_procedures.sql`
-4. Run analysis scripts (`03` → `09`) or use `sql/00_MASTER_ANALYSIS.sql`
+1. Run schema scripts in `sql/` starting with `01_schema_*.sql`
+2. Load source data
+3. Apply `02_triggers_views_procedures.sql`
+4. Run analysis scripts (`03` → `09`) or use `00_MASTER_ANALYSIS.sql`
 
-### 2. Tableau dashboards
-1. Install [Tableau Public](https://public.tableau.com/app/discover) (free) or Tableau Desktop
-2. Open any `.twb` file from the `tableau/` folder
-3. Dashboards are **not** viewable inside GitHub — they must be opened in Tableau
+### 2. Tableau
+1. Install Tableau Public (free) or Tableau Desktop
+2. Open any `.twb` file from `tableau/`
+3. Workbooks are not viewable inside GitHub
 
 ### 3. Results & presentation
-- Sample query outputs → `data/results/`
-- Project presentation → `Computer_Store_Sales_Analysis_Presentation.pptx`
-- ER diagram → `data/schema/relational_model.jpg`
-- Dashboard image → `visuals/dashboard_preview.png`
+- Query outputs: `data/results/`
+- Presentation: `Computer_Store_Sales_Analysis_Presentation.pptx`
+- ER diagram: `data/schema/relational_model.jpg`
+- Dashboard image: `visuals/dashboard_preview.png`
 
 ---
 
@@ -234,11 +279,11 @@ ORDER BY Year;
 |-------------|----------|
 | Relational schema (DDL) | `sql/01_schema_*.sql` |
 | ER diagram | `data/schema/relational_model.jpg` |
-| Analytical SQL scripts | `sql/` (`00` → `09`) |
+| Analytical SQL | `sql/` (`00` → `09`) |
 | Query result CSVs | `data/results/` |
-| Tableau workbooks | `tableau/` (open in Tableau) |
+| Tableau workbooks | `tableau/` |
 | Project presentation | `Computer_Store_Sales_Analysis_Presentation.pptx` |
-| Dashboard preview image | `visuals/dashboard_preview.png` |
+| Dashboard preview | `visuals/dashboard_preview.png` |
 
 ---
 
@@ -254,5 +299,5 @@ Computer Engineer · Data Analyst · Full-Stack Developer
 
 ## License
 
-This project is released under the MIT License. See the `LICENSE` file for details.  
+MIT License — see the `LICENSE` file in this repository.  
 Shared for portfolio and educational use.
