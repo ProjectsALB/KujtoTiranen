@@ -1,178 +1,112 @@
-```markdown
 # Kujto Tiranën
 
-**A full-stack digital time-capsule platform for Tirana**  
-Preserving the city’s visual memory through interactive maps, historical photo archives, and community-driven contributions.
+**A full-stack digital time-capsule for Tirana**  
+Interactive map, historical photo timelines, moderated community uploads, and an admin panel.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Express.js](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=white)](https://expressjs.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Leaflet](https://img.shields.io/badge/Leaflet-199900?logo=leaflet&logoColor=white)](https://leafletjs.com/)
-[![PWA](https://img.shields.io/badge/PWA-Ready-purple.svg)](#)
+[![Version](https://img.shields.io/badge/version-1.6.0-0F2C1A)](CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](package.json)
+[![Stack](https://img.shields.io/badge/stack-Express%20%7C%20MongoDB%20%7C%20Leaflet-blue)](ARCHITECTURE.md)
 
 ---
 
-## Project Overview
+## Overview
 
-Tirana is one of the fastest-changing cities in the region. Streets are redesigned, buildings are replaced, and entire neighborhoods transform within a few years. As a result, visual records of the city’s past are scattered, incomplete, or slowly disappearing.
+Tirana changes quickly. Buildings disappear, streets are redesigned, and the visual identity of the city evolves every year. Historical photographs are often scattered across personal archives, social media, or lost entirely.
 
-**Kujto Tiranën** is a full-stack web application built to address this problem.  
-It functions as a digital time-capsule that allows users to explore historical photographs of Tirana on an interactive map, compare how locations have changed over time, and contribute new visual material to a moderated public archive.
+**Kujto Tiranën** is a full-stack web platform built to preserve the visual memory of the city. It allows users to explore historical photos on an interactive map, browse timelines by year for specific locations, and contribute new images that are published only after moderation.
 
-The platform is designed both for local citizens who want to preserve personal and collective memory, and for visitors interested in understanding the evolution of the city.
-
----
-
-## Main Objectives
-
-- Create a centralized digital archive of Tirana’s visual history
-- Allow users to explore locations through an interactive map interface
-- Enable community participation through moderated photo uploads
-- Provide a reliable admin system for content review and management
-- Deliver a responsive and installable Progressive Web App experience
+The project combines modern web technologies with a practical local purpose: documenting Tirana before it changes again.
 
 ---
 
-## Core Features
+## Features
 
 ### Public Application
-- Interactive map powered by Leaflet
-- Location-based photo markers
-- Historical timeline view for each location
-- Search and filtering functionality
-- Photo upload system with pending approval workflow
-- User registration and authentication
+- Interactive Leaflet map with photo markers
+- Historical timeline view per location
+- Search and location filtering
+- Photo upload with pending approval workflow
+- User registration and authentication (JWT)
+- Optional Google OAuth login
 - Comments system (Albanian and English)
-- Favorites / saved locations
-- Fully responsive design
-- Progressive Web App support (installable on mobile devices)
+- Favorites functionality
+- Contact form
+- Progressive Web App support (installable)
 
 ### Admin Panel
 - Secure admin authentication
 - Review and moderation of uploaded photos
-- Approve / reject content workflow
-- User and content management tools
-- System monitoring endpoints
+- Approve / reject workflow
+- Content and user management tools
+- System health monitoring
 
 ---
 
-## Technology Stack
+## Tech Stack
 
-### Frontend
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- Leaflet.js (interactive maps)
-- Progressive Web App (Service Worker + Web Manifest)
-
-### Backend
-- Node.js
-- Express.js
-- RESTful API architecture
-- JWT Authentication
-- Optional Google OAuth integration
-
-### Database
-- MongoDB
-- Mongoose ODM
-
-### DevOps & Tooling
-- Docker & Docker Compose
-- Environment-based configuration
-- Seed scripts for initial data
-- Basic testing and smoke checks
-
----
-
-## System Architecture
-
-The application follows a classic full-stack structure:
-
-- **Client Layer** → Public interface (`index.html`) and Admin interface (`admin.html`)
-- **API Layer** → Express.js backend handling authentication, uploads, moderation, and data retrieval
-- **Data Layer** → MongoDB for storing users, locations, photos, comments, and moderation states
-
-Key design principles:
-- Separation between public and administrative interfaces
-- Secure authentication flow
-- Content moderation before publication
-- Clean and documented API endpoints
-
-For a deeper technical overview, see [`ARCHITECTURE.md`](ARCHITECTURE.md).
+| Layer | Technology |
+|-------|------------|
+| Frontend | HTML5, CSS3, JavaScript, Leaflet.js |
+| Backend | Node.js, Express.js |
+| Database | MongoDB |
+| Authentication | JWT, Google OAuth (optional) |
+| Other | Docker, PWA (Service Worker + Manifest) |
 
 ---
 
 ## Getting Started
 
-### Prerequisites
-
-Make sure you have the following installed:
-
+### Requirements
 - Node.js **18+**
-- npm
-- MongoDB (local installation or MongoDB Atlas)
+- MongoDB (local or [Atlas](https://www.mongodb.com/cloud/atlas))
 - Git
 
-### Installation Steps
+### Installation
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/ProjectsALB/KujtoTiranen.git
 cd KujtoTiranen
 
-# 2. Enter backend directory
 cd backend
-
-# 3. Configure environment variables
 cp .env.example .env
-
-# 4. Install dependencies
 npm install
-
-# 5. Seed the database with initial data
 npm run seed
-
-# 6. Start the development server
 npm start
-```
 
-### Application URLs
 
-| Interface            | URL                                      |
-|----------------------|------------------------------------------|
-| Public Application   | http://localhost:5000                    |
-| Admin Panel          | http://localhost:5000/admin              |
-| API Health Check     | http://localhost:5000/api/v1/health      |
+Or from the repository root:
 
-### Default Admin Account
+npm run install:all
+npm run seed
+npm start
 
-After seeding the database, you can log in with:
+Access Points
 
-- **Email:** `admin@kujtotiranen.al`
-- **Password:** `Admin123!`
+Interface,URL
+Public Application,http://localhost:5000
+Admin Panel,http://localhost:5000/admin
+Health Check,http://localhost:5000/api/v1/health
 
-> Important: Change these credentials before any production deployment.
+Default Admin Credentials
+After running the seed script:
 
----
+Field,Value
+Email,admin@kujtotiranen.al
+Password,Admin123!
 
-## Project Structure
 
-```text
+Project Structure
+
 KujtoTiranen/
-├── index.html                 # Main public application
-├── admin.html                 # Admin moderation dashboard
-├── css/                       # Stylesheets
-├── js/                        # Frontend JavaScript logic
-├── backend/                   # Express.js API
-│   ├── routes/
-│   ├── models/
-│   ├── middleware/
-│   ├── controllers/
-│   └── ...
-├── docs/                      # Technical documentation
-├── fotot/                     # Media storage
-├── images/                    # Static assets
+├── index.html              # Public application
+├── admin.html              # Admin moderation interface
+├── css/                    # Stylesheets
+├── js/                     # Frontend logic
+├── backend/                # Express API + business logic
+├── docs/                   # API docs and screenshots
+├── fotot/                  # Media assets
+├── images/                 # Static images
 ├── docker-compose.yml
 ├── Dockerfile
 ├── ARCHITECTURE.md
@@ -180,117 +114,75 @@ KujtoTiranen/
 ├── SECURITY.md
 ├── STATUS.md
 └── README.md
-```
 
----
 
-## Environment Configuration
+Environment Variables
+Create a .env file inside the backend folder based on .env.example:
 
-Create a `.env` file inside the `backend` folder using `.env.example` as a template.
-
-| Variable              | Description                                |
-|-----------------------|--------------------------------------------|
-| `MONGODB_URI`         | MongoDB connection string                  |
-| `JWT_SECRET`          | Secret key used for signing JWT tokens     |
-| `ADMIN_EMAIL`         | Default administrator email                |
-| `ADMIN_PASSWORD`      | Default administrator password             |
-| `GOOGLE_CLIENT_ID`    | Optional Google OAuth client ID            |
-| `SMTP_HOST`           | Optional SMTP host for contact form        |
-| `SMTP_USER`           | Optional SMTP username                     |
-| `SMTP_PASS`           | Optional SMTP password                     |
+Variable,Description
+MONGODB_URI,MongoDB connection string
+JWT_SECRET,Secret key for JWT signing
+ADMIN_EMAIL,Default admin email
+ADMIN_PASSWORD,Default admin password
+GOOGLE_CLIENT_ID,Optional Google OAuth client ID
+SMTP_*,Optional email configuration for contact form
+FRONTEND_URL,Public frontend origin (for production)
 
 Never commit real credentials to the repository.
 
----
+Docker
 
-## Running with Docker
-
-If you prefer containerized setup:
-
-```bash
 docker compose up --build
-```
 
----
+Documentation
 
-## Documentation
+Document,Description
+ARCHITECTURE.md,System architecture overview
+docs/API.md,API reference
+DEPLOY.md,Deployment guide
+SECURITY.md,Security notes
+STATUS.md,Current project status
+CHANGELOG.md,Version history
+CONTRIBUTING.md,Contribution guidelines
 
-| File | Purpose |
-|------|---------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | High-level system design |
-| [docs/API.md](docs/API.md) | API endpoint documentation |
-| [DEPLOY.md](DEPLOY.md) | Deployment guidelines |
-| [SECURITY.md](SECURITY.md) | Security considerations |
-| [STATUS.md](STATUS.md) | Current implementation status |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines |
+Scripts
 
----
+Command,Description
+npm start,Start the application
+npm run seed,Seed database with initial data
+npm test,Run backend unit tests
+npm run smoke,Run smoke checks (server must be running)
+npm run install:all,Install all dependencies
 
-## Roadmap
+Roadmap
 
-### Short-term
-- Add real screenshots and demo media
-- Improve mobile UI/UX
-- Deploy a public live demo
+Add real screenshots and live demo
+Improve mobile experience
+Expand search and filtering capabilities
+Image optimization pipeline
+Broader multilingual support
+Public contribution analytics
 
-### Medium-term
-- Advanced filtering and search
-- Better image optimization
-- Expanded multilingual support
 
-### Long-term
-- Public contribution analytics
-- Partnership with local cultural institutions
-- Open data export features
+Contributing
+Contributions are welcome.
 
----
+Fork the repository
+Create a feature branch
+Make your changes
+Open a pull request
 
-## Contributing
+Please read CONTRIBUTING.md before submitting major changes.
 
-Contributions are welcome and appreciated.
+Security
+If you discover a security issue, please follow the process described in SECURITY.md before opening a public issue.
 
-If you want to improve the project:
+License
+This project is licensed under the MIT License.
+See the LICENSE file for details.
 
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
-
-Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting major changes.
-
----
-
-## Security
-
-If you discover a security vulnerability, please review the guidelines in [`SECURITY.md`](SECURITY.md) before creating a public issue.
-
----
-
-## License
-
-This project is licensed under the **MIT License**.  
-You are free to use, modify, and distribute it under the terms of the license.
-
-See the [LICENSE](LICENSE) file for full details.
-
----
-
-## Author
-
-**ProjectsALB**  
+Author
+ProjectsALB
 Full-Stack Developer & Data Analyst based in Albania
 
-Focus areas:
-- Web Development
-- Data Analysis
-- Practical applications with local impact
-
----
-
-## Final Note
-
-Kujto Tiranën is more than a technical project.  
-It is an attempt to protect the visual memory of a city that is changing faster than it can be documented.
-
-If you find this project useful, consider starring the repository and contributing to its growth.
-```
+Built to preserve Tirana’s visual memory for future generations.
