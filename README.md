@@ -163,23 +163,25 @@ cp .env.example .env
 npm install
 npm run seed
 npm start
+```
 
-Surface,URL
+### Surface,URL
 App,http://localhost:5000
 Admin,http://localhost:5000/admin
 Health,http://localhost:5000/api/v1/health
 
-Default admin credentials
+### Default admin credentials
 admin@kujtotiranen.al / Admin123!
 
-Tests
+### Tests
 npm test
 npm run smoke
 
-Configuration
+### Configuration
 Configure the following variables in backend/.env:
 
-Variable,Description
+### Variable,Description
+
 MONGODB_URI,MongoDB connection string
 JWT_SECRET,Secret for signing JWTs
 ADMIN_EMAIL,Default admin email
@@ -188,9 +190,9 @@ FRONTEND_URL,Frontend origin
 SMTP_*,Optional email settings
 GOOGLE_CLIENT_ID,Optional Google OAuth
 
-See DEPLOY.md and SECURITY.md for production guidance.
+### See DEPLOY.md and SECURITY.md for production guidance.
 
-Deployment
+### Deployment
 
 Set NODE_ENV=production
 Use a strong JWT_SECRET and admin password
@@ -203,7 +205,7 @@ npm install --omit=dev
 npm run seed
 pm2 start src/server.js --name kujto-tiranen
 
-Skills Demonstrated
+### Skills Demonstrated
 
 Area,Evidence
 Full-stack delivery,UI + Express API + MongoDB
@@ -214,7 +216,7 @@ Data modeling,Mongoose models
 Frontend,"Modular JS, Leaflet map"
 Ops,"Tests, Docker, deployment docs"
 
-Documentation
+### Documentation
 
 Document,Purpose
 ARCHITECTURE.md,System design
@@ -225,7 +227,7 @@ CHANGELOG.md,Version history
 docs/API.md,API notes
 backend/README.md,Backend setup
 
-Author
+### Author
 Kristina Spahi
 Computer Engineer · Data Analyst · Full-Stack Developer
 
@@ -233,6 +235,6 @@ Email: 26spahikristi@gmail.com
 GitHub: github.com/ProjectsALB
 
 
-License
+### License
 MIT
 
