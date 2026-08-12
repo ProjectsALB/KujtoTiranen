@@ -86,9 +86,6 @@ More detail: [`ARCHITECTURE.md`](ARCHITECTURE.md)
 | **Deploy**   | Dockerfile, process manager (e.g. PM2)    |
 
 ---
-
-## Project Structure
-
 KujtoTiranen/
 ├── index.html
 ├── admin.html
@@ -101,7 +98,8 @@ KujtoTiranen/
 │   ├── moderation-client.js
 │   ├── features.js
 │   └── ...
-├── fotot/ · images/
+├── fotot/
+├── images/
 ├── docs/
 ├── backend/
 │   ├── package.json
@@ -123,9 +121,6 @@ KujtoTiranen/
 ├── CHANGELOG.md
 ├── Dockerfile
 └── package.json
-text
-
-
 ---
 
 ## API Surface (summary)
