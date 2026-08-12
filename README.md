@@ -60,6 +60,7 @@ Express (backend/src/server.js)
 ▼
 MongoDB
 
+---
 
 **Key design decisions**
 
@@ -152,9 +153,9 @@ text
 
 - Node.js **18+** (see `.nvmrc`)
 - MongoDB (local or Atlas)
+---
 
 ### Setup
-
 
 git clone <your-repo-url>
 cd KujtoTiranen
@@ -164,21 +165,27 @@ npm install
 npm run seed
 npm start
 
+---
 
 ### Surface,URL
 App,http://localhost:5000
 Admin,http://localhost:5000/admin
 Health,http://localhost:5000/api/v1/health
 
+---
+
 ### Default admin credentials
 admin@kujtotiranen.al / Admin123!
+---
 
 ### Tests
 npm test
 npm run smoke
+---
 
 ### Configuration
 Configure the following variables in backend/.env:
+---
 
 ### Variable,Description
 
@@ -190,7 +197,7 @@ FRONTEND_URL,Frontend origin
 SMTP_*,Optional email settings
 GOOGLE_CLIENT_ID,Optional Google OAuth
 
-### See DEPLOY.md and SECURITY.md for production guidance.
+---
 
 ### Deployment
 
@@ -205,6 +212,7 @@ npm install --omit=dev
 npm run seed
 pm2 start src/server.js --name kujto-tiranen
 
+---
 ### Skills Demonstrated
 
 Area,Evidence
@@ -216,6 +224,7 @@ Data modeling,Mongoose models
 Frontend,"Modular JS, Leaflet map"
 Ops,"Tests, Docker, deployment docs"
 
+---
 ### Documentation
 
 Document,Purpose
@@ -227,6 +236,8 @@ CHANGELOG.md,Version history
 docs/API.md,API notes
 backend/README.md,Backend setup
 
+---
+
 ### Author
 Kristina Spahi
 Computer Engineer · Data Analyst · Full-Stack Developer
@@ -234,7 +245,7 @@ Computer Engineer · Data Analyst · Full-Stack Developer
 Email: 26spahikristi@gmail.com
 GitHub: github.com/ProjectsALB
 
-
+---
 ### License
 MIT
 
