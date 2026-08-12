@@ -3,10 +3,10 @@
 **SQL · Data Modeling · Business Intelligence**  
 Kristina Spahi · Data Analyst
 
-[![GitHub](https://img.shields.io/badge/GitHub-ProjectsALB-181717?logo=github)](https://github.com/ProjectsALB)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![SQL](https://img.shields.io/badge/SQL-Window%20Functions-orange)](./sql)
-[![Tableau](https://img.shields.io/badge/Tableau-Dashboards-e97627)](./tableau)
+![GitHub](https://img.shields.io/badge/GitHub-ProjectsALB-181717?logo=github)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![SQL](https://img.shields.io/badge/SQL-Window%20Functions-orange)
+![Tableau](https://img.shields.io/badge/Tableau-Dashboards-e97627)
 
 End-to-end analysis of a multi-store computer hardware retailer. Covers relational database design, advanced SQL analytics, data quality checks, and interactive Tableau reporting.
 
@@ -14,7 +14,7 @@ End-to-end analysis of a multi-store computer hardware retailer. Covers relation
 
 ## Dashboard Preview
 
-![Dashboard Preview](./visuals/dashboard_preview.png)
+![Dashboard Preview](visuals/dashboard_preview.png)
 
 ---
 
@@ -57,7 +57,7 @@ This project builds a structured analytical layer on top of transactional data t
 ### 1. Data Modeling
 - Relational schema for stores (`Dyqani`), products, invoices (`Fature`), line items, and trading relationships
 - Primary/foreign keys for multi-store, multi-product analysis
-- ER diagram: [`data/schema/relational_model.jpg`](./data/schema/relational_model.jpg)
+- ER diagram available in `data/schema/relational_model.jpg`
 
 ### 2. SQL Analytics
 
@@ -71,11 +71,12 @@ This project builds a structured analytical layer on top of transactional data t
 | Advanced reports | Business outputs | Combined techniques for stakeholder questions |
 | Data cleaning | Quality | Duplicate detection, outlier handling |
 
-Scripts live in [`sql/`](./sql) and run in order (`00` → `09`).
+All scripts are in the `sql/` folder and are meant to be run in order (`00` → `09`).
 
 ### 3. Visualization
-Interactive Tableau workbooks in [`tableau/`](./tableau), including:
+Tableau workbooks are in the `tableau/` folder. Open them with **Tableau Desktop** or **Tableau Public** (they cannot be opened directly in the browser on GitHub).
 
+Included views:
 - Sales by product and category
 - Revenue by store and region
 - Purchases by age group
@@ -84,10 +85,10 @@ Interactive Tableau workbooks in [`tableau/`](./tableau), including:
 - Average sale value by city
 
 ### 4. Documentation & Reproducibility
-- Ordered SQL scripts
-- Exported query results as CSV in [`data/results/`](./data/results)
-- Master analysis file: [`sql/00_MASTER_ANALYSIS.sql`](./sql/00_MASTER_ANALYSIS.sql)
-- Project presentation: [`Computer_Store_Sales_Analysis_Presentation.pptx`](./Computer_Store_Sales_Analysis_Presentation.pptx)
+- Ordered SQL scripts in `sql/`
+- Exported query results as CSV in `data/results/`
+- Master analysis file: `sql/00_MASTER_ANALYSIS.sql`
+- Project presentation: `Computer_Store_Sales_Analysis_Presentation.pptx`
 
 ---
 
@@ -102,7 +103,7 @@ Interactive Tableau workbooks in [`tableau/`](./tableau), including:
 | **Regional mix** | Product demand varies by region (storage, monitors, peripherals) |
 | **Time trends** | Window functions enable YoY and MoM comparison |
 
-Full result sets: [`data/results/`](./data/results)
+Full result sets are in `data/results/`.
 
 ---
 
@@ -147,7 +148,7 @@ computer-store-sales-analysis/
 │   │   └── relational_model.jpg
 │   └── results/                    # CSV query outputs
 │
-├── tableau/                        # .twb workbooks
+├── tableau/                        # Tableau workbooks (.twb)
 │
 └── visuals/
     └── dashboard_preview.png
@@ -167,18 +168,21 @@ computer-store-sales-analysis/
 ## Getting Started
 
 ### 1. Database
-1. Run schema scripts in [`sql/`](./sql) (`01_schema_*.sql`)
-2. Load source data
-3. Apply [`02_triggers_views_procedures.sql`](./sql/02_triggers_views_procedures.sql)
-4. Run analysis scripts (`03` → `09`) or use [`00_MASTER_ANALYSIS.sql`](./sql/00_MASTER_ANALYSIS.sql)
+1. Run the schema scripts in `sql/` (`01_schema_*.sql`) in order
+2. Load your source data
+3. Apply `sql/02_triggers_views_procedures.sql`
+4. Run analysis scripts (`03` → `09`) or use `sql/00_MASTER_ANALYSIS.sql`
 
-### 2. Tableau
-Open any `.twb` file from [`tableau/`](./tableau) in Tableau Desktop or Tableau Public.
+### 2. Tableau dashboards
+1. Install [Tableau Public](https://public.tableau.com/app/discover) (free) or Tableau Desktop
+2. Open any `.twb` file from the `tableau/` folder
+3. Dashboards are **not** viewable inside GitHub — they must be opened in Tableau
 
-### 3. Results & Presentation
-- Sample outputs → [`data/results/`](./data/results)
-- Presentation → [`Computer_Store_Sales_Analysis_Presentation.pptx`](./Computer_Store_Sales_Analysis_Presentation.pptx)
-- ER diagram → [`data/schema/relational_model.jpg`](./data/schema/relational_model.jpg)
+### 3. Results & presentation
+- Sample query outputs → `data/results/`
+- Project presentation → `Computer_Store_Sales_Analysis_Presentation.pptx`
+- ER diagram → `data/schema/relational_model.jpg`
+- Dashboard image → `visuals/dashboard_preview.png`
 
 ---
 
@@ -226,15 +230,15 @@ ORDER BY Year;
 
 ## Deliverables
 
-| Deliverable | Path |
-|-------------|------|
-| Relational schema (DDL) | [`sql/01_schema_*.sql`](./sql) |
-| ER diagram | [`data/schema/relational_model.jpg`](./data/schema/relational_model.jpg) |
-| Analytical SQL | [`sql/`](./sql) (`00` → `09`) |
-| Query result CSVs | [`data/results/`](./data/results) |
-| Tableau workbooks | [`tableau/`](./tableau) |
-| Project presentation | [`Computer_Store_Sales_Analysis_Presentation.pptx`](./Computer_Store_Sales_Analysis_Presentation.pptx) |
-| Dashboard preview | [`visuals/dashboard_preview.png`](./visuals/dashboard_preview.png) |
+| Deliverable | Location |
+|-------------|----------|
+| Relational schema (DDL) | `sql/01_schema_*.sql` |
+| ER diagram | `data/schema/relational_model.jpg` |
+| Analytical SQL scripts | `sql/` (`00` → `09`) |
+| Query result CSVs | `data/results/` |
+| Tableau workbooks | `tableau/` (open in Tableau) |
+| Project presentation | `Computer_Store_Sales_Analysis_Presentation.pptx` |
+| Dashboard preview image | `visuals/dashboard_preview.png` |
 
 ---
 
@@ -243,12 +247,12 @@ ORDER BY Year;
 **Kristina Spahi**  
 Computer Engineer · Data Analyst · Full-Stack Developer
 
-- Email: [26spahikristi@gmail.com](mailto:26spahikristi@gmail.com)
+- Email: 26spahikristi@gmail.com
 - GitHub: [github.com/ProjectsALB](https://github.com/ProjectsALB)
 
 ---
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE).  
+This project is released under the MIT License. See the `LICENSE` file for details.  
 Shared for portfolio and educational use.
