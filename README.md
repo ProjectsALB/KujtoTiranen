@@ -155,7 +155,7 @@ text
 
 ### Setup
 
-```bash
+
 git clone <your-repo-url>
 cd KujtoTiranen
 cd backend
@@ -163,7 +163,7 @@ cp .env.example .env
 npm install
 npm run seed
 npm start
-```
+
 
 ### Surface,URL
 App,http://localhost:5000
