@@ -2,11 +2,7 @@
  * Kujto Tiranën — Frontend API client
  * Change API_BASE if backend runs on another host/port
  */
-const API_BASE = localStorage.getItem('KT_API_BASE') || (
-  (location.port === '5000' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-    ? (location.origin + '/api/v1')
-    : 'http://localhost:5000/api/v1'
-);
+const API_BASE = localStorage.getItem('KT_API_BASE') || (location.origin + '/api/v1');
 
 async function apiRequest(path, options = {}) {
   const headers = { ...(options.headers || {}) };
